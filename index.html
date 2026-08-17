@@ -1,0 +1,708 @@
+<title>Yutian Pang</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Yutian Pang, PhD — Postdoctoral Fellow in Aerospace Engineering at UT Austin. AI and decision-making for air transportation: human–AI teaming, trajectory optimization, scheduling under uncertainty, aviation safety.">
+<meta name="author" content="Yutian Pang">
+
+<style>
+  /* ============================================================
+     Palette — aeronautical chart: paper white, airway blue,
+     procedure magenta. Light is the base; dark redefines tokens.
+     ============================================================ */
+  :root {
+    --paper:    #F8FAFB;
+    --panel:    #FFFFFF;
+    --ink:      #182430;
+    --muted:    #526475;
+    --line:     #D9E2E9;
+    --accent:   #14538F;   /* airway blue */
+    --accent-2: #A2346B;   /* chart magenta — small marks only */
+    --chip:     #EDF3F7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:    #0E151B;
+      --panel:    #131C24;
+      --ink:      #E2EAF1;
+      --muted:    #93A5B5;
+      --line:     #263442;
+      --accent:   #7FB3E8;
+      --accent-2: #D983AE;
+      --chip:     #1A2733;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:    #0E151B;
+    --panel:    #131C24;
+    --ink:      #E2EAF1;
+    --muted:    #93A5B5;
+    --line:     #263442;
+    --accent:   #7FB3E8;
+    --accent-2: #D983AE;
+    --chip:     #1A2733;
+  }
+
+  * { box-sizing: border-box; }
+
+  :root {
+    --serif: "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+    --mono:  "SF Mono", "Cascadia Code", Consolas, "DejaVu Sans Mono", "Liberation Mono", monospace;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    line-height: 1.62;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--panel); padding: 0.5rem 1rem; z-index: 10;
+  }
+  .skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+  /* ---------- Layout: sticky identity rail + content column ---------- */
+  .layout {
+    display: grid;
+    grid-template-columns: 264px minmax(0, 1fr);
+    gap: 3.5rem;
+    max-width: 1072px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 0;
+  }
+  .rail {
+    position: sticky;
+    top: 2.5rem;
+    align-self: start;
+  }
+
+  /* ---------- Identity rail ---------- */
+  .avatar {
+    width: 132px; height: 132px;
+    border-radius: 50%;
+    display: block;
+    border: 1px solid var(--line);
+  }
+  .rail h1 {
+    font-size: 1.7rem;
+    line-height: 1.15;
+    margin: 1.1rem 0 0.2rem;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .rail .role {
+    margin: 0.35rem 0 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .rail .role strong { color: var(--ink); font-weight: 600; }
+  .flightpath { display: block; margin: 0.9rem 0 0.2rem; width: 100%; height: 22px; }
+
+  nav.toc { margin-top: 1.4rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+  nav.toc ul { list-style: none; margin: 0; padding: 0; }
+  nav.toc a {
+    display: block;
+    padding: 0.28rem 0;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  nav.toc a:hover { color: var(--accent); text-decoration: none; }
+  nav.toc a.active { color: var(--accent); }
+  nav.toc a.active::before { content: "▸ "; color: var(--accent-2); }
+
+  .rail .links { margin-top: 1.2rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+  .rail .links a {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.05em;
+    background: var(--chip);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.28rem 0.7rem;
+    margin: 0 0.3rem 0.45rem 0;
+    color: var(--ink);
+  }
+  .rail .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* ---------- Sections ---------- */
+  main { min-width: 0; padding-bottom: 2rem; }
+  section { padding: 0 0 2.8rem; scroll-margin-top: 2rem; }
+
+  h2 {
+    font-size: 1.45rem;
+    margin: 0 0 1.1rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  h2::before {           /* chart waypoint marker */
+    content: "";
+    width: 11px; height: 11px;
+    flex: none;
+    align-self: center;
+    background: var(--accent-2);
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+  h2::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--line);
+    align-self: center;
+  }
+
+  h3 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 2rem 0 0.8rem;
+  }
+  section > h3:first-of-type { margin-top: 1.2rem; }
+
+  .prose { max-width: 65ch; }
+  .prose p { margin: 0 0 1rem; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.1rem; padding: 0; list-style: none; }
+  .tags li {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.22rem 0.65rem;
+  }
+
+  /* ---------- News: flight-strip rows ---------- */
+  .news { list-style: none; margin: 0; padding: 0; max-width: 65ch; }
+  .news li {
+    display: grid;
+    grid-template-columns: 6.2rem 1fr;
+    gap: 1rem;
+    padding: 0.62rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .news li:first-child { border-top: 1px solid var(--line); }
+  .news time {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    padding-top: 0.28rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Research cards ---------- */
+  .areas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.2rem;
+  }
+  .areas article {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.1rem 1.2rem 1.2rem;
+  }
+  .areas h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+    letter-spacing: -0.005em;
+    color: var(--accent);
+    text-wrap: balance;
+  }
+  .areas p { margin: 0; font-size: 0.95rem; line-height: 1.55; color: var(--muted); }
+
+  .directions { max-width: 65ch; margin: 0.4rem 0 0; padding-left: 1.2rem; }
+  .directions li { margin-bottom: 0.7rem; }
+  .directions strong { font-weight: 600; }
+
+  /* ---------- Publications ---------- */
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 1.2rem 0 0.4rem;
+  }
+  .stats .stat {
+    background: var(--chip);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.55rem 1rem 0.6rem;
+    min-width: 7.2rem;
+  }
+  .stats .n {
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .stats .l {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.1rem;
+  }
+  .scholar-note { font-size: 0.9rem; color: var(--muted); margin: 0.5rem 0 0; }
+
+  .pubs { margin: 0; padding-left: 1.7rem; }
+  .pubs li { margin-bottom: 0.85rem; padding-left: 0.2rem; }
+  .pubs li::marker {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .pubs .self { font-weight: 700; }
+  .pubs .venue { font-style: italic; }
+  .pubs .yr {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .corr { color: var(--accent-2); font-weight: 700; }
+  .legend { font-size: 0.88rem; color: var(--muted); margin: 0.2rem 0 1rem; }
+
+  /* ---------- Activities & background ---------- */
+  .rows { list-style: none; margin: 0; padding: 0; max-width: 68ch; }
+  .rows li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.2rem;
+    align-items: baseline;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .rows li:first-child { border-top: 1px solid var(--line); }
+  .rows .when {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    color: var(--muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .rows .what strong { font-weight: 600; }
+  .rows .what .sub { display: block; font-size: 0.92rem; color: var(--muted); }
+
+  .btn {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 0.55rem 1.1rem;
+    margin-top: 1.2rem;
+  }
+  .btn:hover { text-decoration: none; opacity: 0.92; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    margin-top: 1rem;
+    padding: 1.4rem 0 2.6rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  footer .foot-inner { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 880px) {
+    .layout { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 2rem; }
+    .rail { position: static; }
+    .avatar { width: 104px; height: 104px; }
+    nav.toc ul { display: flex; flex-wrap: wrap; gap: 0.1rem 1.1rem; }
+    .areas { grid-template-columns: 1fr; }
+    .news li { grid-template-columns: 5.4rem 1fr; gap: 0.7rem; }
+    .rows li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+</style>
+
+<a class="skip-link" href="#about">Skip to content</a>
+
+<div class="layout">
+
+  <!-- ================= Identity rail ================= -->
+  <header class="rail">
+    <!-- PHOTO: when you have a headshot, drop it in assets/img/profile.jpg and
+         replace this <svg> block with:
+         <img class="avatar" src="assets/img/profile.jpg" alt="Yutian Pang"> -->
+    <svg class="avatar" viewBox="0 0 132 132" role="img" aria-label="Yutian Pang">
+      <defs>
+        <linearGradient id="av" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#14538F"/>
+          <stop offset="1" stop-color="#0B2E52"/>
+        </linearGradient>
+      </defs>
+      <circle cx="66" cy="66" r="66" fill="url(#av)"/>
+      <text x="66" y="82" text-anchor="middle" font-family="Georgia, serif" font-size="44" fill="#F8FAFB" letter-spacing="2">YP</text>
+    </svg>
+
+    <h1>Yutian Pang, PhD</h1>
+    <p class="role">Postdoctoral Fellow<br>
+      Aerospace Engineering &amp; Engineering Mechanics<br>
+      <strong>The University of Texas at Austin</strong></p>
+
+    <!-- decorative flight path -->
+    <svg class="flightpath" viewBox="0 0 264 22" aria-hidden="true">
+      <path d="M4 16 C 60 4, 110 20, 168 9 S 240 12, 252 6"
+            fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <polygon points="60,10 65,18 55,18" fill="var(--accent-2)"/>
+      <polygon points="168,5 173,13 163,13" fill="var(--accent-2)"/>
+      <circle cx="252" cy="6" r="3" fill="none" stroke="var(--accent-2)" stroke-width="1.6"/>
+    </svg>
+
+    <nav class="toc" aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#activities">Activities</a></li>
+        <li><a href="#background">Background</a></li>
+      </ul>
+    </nav>
+
+    <div class="links">
+      <a href="mailto:yutian.pang@austin.utexas.edu">Email</a>
+      <a href="https://scholar.google.com/citations?user=VyB1ewgAAAAJ" rel="me">Google Scholar</a>
+      <a href="assets/cv/Yutian_Pang_CV.pdf">CV (PDF)</a>
+      <!-- Add when ready:
+      <a href="https://www.linkedin.com/in/YOUR-HANDLE" rel="me">LinkedIn</a>
+      <a href="https://github.com/YutianPangASU" rel="me">GitHub</a> -->
+    </div>
+  </header>
+
+  <!-- ================= Content ================= -->
+  <main id="top">
+
+    <section id="about">
+      <h2>About</h2>
+      <div class="prose">
+        <p>I am a postdoctoral research fellow in the Department of Aerospace Engineering &amp;
+        Engineering Mechanics at The University of Texas at Austin, working with
+        Prof.&nbsp;John-Paul Clarke. My research connects artificial intelligence with air
+        transportation: I develop decision-making methods for complex cyber-physical systems
+        with humans in the loop, and I test them on the demanding problems of smart air
+        traffic and logistics.</p>
+
+        <p>The work follows a recurring loop — build an understanding of a system from
+        heterogeneous operational data; support decisions through optimization and
+        simulation; then assess the risk and reliability that determine whether a method can
+        be trusted in operation. The methods draw on operations research, statistical
+        modeling, and reliability analysis, but they are built to be deployed rather than to
+        stay on paper.</p>
+
+        <p>Before UT Austin, I earned my Ph.D. at Arizona State University working on a
+        five-year NASA aviation data-science project, and spent a year at Thales building
+        machine-learning systems for a certified air traffic management platform. I am also
+        the co-founder and CTO of a healthcare agentic-AI startup in Austin.</p>
+      </div>
+      <ul class="tags" aria-label="Research interests">
+        <li>Applied AI</li>
+        <li>Automation</li>
+        <li>CNS/ATM</li>
+        <li>Safety &amp; Security</li>
+        <li>Risk &amp; Reliability</li>
+      </ul>
+    </section>
+
+    <section id="news">
+      <h2>News</h2>
+      <ul class="news">
+        <li><time>2026</time><span><em>From Voice to Safety</em>, on language-AI understanding of pilot–ATC communication for surface collision risk, published in <em>Transportation Research Part C</em>.</span></li>
+        <li><time>2026</time><span>Journal articles published in <em>Reliability Engineering &amp; System Safety</em> (RPAS reliability under communication uncertainties) and <em>Journal of Air Transport Management</em> (runway capacity under communication and human uncertainties; runway and taxiway-exit prediction at Atlanta, led by mentee Alex Porcayo).</span></li>
+        <li><time>Oct 2025</time><span>Invited talk at the INFORMS Annual Meeting, Atlanta: <em>Evaluation of Near-Terminal Operation Performance under Uncertainties in High-Density Airspace</em>.</span></li>
+        <li><time>2025</time><span>2nd place in the FAA Machine Learning / AI Data Challenge for Aviation Safety, McLean, VA.</span></li>
+        <li><time>2025</time><span>NASA NAMS-2 task awarded: ACERO wildfire air traffic management.</span></li>
+        <li><time>Jul 2024</time><span>Joined UT Austin as a postdoctoral research fellow.</span></li>
+        <li><time>May 2023</time><span>Ph.D. from Arizona State University; Outstanding Graduate Research Award, ASU Mechanical &amp; Aerospace Engineering.</span></li>
+      </ul>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <div class="prose">
+        <p>A recurring feature of my work is that it joins two traditions usually kept apart
+        in transportation systems: high-fidelity modeling and simulation on one side, and
+        data-driven learning and optimization on the other. Four threads run through the
+        program:</p>
+      </div>
+
+      <div class="areas">
+        <article>
+          <h4>Human–AI teaming in safety-critical operations</h4>
+          <p>Language AI that interprets pilot–controller voice communication and links it to
+          surface-movement collision risk; conformalized graph learning that returns
+          calibrated, real-time estimates of controller cognitive workload; scheduling models
+          that encode operator preferences as soft constraints.</p>
+        </article>
+        <article>
+          <h4>System intelligence for networked operations</h4>
+          <p>Spatio-temporal graph transformers for multi-aircraft trajectory prediction,
+          physics-informed graph attention networks for airspace state forecasting, and
+          data-driven recovery of governing equations for traffic-flow dynamics — with
+          calibrated uncertainty through Bayesian treatment.</p>
+        </article>
+        <article>
+          <h4>Scheduling &amp; logistics under uncertainty</h4>
+          <p>Machine-learning-enhanced aircraft landing scheduling, geometry-based trajectory
+          optimization for terminal-area arrivals, dynamic airspace sectorization, and
+          last-mile / same-day delivery routing that respects vehicle capacity and time
+          guarantees.</p>
+        </article>
+        <article>
+          <h4>Trustworthy methods across the model–data spectrum</h4>
+          <p>Probabilistic deep learning, reinforcement learning, and NLP on the data-driven
+          end; nonlinear and integer optimization, discrete-event simulation, and reliability
+          modeling on the model-driven end — and a hybrid middle that uses simulation to
+          train, surrogates to accelerate, and operational rules to keep outputs
+          interpretable.</p>
+        </article>
+      </div>
+
+      <h3>Current directions</h3>
+      <ul class="directions">
+        <li><strong>Human-centered language and intent understanding</strong> for
+        safety-critical operations: automated root-cause analysis of safety reports,
+        compliance monitoring, and real-time voice-based support that operators can check.</li>
+        <li><strong>Hybrid optimization for scheduling and logistics</strong>:
+        uncertainty-aware re-optimization and resilience under disruption, coupling
+        simulation with optimization for production and logistics networks.</li>
+        <li><strong>Reliable end-to-end decision-making for highly automated systems</strong>:
+        decentralized perception, prediction, and planning under sensing and communication
+        uncertainty, alongside human-AI teaming.</li>
+      </ul>
+
+      <h3>Earlier work</h3>
+      <div class="prose">
+        <p>My Ph.D. work at ASU built Bayesian deep-learning models for aircraft trajectory
+        prediction under weather uncertainty — including the B-STAR spatio-temporal graph
+        transformer and some of the first probabilistic deep models for terminal-area
+        trajectory prediction — alongside graph learning for airspace state and controller
+        workload. At Thales, I moved models of this kind from prototype into a platform that
+        had to meet government certification, which meant confronting the computing,
+        security, and reliability questions that surface once a learning system enters
+        production.</p>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h2>Publications</h2>
+
+      <div class="stats" aria-label="Citation statistics">
+        <div class="stat"><div class="n">1,089+</div><div class="l">Citations</div></div>
+        <div class="stat"><div class="n">19</div><div class="l">h-index</div></div>
+        <div class="stat"><div class="n">20</div><div class="l">Journal articles</div></div>
+        <div class="stat"><div class="n">3</div><div class="l">U.S. patents</div></div>
+      </div>
+      <p class="scholar-note">Live counts on
+        <a href="https://scholar.google.com/citations?user=VyB1ewgAAAAJ">Google Scholar</a>.</p>
+
+      <p class="legend"><span class="corr">*</span> indicates corresponding author.</p>
+
+      <h3>Under review</h3>
+      <ol class="pubs">
+        <li><span class="self">Pang, Y.</span>, Tian, Y., Xie, J., Zhao, X., Hu, J., Jacobsen, H., Clarke, J. A Hybrid Framework for Explainable Aviation Risk: Causal Chain Extraction from Safety Reports with Physics-Based Failure Quantification and Counterfactual Analysis. <span class="venue">Advanced Engineering Informatics</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Clarke, J. Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area. <span class="venue">AIAA Journal</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Clarke, J. Fuel-Optimal Stochastic Optimization of Delayed Deceleration and Continuous Descent Approach Procedures under Wind Uncertainty. <span class="venue">AIAA Journal of Aircraft</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.</span>, Hu, J., Iyer, H., Zhao, X., Clarke, J. V-STAR: VectorNet-Augmented Spatio-Temporal Attention and Reasoning for Procedure-Aware Aircraft Trajectory Prediction. <span class="venue">Transportation Research Part C</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Dong, Z., Clarke, J. A Probabilistic Runway Occupancy Conflict Alerting Framework for Real-Time Runway Incursion Detection from ATC Speech and ADS-B. <span class="venue">Journal of Air Transport Management</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Delahaye, D., Clarke, J. Trajectory-Based Optimization for Air Traffic Control in the Terminal Maneuvering Area. <span class="venue">Transportation Research Part C</span>. <span class="yr">2026</span></li>
+        <li>Liang, J., <span class="self">Pang, Y.<span class="corr">*</span></span>, Clarke, J. Optimizing Same-Day Delivery: A Framework Incorporating Vehicle Capacity and Time Guarantees. <span class="venue">Transportation Science</span>. <span class="yr">2026</span></li>
+      </ol>
+
+      <h3>Journal articles</h3>
+      <ol class="pubs">
+        <li>Porcayo, A., <span class="self">Pang, Y.<span class="corr">*</span></span>, Thomas, M., Clarke, J. Data-Driven Runway and Taxiway Exits Prediction of Landing Aircraft: A Case Study at Hartsfield-Jackson Atlanta International Airport. <span class="venue">Journal of Air Transport Management</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Kendall, A., Clarke, J. Modeling the Impact of Communication and Human Uncertainties on Runway Capacity in Terminal Airspace. <span class="venue">Journal of Air Transport Management</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Kendall, A., Clarke, J. The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties. <span class="venue">Reliability Engineering &amp; System Safety</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Kendall, A. P., Porcayo, A., Barsotti, M., Jain, A., Clarke, J. From Voice to Safety: Language AI Powered Pilot-ATC Communication Understanding for Airport Surface Movement Collision Risk Assessment. <span class="venue">Transportation Research Part C</span>, 184, 105540. <span class="yr">2026</span></li>
+        <li>Xu, Q., <span class="self">Pang, Y.</span>, Liu, Y. Data-driven governing equation identification of near terminal air traffic flow dynamics. <span class="venue">Journal of Air Transport Management</span>. <span class="yr">2025</span></li>
+        <li>Xu, Q., <span class="self">Pang, Y.</span>, Liu, Y. Dynamic airspace sectorization with machine learning enhanced workload prediction and clustering. <span class="venue">Journal of Air Transport Management</span>. <span class="yr">2024</span></li>
+        <li>Xu, Q., <span class="self">Pang, Y.</span>, Zhou, X., Liu, Y. PIGAT: Physics-Informed Graph Attention Transformer for Air Traffic State Prediction. <span class="venue">IEEE Transactions on Intelligent Transportation Systems</span>. <span class="yr">2024</span></li>
+        <li><span class="self">Pang, Y.</span>, Zhao, P., Hu, J., Liu, Y. Machine Learning-Enhanced Aircraft Landing Scheduling under Uncertainties. <span class="venue">Transportation Research Part C</span>, 158, 104444. <span class="yr">2024</span></li>
+        <li>Zhang, L., Wang, M., Ding, Y., Wan, T., Qi, B., <span class="self">Pang, Y.</span> FBC-ANet: A Semantic Segmentation Model for UAV Forest Fire Images Combining Boundary Enhancement and Context Awareness. <span class="venue">Drones</span>, 7(7), 456. <span class="yr">2023</span></li>
+        <li>Rathnakumar, R., <span class="self">Pang, Y.</span>, Liu, Y. Epistemic and aleatoric uncertainty quantification for crack detection using a Bayesian Boundary Aware Convolutional Network. <span class="venue">Reliability Engineering &amp; System Safety</span>, 109547. <span class="yr">2023</span></li>
+        <li>Hu, J., Xu, Z., Wang, W., Qu, G., <span class="self">Pang, Y.</span>, Liu, Y. Decentralized graph-based multi-agent reinforcement learning using reward machines. <span class="venue">Neurocomputing</span>, 126974. <span class="yr">2023</span></li>
+        <li>Xu, Q., <span class="self">Pang, Y.</span>, Liu, Y. Air Traffic Density Prediction using Bayesian Ensemble Graph Attention Network (BEGAN). <span class="venue">Transportation Research Part C</span>. <span class="yr">2023</span></li>
+        <li><span class="self">Pang, Y.</span>, Hu, J., Lieber, C., Cooke, N., Liu, Y. Air Traffic Controller Cognitive Workload Level Prediction using Conformal Dynamical Graph Learning. <span class="venue">Advanced Engineering Informatics</span>, 57, 102113. <span class="yr">2023</span></li>
+        <li>Huang, J., <span class="self">Pang, Y.</span>, Zhao, X., Liu, Y., Yan, H. Posterior Regularized Bayesian Neural Network Incorporating Soft and Hard Knowledge Constraints. <span class="venue">Knowledge-Based Systems</span>, 249, 109047. <span class="yr">2022</span></li>
+        <li>Hu, J., Wang, Y., <span class="self">Pang, Y.</span>, Liu, Y. Optimal maintenance scheduling under uncertainties using Linear Programming-enhanced Reinforcement Learning. <span class="venue">Engineering Applications of Artificial Intelligence</span>, 109, 104655. <span class="yr">2022</span></li>
+        <li>Wei, H., Yao, H., <span class="self">Pang, Y.</span>, Liu, Y. Fracture Pattern Prediction with Random Microstructure using Physics-Informed Deep Neural Networks. <span class="venue">Engineering Fracture Mechanics</span>, 108497. <span class="yr">2022</span></li>
+        <li><span class="self">Pang, Y.</span>, Zhao, X., Hu, J., Yan, H., Liu, Y. Bayesian Spatio-Temporal Graph Transformer Network (B-STAR) for Multi-Aircraft Trajectory Prediction. <span class="venue">Knowledge-Based Systems</span>, 249, 108998. <span class="yr">2022</span></li>
+        <li><span class="self">Pang, Y.</span>, Zhao, X., Yan, H., Liu, Y. Data-driven trajectory prediction with weather uncertainties: A Bayesian deep learning approach. <span class="venue">Transportation Research Part C</span>, 130, 103326. <span class="yr">2021</span></li>
+        <li>Wang, Y., <span class="self">Pang, Y.</span>, Chen, O., Iyer, H. N., Dutta, P., Menon, P. K., Liu, Y. Uncertainty quantification and reduction in aircraft trajectory prediction using Bayesian-Entropy information fusion. <span class="venue">Reliability Engineering &amp; System Safety</span>, 107650. <span class="yr">2021</span></li>
+        <li>Wang, Y., <span class="self">Pang, Y.</span>, Gorceski, S., Kostiuk, P., Mohen, M. T., Menon, P. K., Liu, Y. A Voice Communication-Augmented Simulation Framework for Aircraft Trajectory Simulation. <span class="venue">IEEE Transactions on Intelligent Transportation Systems</span>. <span class="yr">2021</span></li>
+      </ol>
+
+      <h3>Working papers</h3>
+      <ol class="pubs">
+        <li>Liang, J., <span class="self">Pang, Y.<span class="corr">*</span></span>, Clarke, J. An optimization formulation for last-mile delivery using ring widget structure. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Kendall, A., Clarke, J. A Reactive Control Law for Aircraft Collision Avoidance and Its Capacity Limits. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.<span class="corr">*</span></span>, Kendall, A., Clarke, J. Communication and Autonomy Level Tradeoff for Autonomous Systems Resource Allocation. <span class="yr">2026</span></li>
+      </ol>
+
+      <h3>Selected conference papers</h3>
+      <ol class="pubs">
+        <li>Bhujel, S., <span class="self">Pang, Y.</span>, Snyder, P., Tang, C., Hu, J. Aerodynamic Effects of Fuselage-Package Separation Distance on UAV Performance. <span class="venue">AIAA AVIATION Forum</span>. <span class="yr">2026</span></li>
+        <li><span class="self">Pang, Y.</span>, Delahaye, D., Clarke, J. Geometric Trajectory Optimization for TRACON Arrivals: An NLP Approach with ATC Vectoring Maneuver Modeling. <span class="venue">Annual Modeling and Simulation Conference</span>. <span class="yr">2026</span></li>
+        <li>Momit, M. A., Jiang, W., Hussain, B. Z., Ammar, M., Bhujel, S., <span class="self">Pang, Y.</span>, et al., Hu, J. Deep Q-Network With Lagrangian Relaxation for Autonomous Aircraft Landing. <span class="venue">AIAA SCITECH Forum</span>, 1983. <span class="yr">2026</span></li>
+        <li>Rathnakumar, R., Liu, Y., <span class="self">Pang, Y.</span> Bayesian Approach for Uncertainty Quantification of Neural Networks-Based Crack Diagnostics. <span class="venue">AIAA SCITECH Forum</span>, 1959. <span class="yr">2025</span></li>
+        <li>Xu, Q., <span class="self">Pang, Y.</span>, Zhang, Z., Liu, Y. Physics-Based Learning for Aircraft Waiting Time Prediction. <span class="venue">AIAA AVIATION Forum</span>, 3826. <span class="yr">2022</span></li>
+        <li><span class="self">Pang, Y.</span>, Xu, N., Liu, Y. Robust Satellite Image Classification with Bayesian Deep Learning. <span class="venue">Integrated Communication, Navigation and Surveillance Conference (ICNS)</span>. <span class="yr">2022</span></li>
+        <li><span class="self">Pang, Y.</span>, Cheng, S., Hu, J., Liu, Y. Evaluating the Robustness of Bayesian Neural Networks Against Different Types of Attacks. <span class="venue">CVPR Workshop on Adversarial Machine Learning in Real-World Computer Vision Systems</span>. <span class="yr">2021</span></li>
+        <li><span class="self">Pang, Y.</span>, Wang, Y., Liu, Y. Probabilistic Aircraft Trajectory Prediction with Weather Uncertainties using Approximate Bayesian Variational Inference to Neural Networks. <span class="venue">AIAA AVIATION Forum</span>, 2897. <span class="yr">2020</span></li>
+        <li><span class="self">Pang, Y.</span>, Liu, Y. Conditional Generative Adversarial Networks (CGAN) for Aircraft Trajectory Prediction considering weather effects. <span class="venue">AIAA SciTech Forum</span>, 1853. <span class="yr">2020</span></li>
+        <li><span class="self">Pang, Y.</span>, Liu, Y. Probabilistic Aircraft Trajectory Prediction Considering Weather Uncertainties Using Dropout As Bayesian Approximate Variational Inference. <span class="venue">AIAA SciTech Forum</span>, 1413. <span class="yr">2020</span></li>
+        <li><span class="self">Pang, Y.</span>, Hu, J., Cheng, S., Liu, Y. Aircraft trajectory prediction using LSTM neural network with embedded convolutional layer. <span class="venue">Annual Conference of the Prognostics and Health Management Society</span>. <span class="yr">2019</span></li>
+        <li><span class="self">Pang, Y.</span>, Yao, H., Hu, J., Liu, Y. A Recurrent Neural Network Approach for Aircraft Trajectory Prediction with Weather Features From Sherlock. <span class="venue">AIAA AVIATION Forum</span>, 3413. <span class="yr">2019</span></li>
+        <li>Wang, Y., <span class="self">Pang, Y.</span>, Liu, Y., Dutta, P., Yang, B. J. Aircraft Trajectory Prediction and Risk Assessment Using Bayesian Updating. <span class="venue">AIAA AVIATION Forum</span>, 2936. <span class="yr">2019</span></li>
+        <li>Zhao, X., Yan, H., Li, J., <span class="self">Pang, Y.</span>, Liu, Y. Spatio-temporal Anomaly Detection, Diagnostics, and Prediction of the Air-traffic Trajectory Deviation using Convective Weather. <span class="venue">Annual Conference of the PHM Society</span>. <span class="yr">2019</span></li>
+      </ol>
+
+      <h3>U.S. patents</h3>
+      <ol class="pubs">
+        <li>Liu, Y., <span class="self">Pang, Y.</span>, Hu, J. Systems and Methods for Machine Learning-Enhanced Aircraft Landing Scheduling Under Uncertainties.</li>
+        <li>Liu, Y., <span class="self">Pang, Y.</span>, Hu, J. Systems and Methods for Air Traffic Controller Workload Level Prediction using Conformalized Dynamical Graph Learning.</li>
+        <li>Liu, Y., Xu, Q., <span class="self">Pang, Y.</span> Systems and Methods for Dynamic Airspace Sectorization with Machine Learning Enhanced Workload Prediction and Clustering.</li>
+      </ol>
+    </section>
+
+    <section id="activities">
+      <h2>Activities</h2>
+
+      <h3>Funding &amp; proposals</h3>
+      <ul class="rows">
+        <li><span class="what"><strong>NASA NAMS-2 task: ACERO wildfire air traffic management</strong><span class="sub">Awarded, $100K — major initiator and writer</span></span><span class="when">2025</span></li>
+        <li><span class="what"><strong>FAA Machine Learning / AI Challenge for Aviation Safety</strong><span class="sub">Awarded, $20K — 2nd place nationally</span></span><span class="when">2024</span></li>
+        <li><span class="what"><strong>Proposal development</strong><span class="sub">Led writing for NASA ULI Round 9 Thrust 5 ($5M) and ACRP / Transportation Research Board ($400K) submissions</span></span><span class="when">2024–25</span></li>
+      </ul>
+
+      <h3>Invited talks</h3>
+      <ul class="rows">
+        <li><span class="what"><strong>INFORMS Annual Meeting</strong>, Atlanta, GA<span class="sub">Evaluation of Near-Terminal Operation Performance under Uncertainties in High-Density Airspace</span></span><span class="when">Oct 2025</span></li>
+        <li><span class="what"><strong>INFORMS Annual Meeting</strong>, Anaheim, CA<span class="sub">Machine Learning Based Aircraft Trajectory Prediction with Historical Data</span></span><span class="when">Oct 2021</span></li>
+      </ul>
+
+      <h3>Service</h3>
+      <ul class="rows">
+        <li><span class="what"><strong>Technical Program Committee</strong><span class="sub">CVPR Workshop on Perception Beyond the Visible Spectrum</span></span><span class="when">2024–</span></li>
+        <li><span class="what"><strong>Early Career Editorial Board</strong><span class="sub">Computer Systems Science and Engineering</span></span><span class="when">2023–</span></li>
+        <li><span class="what"><strong>Peer reviewer, 50+ journals</strong><span class="sub">Transportation Research Part C/D/E/F, Reliability Engineering &amp; System Safety, IEEE T-ITS / TAES, AIAA journals, Information Fusion, and others</span></span><span class="when">ongoing</span></li>
+      </ul>
+
+      <h3>Mentoring</h3>
+      <ul class="rows">
+        <li><span class="what"><strong>Jianhua Liang</strong>, Ph.D., Aerospace Engineering, UT Austin<span class="sub">Two journal manuscripts submitted</span></span><span class="when">ongoing</span></li>
+        <li><span class="what"><strong>Cameron Jobson</strong> and <strong>Viraj Singhee</strong>, B.S., Computer Science, UT Austin</span><span class="when">ongoing</span></li>
+        <li><span class="what"><strong>Alex Porcayo</strong>, M.S., Aerospace Engineering, UT Austin<span class="sub">Graduated 2025 — two journal articles published</span></span><span class="when">2025</span></li>
+        <li><span class="what"><strong>Rahul Rathnakumar</strong> and <strong>Qihang Xu</strong>, Ph.D., MAE, Arizona State<span class="sub">Both graduated 2024</span></span><span class="when">2024</span></li>
+      </ul>
+    </section>
+
+    <section id="background">
+      <h2>Background</h2>
+
+      <h3>Positions</h3>
+      <ul class="rows">
+        <li><span class="what"><strong>Postdoctoral Research Fellow</strong><span class="sub">UT Austin, Aerospace Engineering &amp; Engineering Mechanics</span></span><span class="when">2024–</span></li>
+        <li><span class="what"><strong>Co-founder &amp; CTO</strong><span class="sub">Stealth healthcare agentic-AI startup, Austin, TX</span></span><span class="when">2025–</span></li>
+        <li><span class="what"><strong>Machine Learning Engineer</strong><span class="sub">Thales USA, San Jose, CA</span></span><span class="when">2023–24</span></li>
+      </ul>
+
+      <h3>Education</h3>
+      <ul class="rows">
+        <li><span class="what"><strong>Ph.D., Mechanical &amp; Aerospace Engineering</strong><span class="sub">Arizona State University, Tempe, AZ</span></span><span class="when">2018–23</span></li>
+        <li><span class="what"><strong>M.S., Mechanical &amp; Aerospace Engineering</strong><span class="sub">Arizona State University, Tempe, AZ</span></span><span class="when">2017–18</span></li>
+        <li><span class="what"><strong>B.S., Mechanical Design, Manufacturing &amp; Automation</strong><span class="sub">Huazhong University of Science and Technology, Wuhan, China</span></span><span class="when">2013–17</span></li>
+      </ul>
+
+      <h3>Honors</h3>
+      <ul class="rows">
+        <li><span class="what">2nd Place, FAA ML/AI Data Challenge for Aviation Safety</span><span class="when">2025</span></li>
+        <li><span class="what">Outstanding Graduate Research Award, ASU MAE</span><span class="when">2023</span></li>
+        <li><span class="what">Outstanding Academic Performance Award, HUST MSE</span><span class="when">2015</span></li>
+      </ul>
+
+      <a class="btn" href="assets/cv/Yutian_Pang_CV.pdf">Download full CV (PDF)</a>
+    </section>
+
+    <footer>
+      <div class="foot-inner">
+        <span>© 2026 Yutian Pang · Austin, TX</span>
+        <span><a href="mailto:yutian.pang@austin.utexas.edu">yutian.pang@austin.utexas.edu</a></span>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  /* ---------- Section highlighting in the nav ---------- */
+  (function () {
+    var links = document.querySelectorAll('nav.toc a');
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    if ('IntersectionObserver' in window) {
+      var current = null;
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            if (current) current.classList.remove('active');
+            current = map[e.target.id];
+            if (current) current.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      document.querySelectorAll('main section[id]').forEach(function (s) { obs.observe(s); });
+    }
+  })();
+
+  /* ---------- Visitor tracking: Google Analytics 4 ----------
+     1. Create a GA4 property at https://analytics.google.com
+        (Admin → Create property → add a Web data stream for yutianpang.com).
+     2. Paste your Measurement ID (looks like "G-XXXXXXXXXX") below.
+     Until then, this block does nothing. */
+  var GA_MEASUREMENT_ID = '';   /* e.g. 'G-ABC123XYZ0' */
+
+  if (GA_MEASUREMENT_ID) {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_MEASUREMENT_ID);
+  }
+</script>
