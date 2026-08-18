@@ -18,7 +18,7 @@ Previous custom single-page design: branch `custom-site`.
   patents.
 - **Talks**: `_talks/`
 - **CV**: `_pages/cv.md` + replace `files/Yutian_Pang_CV.pdf`
-- **Photo**: replace `images/profile.png` (currently a monogram placeholder)
+- **Photo**: `images/profile.jpg` (square-cropped headshot; replace to update)
 - Push to deploy: `git add -A && git commit -m "update" && git push`
   (live in ~1 minute).
 
