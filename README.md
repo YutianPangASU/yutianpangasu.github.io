@@ -80,9 +80,10 @@ A prepared-but-inactive "Visitors" section sits just above the footer in
 `index.html` — a world map showing a dot per visitor, with click-through to
 per-visitor detail (IP, time, country, state/province, city).
 
-1. Sign up free at <https://clustrmaps.com> ("Get your free map"), register
+1. Sign up free at <https://mapmyvisitors.com> ("Get your free map"), register
    `https://yutianpang.com`, and choose the **Map** widget. Colors that match
    the site: background `#D9E2E9`, dots `#A2346B`, text `#14538F`.
+   (ClustrMaps offers the identical widget but was unreachable in Aug 2026.)
 2. Copy the `<script>` embed snippet.
 3. In `index.html`, find the `VISITOR MAP` comment block above the footer:
    delete the comment markers so the `<section id="visitors">` becomes live,
