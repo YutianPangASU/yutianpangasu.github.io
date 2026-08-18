@@ -1,143 +1,101 @@
-# yutianpang.com — academic homepage
+# Academic Pages
+**Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
 
-Single-file static site (`index.html` contains all markup, styles, and scripts).
-No build step, no dependencies.
+![Academic Pages template example](images/themes/homepage-light.png "Academic Pages template example")
 
-## Preview locally
+# Getting Started
+
+1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
+1. Click the "Use this template" button in the top right.
+1. On the "New repository" page, enter your public repository name as "[your GitHub username].github.io", which will also be your website's URL.
+1. Edit site-wide configuration in `_config.yml` and double check that the `url` is the one that you just selected in the previous step and that `repository` reflects the correct path for your repository.
+1. Add your site content, upload any files (like PDFs, .zip files, etc.) to the `files/` directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.
+1. Check status by going to the repository settings, in the "GitHub pages" section
+1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+
+See more info at https://academicpages.github.io/
+
+### Additional Tutorials
+
+Additional tutorials for working with the Academic Pages template can be found at the following sites:
+- https://jayrobwilliams.com/posts/2020/06/academic-website/
+
+## Running locally
+
+When you are initially working on your website, it is very useful to be able to preview the changes locally before pushing them to GitHub. To work locally you will need to:
+
+1. Clone the repository and made updates as detailed above.
+
+### Using a different IDE
+1. Make sure you have ruby-dev, bundler, and nodejs installed
+    
+    On most Linux distributions and [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/about) the command is:
+    ```bash
+    sudo apt install ruby-dev ruby-bundler nodejs
+    ```
+    If you see error `Unable to locate package ruby-bundler`, `Unable to locate package nodejs `, run the following:
+    ```bash
+    sudo apt update && sudo apt upgrade -y
+    ```
+    then try running `sudo apt install ruby-dev ruby-bundler nodejs` again.
+
+    On MacOS the commands are:
+    ```bash
+    brew install ruby
+    brew install node
+    gem install bundler
+    ```
+1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
+
+    If you see file permission error like `Fetching bundler-2.6.3.gem ERROR:  While executing gem (Gem::FilePermissionError) You don't have write permissions for the /var/lib/gems/3.2.0 directory.` or `Bundler::PermissionError: There was an error while trying to write to /usr/local/bin.`
+    Install Gems Locally (Recommended):
+    ```bash
+    bundle config set --local path 'vendor/bundle'
+    ```
+    then try run `bundle install` again. If succeeded, you should see a folder called `vendor` and `.bundle`.
+
+1. Run `jekyll serve -l -H localhost` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change to Markdown (*.md) and HTML files, while changes to the core template and configuration (i.e., `_config.yml`) will require stopping and restarting Jekyll.
+    You may also try `bundle exec jekyll serve -l -H localhost` to ensure jekyll to use specific dependencies on your own local machine.
+
+If you are running on Linux it may be necessary to install some additional dependencies prior to being able to run locally: `sudo apt install build-essential gcc make`
+
+## Using Docker
+
+Working from a different OS, or just want to avoid installing dependencies? You can use the provided `Dockerfile` to build a container that will run the site for you if you have [Docker](https://www.docker.com/) installed.
+
+You can build and execute the container by running the following command in the repository:
 
 ```bash
-cd ~/research/webpage
-python3 -m http.server 8000
-# open http://localhost:8000
+chmod -R 777 .
+docker compose up
 ```
 
-(If you're working over VSCode Remote-SSH, the port forwards automatically —
-just Ctrl+click the URL in the terminal.)
+You should now be able to access the website from `localhost:4000`.
 
-## Deploy to GitHub Pages (free, custom domain supported)
+### Using the DevContainer in VS Code
 
-The local git repo is already initialized and committed. To publish:
+If you are using [Visual Studio Code](https://code.visualstudio.com/) you can use the [Dev Container](https://code.visualstudio.com/docs/devcontainers/containers) that comes with this Repository. Normally VS Code detects that a development container configuration is available and asks you if you want to use the container. If this doesn't happen you can manually start the container by **F1->DevContainer: Reopen in Container**. This restarts your VS Code in the container and automatically hosts your academic page locally on http://localhost:4000. All changes will be updated live to that page after a few seconds.
 
-1. On github.com (account **YutianPangASU**), create a new **public** repo named
-   `yutianpangasu.github.io` (any name works, but this one also gives you a
-   fallback URL). Do **not** initialize it with a README.
-2. Push:
+# Maintenance
 
-   ```bash
-   cd ~/research/webpage
-   git remote add origin git@github.com:YutianPangASU/yutianpangasu.github.io.git
-   git push -u origin main
-   ```
+Bug reports and feature requests to the template should be [submitted via GitHub](https://github.com/academicpages/academicpages.github.io/issues/new/choose). For questions concerning how to style the template, please feel free to start a [new discussion on GitHub](https://github.com/academicpages/academicpages.github.io/discussions).
 
-   (Use `https://github.com/...` for the remote URL if you don't have SSH keys
-   set up with GitHub.)
-3. On GitHub: **Settings → Pages** → Source: *Deploy from a branch* →
-   Branch: `main`, folder `/ (root)` → Save.
-4. Still in **Settings → Pages**, under *Custom domain* enter `yutianpang.com`
-   and save. The `CNAME` file in this repo keeps that setting across pushes.
-5. After DNS is set up (below) and the check passes, tick **Enforce HTTPS**.
+This repository was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License (see LICENSE.md). It is currently being maintained by [Robert Zupko](https://github.com/rjzupkoii), and additional maintainers would be welcome.
 
-## GoDaddy DNS setup
+## Bugfixes and enhancements
 
-In GoDaddy: **My Products → yutianpang.com → DNS → Manage DNS**. Remove any
-default "Parked" / forwarding records, then add:
+If you have bugfixes and enhancements that you would like to submit as a pull request, you will need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository as opposed to using it as a template. This will also allow you to [synchronize your copy](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) of the template to your fork as well.
 
-| Type  | Name | Value                       | TTL     |
-|-------|------|-----------------------------|---------|
-| A     | @    | 185.199.108.153             | default |
-| A     | @    | 185.199.109.153             | default |
-| A     | @    | 185.199.110.153             | default |
-| A     | @    | 185.199.111.153             | default |
-| CNAME | www  | yutianpangasu.github.io     | default |
+Unfortunately, one logistical issue with a template theme like Academic Pages that makes it a little tricky to get bug fixes and updates to the core theme. If you use this template and customize it, you will probably get merge conflicts if you attempt to synchronize, although [rebasing](https://git-scm.com/docs/git-rebase) the changes from this template will work along with manually [cherry picking](https://git-scm.com/docs/git-cherry-pick) the relevant commits. If you are not comfortable with the Git command line, you can save your various `.yml` configuration files and Markdown files, delete the repository, and fork it again. 
 
-DNS changes typically take a few minutes but can take up to an hour or two.
-Check with: `dig yutianpang.com +short` (should return the four A records).
+---
+<div align="center">
+    
+![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
+[![GitHub contributors](https://img.shields.io/github/contributors/academicpages/academicpages.github.io.svg)](https://github.com/academicpages/academicpages.github.io/graphs/contributors)
+[![GitHub release](https://img.shields.io/github/v/release/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/releases/latest)
+[![GitHub license](https://img.shields.io/github/license/academicpages/academicpages.github.io?color=blue)](https://github.com/academicpages/academicpages.github.io/blob/master/LICENSE)
 
-## Visitor tracking
-
-The site ships with a Google Analytics 4 hook that is **inactive until you add
-your ID**:
-
-1. Go to <https://analytics.google.com> → Admin → **Create property** →
-   add a *Web* data stream for `https://yutianpang.com`.
-2. Copy the Measurement ID (`G-XXXXXXXXXX`).
-3. In `index.html`, near the bottom, set:
-
-   ```js
-   var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
-   ```
-
-4. Commit and push. Visits, referrers, geography, and per-section traffic will
-   appear in the GA4 dashboard (real-time within seconds; reports within ~24h).
-
-Privacy-friendlier alternative: [GoatCounter](https://www.goatcounter.com)
-(free, no cookies, shows a simple visit counter). Sign up, then replace the GA
-block in `index.html` with their one-line script tag.
-
-## Visitor map (on-page widget)
-
-A prepared-but-inactive "Visitors" section sits just above the footer in
-`index.html` — a world map showing a dot per visitor, with click-through to
-per-visitor detail (IP, time, country, state/province, city).
-
-1. Sign up free at <https://mapmyvisitors.com> ("Get your free map"), register
-   `https://yutianpang.com`, and choose the **Map** widget. Colors that match
-   the site: background `#D9E2E9`, dots `#A2346B`, text `#14538F`.
-   (ClustrMaps offers the identical widget but was unreachable in Aug 2026.)
-2. Copy the `<script>` embed snippet.
-3. In `index.html`, find the `VISITOR MAP` comment block above the footer:
-   delete the comment markers so the `<section id="visitors">` becomes live,
-   and paste the snippet in place of `PASTE YOUR CLUSTRMAPS <script> SNIPPET
-   HERE`. Optionally add `<li><a href="#visitors">Visitors</a></li>` to the
-   sidebar nav.
-4. Commit and push.
-
-Per-visitor IP detail lives in your ClustrMaps account dashboard (the public
-map click shows locations only). If you want fully private per-visitor logs
-instead of an on-page map, [StatCounter](https://statcounter.com) offers the
-same detail with an invisible tracker. GA4 (above) coexists fine with either.
-
-## Interactive visitor map (custom, Cloudflare Worker)
-
-`worker/visitor-worker.js` is a self-contained visitor logger. Once deployed,
-the Visitors section swaps the MapMyVisitors widget for a full interactive
-world map rendered on the page (Leaflet + CARTO tiles): every visit becomes a
-dot anyone can click to see the visit time, city, state/province, and country.
-IP addresses are logged too but only visible to you.
-
-Setup in the Cloudflare dashboard (~5 min; works fine in an account that
-already hosts other sites — this is a standalone Worker, no domain changes):
-
-1. **Workers & Pages → Create → Worker** — name it `visitor-log`, deploy the
-   hello-world, then Edit Code, replace with `worker/visitor-worker.js`, Deploy.
-2. **Storage & Databases → D1 → Create database** — name `visitors`.
-3. Back in the worker: **Settings → Bindings → Add → D1 database** — variable
-   name `DB`, database `visitors`.
-4. **Settings → Variables and Secrets → Add secret** — name `ADMIN_KEY`, value
-   = a long random string (your private key for the IP log).
-5. Copy the worker URL (`https://visitor-log.<account>.workers.dev`) and set it
-   as `VISITOR_API` near the bottom of `index.html`; commit and push.
-
-Owner-only detail log (with IPs):
-`https://visitor-log.<account>.workers.dev/admin?key=YOUR_ADMIN_KEY`
-
-The visits table auto-creates on first hit. Repeat visits from the same IP
-within 30 minutes and obvious bots are not logged.
-
-## Updating content
-
-Everything lives in `index.html`, in clearly marked sections:
-
-- **Photo** — drop a headshot at `assets/img/profile.jpg`, then replace the
-  `<svg class="avatar">…</svg>` block with
-  `<img class="avatar" src="assets/img/profile.jpg" alt="Yutian Pang">`
-  (a comment in the file marks the spot).
-- **News** — add a `<li>` at the top of the `<ul class="news">` list.
-- **Publications** — each group (`Under review`, `Journal articles`, …) is an
-  `<ol class="pubs">`; copy an existing `<li>` as a template.
-- **CV PDF** — overwrite `assets/cv/Yutian_Pang_CV.pdf` with a fresh export.
-- **LinkedIn / GitHub links** — uncomment the placeholders in the
-  `<div class="links">` block in the sidebar.
-
-After any edit: `git add -A && git commit -m "update" && git push` — the live
-site refreshes in about a minute.
+[![GitHub stars](https://img.shields.io/github/stars/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io)
+[![GitHub forks](https://img.shields.io/github/forks/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/fork)
+</div>

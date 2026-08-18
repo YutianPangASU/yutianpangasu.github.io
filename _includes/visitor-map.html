@@ -1,0 +1,102 @@
+<!-- Visitor map: MapMyVisitors widget by default; when VISITOR_API below is set
+     to a deployed copy of worker/visitor-worker.js, an interactive Leaflet map
+     replaces it (per-location popups: time, city, state, country). -->
+<style>
+  #visitor-globe { height: 380px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
+  #visitor-stats, #visitor-widget-note { font-size: 0.85em; color: #6b7a8a; margin-top: 0.5em; }
+  .visitor-widget { display: flex; justify-content: center; padding: 0.5em 0; }
+</style>
+
+<div id="visitor-globe" hidden></div>
+<p id="visitor-stats" hidden></p>
+
+<div class="visitor-widget">
+  <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=Q_GbtGw-48cNpupVpRe1WPZbgFheNgL779uX62qfbmE&cl=ffffff&w=a"></script>
+</div>
+<p id="visitor-widget-note">Each dot marks a visitor to this page. Clicking the map opens the full visit history.</p>
+
+<script>
+  var VISITOR_API = '';   /* e.g. 'https://visitor-log.myaccount.workers.dev' — no trailing slash */
+
+  if (VISITOR_API) {
+    if (/yutianpang\.com$/.test(location.hostname)) {
+      fetch(VISITOR_API + '/hit').catch(function () {});
+    }
+    (function () {
+      var lcss = document.createElement('link');
+      lcss.rel = 'stylesheet';
+      lcss.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      lcss.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+      lcss.crossOrigin = 'anonymous';
+      document.head.appendChild(lcss);
+      var ljs = document.createElement('script');
+      ljs.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      ljs.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+      ljs.crossOrigin = 'anonymous';
+      ljs.onload = drawVisitorMap;
+      document.head.appendChild(ljs);
+    })();
+  }
+
+  function drawVisitorMap() {
+    fetch(VISITOR_API + '/visits')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var visits = (data.visits || []).filter(function (v) {
+          return v.lat != null && v.lon != null;
+        });
+        var globe = document.getElementById('visitor-globe');
+        var stats = document.getElementById('visitor-stats');
+        globe.hidden = false;
+        stats.hidden = false;
+        var widget = document.querySelector('.visitor-widget');
+        var note = document.getElementById('visitor-widget-note');
+        if (widget) widget.style.display = 'none';
+        if (note) note.style.display = 'none';
+
+        var map = L.map(globe, { scrollWheelZoom: false, worldCopyJump: true })
+                   .setView([25, 5], 2);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+          subdomains: 'abcd',
+          maxZoom: 12,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        }).addTo(map);
+
+        function esc(s) {
+          return String(s).replace(/[<>&"]/g, function (c) {
+            return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c];
+          });
+        }
+
+        var cells = {};
+        visits.forEach(function (v) {
+          var k = v.lat.toFixed(1) + ',' + v.lon.toFixed(1);
+          var c = cells[k] || (cells[k] = { lat: v.lat, lon: v.lon, n: 0, last: v.ts, place: null });
+          c.n += 1;
+          if (v.ts > c.last) c.last = v.ts;
+          if (!c.place && (v.city || v.region || v.country)) {
+            c.place = [v.city, v.region, v.country].filter(Boolean).join(', ');
+          }
+        });
+
+        Object.keys(cells).forEach(function (k) {
+          var c = cells[k];
+          L.circleMarker([c.lat, c.lon], {
+            radius: 4 + 2 * Math.log(c.n + 1) / Math.LN2,
+            color: '#A2346B', weight: 1.5,
+            fillColor: '#A2346B', fillOpacity: 0.45
+          }).addTo(map).bindPopup(
+            '<b>' + esc(c.place || 'Unknown location') + '</b><br>' +
+            c.n + (c.n === 1 ? ' visit' : ' visits') +
+            ' &middot; last ' + esc(new Date(c.last).toLocaleString())
+          );
+        });
+
+        stats.textContent = visits.length + ' recorded visit' +
+          (visits.length === 1 ? '' : 's') + ' from ' + Object.keys(cells).length +
+          ' location' + (Object.keys(cells).length === 1 ? '' : 's') +
+          ' since August 2026. Click a dot for details.';
+      })
+      .catch(function () { /* worker unreachable — leave the widget visible */ });
+  }
+</script>
