@@ -1,6 +1,7 @@
 ---
 permalink: /
 title: "About me"
+seo_title: "Yutian Pang Homepage"
 author_profile: true
 redirect_from: 
   - /about/
