@@ -74,6 +74,28 @@ Privacy-friendlier alternative: [GoatCounter](https://www.goatcounter.com)
 (free, no cookies, shows a simple visit counter). Sign up, then replace the GA
 block in `index.html` with their one-line script tag.
 
+## Visitor map (on-page widget)
+
+A prepared-but-inactive "Visitors" section sits just above the footer in
+`index.html` — a world map showing a dot per visitor, with click-through to
+per-visitor detail (IP, time, country, state/province, city).
+
+1. Sign up free at <https://clustrmaps.com> ("Get your free map"), register
+   `https://yutianpang.com`, and choose the **Map** widget. Colors that match
+   the site: background `#D9E2E9`, dots `#A2346B`, text `#14538F`.
+2. Copy the `<script>` embed snippet.
+3. In `index.html`, find the `VISITOR MAP` comment block above the footer:
+   delete the comment markers so the `<section id="visitors">` becomes live,
+   and paste the snippet in place of `PASTE YOUR CLUSTRMAPS <script> SNIPPET
+   HERE`. Optionally add `<li><a href="#visitors">Visitors</a></li>` to the
+   sidebar nav.
+4. Commit and push.
+
+Per-visitor IP detail lives in your ClustrMaps account dashboard (the public
+map click shows locations only). If you want fully private per-visitor logs
+instead of an on-page map, [StatCounter](https://statcounter.com) offers the
+same detail with an invisible tracker. GA4 (above) coexists fine with either.
+
 ## Updating content
 
 Everything lives in `index.html`, in clearly marked sections:

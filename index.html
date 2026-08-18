@@ -324,6 +324,18 @@
   }
   .btn:hover { text-decoration: none; opacity: 0.92; }
 
+  /* ---------- Visitor map ---------- */
+  .visitor-map {
+    display: flex;
+    justify-content: center;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.2rem;
+    margin-top: 1.2rem;
+  }
+  .visitor-map + p { font-size: 0.88rem; color: var(--muted); margin-top: 0.6rem; }
+
   /* ---------- Footer ---------- */
   footer {
     border-top: 1px solid var(--line);
@@ -655,6 +667,26 @@
 
       <a class="btn" href="assets/cv/Yutian_Pang_CV.pdf">Download full CV (PDF)</a>
     </section>
+
+    <!-- ============ VISITOR MAP (inactive until you add your widget) ============
+         1. Go to https://clustrmaps.com → "Get your free map" → enter
+            https://yutianpang.com and your email → pick the "Map" widget.
+            Suggested colors to match this site: background #D9E2E9,
+            dots #A2346B, text/outline #14538F.
+         2. Copy the <script> embed snippet they give you.
+         3. Remove this comment's opening/closing markers so the <section>
+            below becomes live, and paste the snippet where marked.
+         Clicking the live map opens your ClustrMaps page; sign in there to see
+         per-visitor detail: IP, time, country, state/province, city.
+
+    <section id="visitors">
+      <h2>Visitors</h2>
+      <div class="visitor-map">
+        PASTE YOUR CLUSTRMAPS <script> SNIPPET HERE
+      </div>
+      <p>Each dot marks a visitor to this page.</p>
+    </section>
+    ============================================================================ -->
 
     <footer>
       <div class="foot-inner">
