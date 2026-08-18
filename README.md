@@ -97,6 +97,33 @@ map click shows locations only). If you want fully private per-visitor logs
 instead of an on-page map, [StatCounter](https://statcounter.com) offers the
 same detail with an invisible tracker. GA4 (above) coexists fine with either.
 
+## Interactive visitor map (custom, Cloudflare Worker)
+
+`worker/visitor-worker.js` is a self-contained visitor logger. Once deployed,
+the Visitors section swaps the MapMyVisitors widget for a full interactive
+world map rendered on the page (Leaflet + CARTO tiles): every visit becomes a
+dot anyone can click to see the visit time, city, state/province, and country.
+IP addresses are logged too but only visible to you.
+
+Setup in the Cloudflare dashboard (~5 min; works fine in an account that
+already hosts other sites — this is a standalone Worker, no domain changes):
+
+1. **Workers & Pages → Create → Worker** — name it `visitor-log`, deploy the
+   hello-world, then Edit Code, replace with `worker/visitor-worker.js`, Deploy.
+2. **Storage & Databases → D1 → Create database** — name `visitors`.
+3. Back in the worker: **Settings → Bindings → Add → D1 database** — variable
+   name `DB`, database `visitors`.
+4. **Settings → Variables and Secrets → Add secret** — name `ADMIN_KEY`, value
+   = a long random string (your private key for the IP log).
+5. Copy the worker URL (`https://visitor-log.<account>.workers.dev`) and set it
+   as `VISITOR_API` near the bottom of `index.html`; commit and push.
+
+Owner-only detail log (with IPs):
+`https://visitor-log.<account>.workers.dev/admin?key=YOUR_ADMIN_KEY`
+
+The visits table auto-creates on first hit. Repeat visits from the same IP
+within 30 minutes and obvious bots are not logged.
+
 ## Updating content
 
 Everything lives in `index.html`, in clearly marked sections:
