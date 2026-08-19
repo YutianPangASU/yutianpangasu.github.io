@@ -33,7 +33,7 @@ Each links to a short introduction; the full list with one-sentence summaries is
 
 News
 ======
-* **Aug 2026** — NASA ACERO wildfire air traffic management: a [technical review of firefighting UAVs for wildland fire](/files/firefighting_uav_review.html) — platforms and missions, flight dynamics and control models, and the coupling of fire-propagation models to UAV planning.
+* **Aug 2026** — NASA ACERO wildfire air traffic management: a [technical review of firefighting UAVs for wildland fire](/files/firefighting_uav_review.html) — platforms and missions, flight dynamics and control models, and the coupling of fire-propagation models to UAV planning — and a companion [review of optimization formulations for the firefighting-UAV problem](/files/uav_optimization_formulation.html) — constraints, cost functions, and tractability across the strategic, tactical, and trajectory layers.
 * **2026** — *From Voice to Safety* published in *Transportation Research Part C*; further articles in *Reliability Engineering & System Safety* and *Journal of Air Transport Management* (×2).
 * **Oct 2025** — Invited talk at the INFORMS Annual Meeting, Atlanta.
 * **2025** — 2nd place in the FAA Machine Learning / AI Data Challenge for Aviation Safety.
