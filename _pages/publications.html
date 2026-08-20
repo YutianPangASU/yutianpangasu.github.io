@@ -11,13 +11,13 @@ author_profile: true
 
 {% include base_path %}
 
-<p>Grouped by operational phase &mdash; from the airport surface through the terminal area to the en-route center &mdash; and then by research area. Each paper appears once, under its primary area; newest first within each group. Unfinished working papers are listed separately at the end.</p>
+<p>Published work is grouped by operational phase &mdash; from the airport surface through the terminal area to the en-route center &mdash; and then by research area. Each paper appears once, under its primary area; newest first within each group. Manuscripts under review and unfinished working papers are listed separately at the end.</p>
 
 {% if site.publication_area %}
   {% for area in site.publication_area %}
     {% assign title_shown = false %}
     {% for post in site.publications reversed %}
-      {% if post.area != area[0] or post.category == 'workingpapers' %}
+      {% if post.area != area[0] or post.category == 'underreview' or post.category == 'workingpapers' %}
         {% continue %}
       {% endif %}
       {% unless title_shown %}
@@ -26,6 +26,18 @@ author_profile: true
       {% endunless %}
       {% include archive-single.html %}
     {% endfor %}
+  {% endfor %}
+
+  {% assign title_shown = false %}
+  {% for post in site.publications reversed %}
+    {% if post.category != 'underreview' %}
+      {% continue %}
+    {% endif %}
+    {% unless title_shown %}
+      <h2>Under Review</h2><hr />
+      {% assign title_shown = true %}
+    {% endunless %}
+    {% include archive-single.html %}
   {% endfor %}
 
   {% assign title_shown = false %}
