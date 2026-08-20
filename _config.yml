@@ -100,7 +100,7 @@ publication_area:
   airport-ground:
     title: 'Airport & Ground Operations'
   terminal:
-    title: 'Near-Terminal Operations'
+    title: 'Near-Terminal Automation'
   enroute:
     title: 'En-Route & Center-Level Decision Support'
   language-ai:
