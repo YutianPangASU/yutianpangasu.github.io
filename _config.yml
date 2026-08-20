@@ -38,7 +38,7 @@ author:
   googlescholar    : "https://scholar.google.com/citations?user=VyB1ewgAAAAJ"
   inspire-hep      : # URL
   impactstory      : # URL
-  orcid            : # URL
+  orcid            : "https://orcid.org/0000-0001-6343-9641"
   semantic         : # URL
   ssrn             : # URL
   pubmed           : # URL
@@ -177,6 +177,7 @@ social:
     - "https://scholar.google.com/citations?user=VyB1ewgAAAAJ"
     - "https://github.com/YutianPangASU"
     - "https://www.linkedin.com/in/yutianpang/"
+    - "https://orcid.org/0000-0001-6343-9641"
 
 
 # Analytics
