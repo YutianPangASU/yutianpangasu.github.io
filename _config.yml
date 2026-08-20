@@ -12,7 +12,7 @@ site_theme               : "default" # The available themes options are "default
 title                    : "Yutian Pang"
 title_separator          : "-"
 name                     : &name "Yutian Pang"
-description              : &description "Yutian Pang, PhD — Postdoctoral Fellow in Aerospace Engineering at UT Austin. AI and decision-making for air transportation."
+description              : &description "Yutian Pang, PhD — Postdoctoral Fellow in Aerospace Engineering at UT Austin. Smart aviation research: air traffic control and advanced air mobility with AI, machine learning, and optimization."
 url                      : https://yutianpang.com
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
