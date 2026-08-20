@@ -19,9 +19,9 @@ Education
 
 Positions
 ======
-* 2024–present: Postdoctoral Research Fellow, Department of Aerospace Engineering & Engineering Mechanics, The University of Texas at Austin
-* 2025–present: Co-founder & CTO, stealth healthcare agentic-AI startup, Austin, TX
-* 2023–2024: Machine Learning Engineer, Thales USA, San Jose, CA
+* Jul 2024 – present: Postdoctoral Research Fellow, Department of Aerospace Engineering & Engineering Mechanics, The University of Texas at Austin
+* Mar 2025 – present: Co-founder & CTO, [Wyzzy](https://calls.wyzzy.ai/), an agentic-AI healthcare startup, Austin, TX
+* Jun 2023 – Jul 2024: Machine Learning Engineer, Thales USA, San Jose, CA
 
 Honors and awards
 ======
@@ -57,4 +57,4 @@ Service
 ======
 * Technical Program Committee, CVPR Workshop on Perception Beyond the Visible Spectrum, 2024–present
 * Early Career Editorial Board, *Computer Systems Science and Engineering*, 2023–present
-* Peer reviewer for 50+ journals across aerospace, transportation, AI, and reliability, including *Transportation Research Part C/D/E/F*, *Reliability Engineering & System Safety*, IEEE T-ITS/TAES, and AIAA journals
+* Peer reviewer for 50+ journals in aerospace, mechanical, transportation, AI, IE/OR, and CS/CE, including *Aerospace Science and Technology*, *Chinese Journal of Aeronautics*, *AIAA Journal of Aerospace Information Systems*, *AIAA Journal of Aircraft*, *Computers in Industry*, *Information Fusion*, *Reliability Engineering & System Safety*, *Transportation Research Part C/D/E/F*, and IEEE T-ITS/TAES
