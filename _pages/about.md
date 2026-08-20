@@ -12,7 +12,7 @@ I am a postdoctoral research fellow in the Department of Aerospace Engineering &
 
 My path has crossed the model–data spectrum in stages. My Ph.D. at Arizona State University, anchored in a five-year NASA aviation data-science project, was data-driven work: Bayesian deep learning and graph models that predict air traffic behavior from operational data. A year at Thales as a machine learning engineer brought a security focus, hardening learning systems for an air traffic management platform that had to meet government certification. My postdoc at UT Austin has added the model-driven side — flight simulation, trajectory optimization, and hybrid methods that couple the two traditions. Throughout, the methods are built to be deployed rather than to stay on paper.
 
-Alongside academia, I have been involved in multiple startups across aerospace, autonomous driving, and healthcare — most recently as co-founder and CTO of an agentic-AI healthcare startup in Austin.
+Alongside academia, I have been involved in multiple startups across aerospace, autonomous driving, and healthcare — most recently as co-founder and CTO of [Wyzzy](https://calls.wyzzy.ai/), an agentic-AI healthcare startup in Austin.
 
 Research areas
 ======
