@@ -66,7 +66,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "yutianpang"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
@@ -94,6 +94,25 @@ publication_category:
     title: 'Conference Papers'
   patents:
     title: 'U.S. Patents'
+
+# Research-area grouping used on the Publications page; order here is display order
+publication_area:
+  airport-ground:
+    title: 'Airport & Ground Operations'
+  terminal:
+    title: 'Near-Terminal Operations'
+  enroute:
+    title: 'En-Route & Center-Level Decision Support'
+  language-ai:
+    title: 'Language AI for Aviation'
+  computer-vision:
+    title: 'Computer Vision'
+  optimization:
+    title: 'Optimization & Logistics'
+  safety-security:
+    title: 'Safety & Security'
+  risk-reliability:
+    title: 'Risk & Reliability'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews
@@ -157,6 +176,7 @@ social:
   links:
     - "https://scholar.google.com/citations?user=VyB1ewgAAAAJ"
     - "https://github.com/YutianPangASU"
+    - "https://www.linkedin.com/in/yutianpang/"
 
 
 # Analytics

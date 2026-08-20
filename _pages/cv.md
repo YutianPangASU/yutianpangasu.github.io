@@ -35,14 +35,12 @@ Funding and proposals
 
 * NASA NAMS-2 task: ACERO wildfire air traffic management — **awarded**, $100K
 * 2024 FAA Machine Learning / AI Challenge for Aviation Safety — **awarded**, $20K
-* NASA ULI Round 9, Thrust 5: In-Time System-Wide Safety Assurance — proposal led, $5M
-* Airport Cooperative Research Program, Transportation Research Board — proposal led, $400K
+* NASA ULI Round 9, Thrust 5: In-Time System-Wide Safety Assurance — proposal led, $5M, not selected
+* Airport Cooperative Research Program, Transportation Research Board — proposal led, $400K, not selected
 
 Publications
 ======
-<ul>{% for post in site.publications reversed %}
-  {% include archive-single-cv.html %}
-{% endfor %}</ul>
+See the [Publications](/publications/) page, or the full CV PDF above.
 
 Talks
 ======
