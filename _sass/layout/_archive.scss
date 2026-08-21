@@ -86,6 +86,55 @@
 
 
 /*
+   Publication list teaser (thumbnail beside each publication entry)
+   ========================================================================== */
+
+.archive__item--with-teaser {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+
+  @include breakpoint($medium) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.25em;
+  }
+
+  .archive__item-list-teaser {
+    display: block;
+    flex: 0 0 auto;
+    max-width: 300px;
+    border: 1px solid var(--global-border-color);
+    border-radius: $border-radius;
+    background: #fff;
+    padding: 3px;
+    overflow: hidden;
+
+    @include breakpoint($medium) {
+      flex: 0 0 220px;
+      width: 220px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: $border-radius;
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(#000, 0.25);
+    }
+  }
+
+  .archive__item-body {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+
+/*
    List view
    ========================================================================== */
 

@@ -12,8 +12,13 @@
   {% assign title = post.title %}
 {% endif %}
 
+{% assign show_list_teaser = false %}
+{% if include.type != "grid" and post.collection == 'publications' and post.header.teaser %}
+  {% assign show_list_teaser = true %}
+{% endif %}
+
 <div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="archive__item{% if show_list_teaser %} archive__item--with-teaser{% endif %}" itemscope itemtype="http://schema.org/CreativeWork">
     {% if include.type == "grid" and teaser %}
       <div class="archive__item-teaser">
         <img src=
@@ -24,6 +29,19 @@
           {% endif %}
           alt="">
       </div>
+    {% endif %}
+
+    {% if show_list_teaser %}
+      <a class="archive__item-list-teaser" href="{{ base_path }}{{ post.url }}" tabindex="-1" aria-hidden="true">
+        <img src=
+          {% if post.header.teaser contains "://" %}
+            "{{ post.header.teaser }}"
+          {% else %}
+            "{{ post.header.teaser | prepend: "/images/" | prepend: base_path }}"
+          {% endif %}
+          alt="" loading="lazy">
+      </a>
+      <div class="archive__item-body">
     {% endif %}
 
     <h2 class="archive__item-title" itemprop="headline">
@@ -86,6 +104,10 @@
       <p><a href="{{ post.slidesurl }}">Download Slides</a></p>
     {% elsif post.bibtexurl %}
       <p><a href="{{ post.bibtexurl }}">Download Bibtex</a></p>
+    {% endif %}
+
+    {% if show_list_teaser %}
+      </div>
     {% endif %}
 
   </article>

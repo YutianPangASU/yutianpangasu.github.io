@@ -399,3 +399,30 @@
   font-size: $type-size-6;
   text-transform: uppercase;
 }
+
+
+/*
+   Publication figure (representative figure/GIF on a publication page)
+   ========================================================================== */
+
+.publication__figure {
+  margin: 0 0 1.5em;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--global-border-color);
+    border-radius: $border-radius;
+    background: #fff;
+    padding: 4px;
+  }
+
+  figcaption {
+    margin-top: 0.5em;
+    font-size: $type-size-6;
+    font-style: italic;
+    color: var(--global-text-color-light);
+    text-align: center;
+  }
+}

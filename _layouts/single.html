@@ -45,6 +45,18 @@ layout: default
       {% endunless %}
 
       <section class="page__content" itemprop="text">
+        {% if page.collection == 'publications' and page.header.teaser %}
+          <figure class="publication__figure">
+            <img src=
+              {% if page.header.teaser contains "://" %}
+                "{{ page.header.teaser }}"
+              {% else %}
+                "{{ page.header.teaser | prepend: "/images/" | prepend: base_path }}"
+              {% endif %}
+              alt="Representative figure for this publication">
+            {% if page.figure_caption %}<figcaption>{{ page.figure_caption | markdownify | remove: '<p>' | remove: '</p>' }}</figcaption>{% endif %}
+          </figure>
+        {% endif %}
         {{ content }}
 
         {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}

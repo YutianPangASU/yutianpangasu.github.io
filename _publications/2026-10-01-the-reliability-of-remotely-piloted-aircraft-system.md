@@ -8,6 +8,9 @@ excerpt: "A reliability framework showing how uncertainties in aeronautical comm
 date: 2026-10-01
 venue: "Reliability Engineering & System Safety"
 citation: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J. (2026). “The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties.” <i>Reliability Engineering & System Safety</i>."
+header:
+  teaser: publications/2026-10-01-the-reliability-of-remotely-piloted-aircraft-system.png
+figure_caption: "Waypoint tracking performance of a remotely piloted aircraft degrading as command and control latency grows."
 ---
 
 A reliability framework showing how uncertainties in aeronautical communication links bound the safe performance of remotely piloted aircraft systems.

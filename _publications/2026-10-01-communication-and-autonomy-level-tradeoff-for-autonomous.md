@@ -8,6 +8,9 @@ excerpt: "Characterizes the tradeoff between communication load and autonomy lev
 date: 2026-10-01
 venue: "Working paper"
 citation: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J. (2026). “Communication and Autonomy Level Tradeoff for Autonomous Systems Resource Allocation.” <i>Working paper</i>."
+header:
+  teaser: publications/2026-10-01-communication-and-autonomy-level-tradeoff-for-autonomous.png
+figure_caption: "Certification map: residual hazard rate across autonomy level and communication availability."
 ---
 
 Characterizes the tradeoff between communication load and autonomy level when allocating resources across autonomous systems.
