@@ -14,6 +14,8 @@ My path has crossed the model–data spectrum in stages. My Ph.D. at Arizona Sta
 
 Alongside academia, I have worked in industry. A year at Thales as a machine learning engineer brought a focus on security and privacy research, such as embedding protection for the Thales data security platform. I have also been involved in multiple startups across aerospace, autonomous driving, and healthcare — most recently as co-founder and CTO of [Wyzzy](https://calls.wyzzy.ai/), an agentic-AI healthcare startup in Austin whose product is deployed in dental offices in Dallas, TX.
 
+I am always open to collaborations and research opportunities. Please reach me at yutian DOT pang AT outlook DOT com.
+
 Research areas
 ======
 * **Human–AI teaming in safety-critical operations** — how human operators and intelligent systems can share responsibility in high-stakes environments: understanding human communication and workload, and designing decision support that complements rather than replaces human judgment.
