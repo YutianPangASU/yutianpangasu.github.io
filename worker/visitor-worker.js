@@ -3,8 +3,11 @@
  *
  * Endpoints:
  *   GET /hit     — called by the homepage on each page load; records the visit
- *                  (time, geolocation from Cloudflare, IP) into D1. Skips bots
- *                  and repeat hits from the same IP within 30 minutes.
+ *                  (time, geolocation from Cloudflare, IP, network owner) into
+ *                  D1. Skips bots and repeat hits from the same IP within 30
+ *                  minutes. The network owner (Cloudflare's asOrganization)
+ *                  explains most "unknown location" rows: VPNs, Apple Private
+ *                  Relay, mobile carriers, and cloud hosts.
  *   GET /visits  — public JSON of recent visits (time, country, region, city,
  *                  lat/lon). NO IP addresses — this feeds the public map.
  *   GET /admin?key=YOUR_ADMIN_KEY
@@ -19,7 +22,7 @@
  *   4. Worker → Settings → Variables and Secrets → Add secret:
  *      name ADMIN_KEY, value = any long random string you keep private.
  *   5. Done. The worker URL looks like https://visitor-log.<account>.workers.dev
- *      — paste it into VISITOR_API in index.html.
+ *      — paste it into VISITOR_API in _includes/visitor-map.html.
  *
  * The visits table is created automatically on first use.
  */
@@ -33,8 +36,24 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS visits (
   city    TEXT,
   lat     REAL,
   lon     REAL,
-  ua      TEXT
+  ua      TEXT,
+  asn     INTEGER,
+  org     TEXT
 )`;
+
+// Columns added after the first deployment; the ALTER fails harmlessly when
+// the column already exists.
+const MIGRATIONS = [
+  "ALTER TABLE visits ADD COLUMN asn INTEGER",
+  "ALTER TABLE visits ADD COLUMN org TEXT",
+];
+
+async function ensureSchema(db) {
+  await db.prepare(SCHEMA).run();
+  for (const sql of MIGRATIONS) {
+    try { await db.prepare(sql).run(); } catch (_) { /* already migrated */ }
+  }
+}
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -52,7 +71,7 @@ function json(data, extra = {}) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    await env.DB.prepare(SCHEMA).run();
+    await ensureSchema(env.DB);
 
     if (url.pathname === "/hit") {
       const ua = request.headers.get("User-Agent") || "";
@@ -70,7 +89,7 @@ export default {
       }
 
       await env.DB
-        .prepare("INSERT INTO visits (ts, ip, country, region, city, lat, lon, ua) VALUES (?,?,?,?,?,?,?,?)")
+        .prepare("INSERT INTO visits (ts, ip, country, region, city, lat, lon, ua, asn, org) VALUES (?,?,?,?,?,?,?,?,?,?)")
         .bind(
           new Date().toISOString(),
           ip,
@@ -79,7 +98,9 @@ export default {
           cf.city || null,
           cf.latitude ? Number(cf.latitude) : null,
           cf.longitude ? Number(cf.longitude) : null,
-          ua.slice(0, 200)
+          ua.slice(0, 200),
+          cf.asn ? Number(cf.asn) : null,   // network owner, e.g. a university, a mobile
+          cf.asOrganization || null         // carrier, Apple Private Relay, or a cloud host
         ).run();
       return json({ ok: true });
     }
@@ -96,18 +117,20 @@ export default {
         return new Response("Forbidden", { status: 403 });
       }
       const { results } = await env.DB
-        .prepare("SELECT ts, ip, country, region, city, ua FROM visits ORDER BY id DESC LIMIT 5000")
+        .prepare("SELECT ts, ip, country, region, city, org, asn, ua FROM visits ORDER BY id DESC LIMIT 5000")
         .all();
+      const esc = v => String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;");
       const rows = results.map(r =>
-        `<tr><td>${r.ts}</td><td>${r.ip}</td><td>${r.country || ""}</td>` +
-        `<td>${r.region || ""}</td><td>${r.city || ""}</td><td>${(r.ua || "").replace(/</g, "&lt;")}</td></tr>`
+        `<tr><td>${esc(r.ts)}</td><td>${esc(r.ip)}</td><td>${esc(r.country)}</td>` +
+        `<td>${esc(r.region)}</td><td>${esc(r.city)}</td>` +
+        `<td>${esc(r.org)}${r.asn ? " (AS" + r.asn + ")" : ""}</td><td>${esc(r.ua)}</td></tr>`
       ).join("");
       const html = `<!doctype html><meta charset="utf-8"><title>Visitor log</title>
 <style>body{font:13px/1.5 monospace;margin:2rem;color:#182430}
 table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:4px 8px;text-align:left}
 th{background:#edf3f7}</style>
 <h2>Visitor log — ${results.length} entries</h2>
-<table><tr><th>Time (UTC)</th><th>IP</th><th>Country</th><th>Region</th><th>City</th><th>User agent</th></tr>${rows}</table>`;
+<table><tr><th>Time (UTC)</th><th>IP</th><th>Country</th><th>Region</th><th>City</th><th>Network</th><th>User agent</th></tr>${rows}</table>`;
       return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
     }
 
