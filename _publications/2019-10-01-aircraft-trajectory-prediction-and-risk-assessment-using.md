@@ -8,6 +8,14 @@ excerpt: "Bayesian updating for aircraft trajectory prediction and en-route risk
 date: 2019-10-01
 venue: "AIAA AVIATION 2019 Forum"
 citation: "Wang, Y., <b>Pang, Y.</b>, Liu, Y., Dutta, P., & Yang, B. J. (2019). “Aircraft Trajectory Prediction and Risk Assessment Using Bayesian Updating.” <i>AIAA AVIATION 2019 Forum</i>, p. 2936."
+bibtex: |
+  @inproceedings{wang2019aircraft,
+    title = {Aircraft Trajectory Prediction and Risk Assessment Using Bayesian Updating},
+    author = {Wang, Y. and Pang, Y. and Liu, Y. and Dutta, P. and Yang, B. J.},
+    booktitle = {AIAA AVIATION 2019 Forum},
+    pages = {2936},
+    year = {2019}
+  }
 ---
 
 Bayesian updating for aircraft trajectory prediction and en-route risk assessment.

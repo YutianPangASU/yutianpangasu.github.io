@@ -8,6 +8,13 @@ excerpt: "Extracts causal chains from aviation safety reports and grounds them w
 date: 2026-12-01
 venue: "To be submitted to Advanced Engineering Informatics"
 citation: "<b>Pang, Y.</b>, Tian, Y., Xie, J., Zhao, X., Hu, J., Jacobsen, H., & Clarke, J. (2026). “A Hybrid Framework for Explainable Aviation Risk: Causal Chain Extraction from Safety Reports with Physics-Based Failure Quantification and Counterfactual Analysis.” <i>Advanced Engineering Informatics</i>."
+bibtex: |
+  @unpublished{pang2026hybrid,
+    title = {A Hybrid Framework for Explainable Aviation Risk: Causal Chain Extraction from Safety Reports with Physics-Based Failure Quantification and Counterfactual Analysis},
+    author = {Pang, Y. and Tian, Y. and Xie, J. and Zhao, X. and Hu, J. and Jacobsen, H. and Clarke, J.},
+    note = {To be submitted to Advanced Engineering Informatics},
+    year = {2026}
+  }
 header:
   teaser: publications/2026-12-01-a-hybrid-framework-for-explainable-aviation-risk.png
 figure_caption: "Aggregate causation graph learned from 55,940 NTSB and FAA accident chains, layered from organizational factors to aerodynamic states."

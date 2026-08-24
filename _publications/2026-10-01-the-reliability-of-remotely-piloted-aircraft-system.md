@@ -9,6 +9,13 @@ date: 2026-10-01
 venue: "Reliability Engineering & System Safety"
 arxiv: "https://arxiv.org/abs/2501.07743"
 citation: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J. (2026). “The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties.” <i>Reliability Engineering & System Safety</i>."
+bibtex: |
+  @article{pang2026reliability,
+    title = {The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties},
+    author = {Pang, Y. and Kendall, A. and Clarke, J.},
+    journal = {Reliability Engineering \& System Safety},
+    year = {2026}
+  }
 header:
   teaser: publications/2026-10-01-the-reliability-of-remotely-piloted-aircraft-system.png
 figure_caption: "Waypoint tracking performance of a remotely piloted aircraft degrading as command and control latency grows."

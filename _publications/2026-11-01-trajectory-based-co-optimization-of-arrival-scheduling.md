@@ -8,6 +8,13 @@ excerpt: "Jointly optimizes arrival sequencing and descent-path geometry in the 
 date: 2026-11-01
 venue: "To be submitted to AIAA Journal"
 citation: "<b>Pang, Y.</b>* & Clarke, J. (2026). “Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area.” <i>AIAA Journal</i>."
+bibtex: |
+  @unpublished{pang2026trajectoryb,
+    title = {Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area},
+    author = {Pang, Y. and Clarke, J.},
+    note = {To be submitted to AIAA Journal},
+    year = {2026}
+  }
 header:
   teaser: publications/2026-11-01-trajectory-based-co-optimization-of-arrival-scheduling.gif
 figure_caption: "Co-optimized arrival run in the terminal area: lateral tracks with the synchronized vertical profile of the delayed deceleration approach."

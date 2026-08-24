@@ -59,7 +59,12 @@ layout: default
         {% endif %}
         {{ content }}
 
-        {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
+        {% if page.bibtex %}
+          <div class="bibtex">
+            <p class="bibtex__label">Recommended citation <button type="button" class="bibtex__copy" onclick="navigator.clipboard.writeText(this.closest('.bibtex').querySelector('code').textContent).then(()=>{this.textContent='copied';setTimeout(()=>{this.textContent='copy BibTeX'},1500)})">copy BibTeX</button></p>
+            <pre><code>{{ page.bibtex | strip | escape }}</code></pre>
+          </div>
+        {% elsif page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
         {% elsif page.citation and page.paperurl and page.slidesurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
