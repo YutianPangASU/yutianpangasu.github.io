@@ -12,6 +12,9 @@
  *                  lat/lon). NO IP addresses — this feeds the public map.
  *   GET /admin?key=YOUR_ADMIN_KEY
  *                — owner-only HTML table of the full log, including IPs.
+ *                  A correct key sets a year-long cookie, after which plain
+ *                  /admin opens directly in that browser; without key or
+ *                  cookie the page shows a key prompt.
  *
  * Setup (Cloudflare dashboard, ~5 minutes):
  *   1. Workers & Pages → Create → Worker ("visitor-log"), paste this file,
@@ -113,8 +116,18 @@ export default {
     }
 
     if (url.pathname === "/admin") {
-      if (!env.ADMIN_KEY || url.searchParams.get("key") !== env.ADMIN_KEY) {
-        return new Response("Forbidden", { status: 403 });
+      const qKey = url.searchParams.get("key") || "";
+      const cookieKey = ((request.headers.get("Cookie") || "")
+        .match(/(?:^|;\s*)adminkey=([^;]*)/) || [])[1] || "";
+      if (!env.ADMIN_KEY || (qKey !== env.ADMIN_KEY && cookieKey !== env.ADMIN_KEY)) {
+        return new Response(`<!doctype html><meta charset="utf-8"><title>Visitor log</title>
+<style>body{font:14px/1.6 sans-serif;margin:4rem auto;max-width:22rem;color:#182430}
+input{width:100%;padding:6px;margin:6px 0}button{padding:6px 16px}</style>
+<h3>Visitor log</h3><p>This page is for the site owner.</p>
+<form method="GET" action="/admin"><input type="password" name="key" placeholder="admin key" autofocus>
+<button>Open</button></form>`, {
+          status: 401, headers: { "Content-Type": "text/html; charset=utf-8" },
+        });
       }
       const { results } = await env.DB
         .prepare("SELECT ts, ip, country, region, city, org, asn, ua FROM visits ORDER BY ts DESC, id DESC LIMIT 5000")
@@ -131,7 +144,12 @@ table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:4p
 th{background:#edf3f7}</style>
 <h2>Visitor log — ${results.length} entries · <a href="https://yutianpang.com">yutianpang.com</a></h2>
 <table><tr><th>Time (UTC)</th><th>IP</th><th>Country</th><th>Region</th><th>City</th><th>Network</th><th>User agent</th></tr>${rows}</table>`;
-      return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
+      const headers = { "Content-Type": "text/html; charset=utf-8" };
+      if (qKey === env.ADMIN_KEY) {
+        headers["Set-Cookie"] =
+          `adminkey=${qKey}; HttpOnly; Secure; Path=/; Max-Age=31536000; SameSite=Lax`;
+      }
+      return new Response(html, { headers });
     }
 
     return json({ service: "visitor logger", endpoints: ["/hit", "/visits", "/admin?key=…"] });
