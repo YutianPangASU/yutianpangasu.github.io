@@ -217,6 +217,40 @@
   }
 }
 
+/* Calligraphy motto at the end of the author profile.
+   Fonts are OFL-licensed subsets (quote characters only) in /assets/fonts. */
+@font-face {
+  font-family: "Zhi Mang Xing";
+  src: url("../fonts/ZhiMangXing-quote.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ma Shan Zheng";
+  src: url("../fonts/MaShanZheng-quote.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.sidebar .author__motto {
+  margin: 15px 0 0;
+  font-family: "Zhi Mang Xing", "Ma Shan Zheng", "Kaiti SC", "Kaiti TC", STKaiti, KaiTi, "楷体", "AR PL UKai CN", "AR PL KaitiM GB", serif;
+  font-size: 1.15em;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--global-text-color);
+  opacity: 0.85;
+
+  @include breakpoint($large) {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--global-border-color);
+  }
+}
+
 .author__urls-wrapper {
   position: relative;
   display: table-cell;
