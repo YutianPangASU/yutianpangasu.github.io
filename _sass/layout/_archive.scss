@@ -103,7 +103,7 @@
   .archive__item-list-teaser {
     display: block;
     flex: 0 0 auto;
-    max-width: 300px;
+    max-width: 360px;
     border: 1px solid var(--global-border-color);
     border-radius: $border-radius;
     background: #fff;
@@ -111,8 +111,13 @@
     overflow: hidden;
 
     @include breakpoint($medium) {
-      flex: 0 0 220px;
-      width: 220px;
+      flex: 0 0 280px;
+      width: 280px;
+    }
+
+    @include breakpoint($large) {
+      flex: 0 0 340px;
+      width: 340px;
     }
 
     img {

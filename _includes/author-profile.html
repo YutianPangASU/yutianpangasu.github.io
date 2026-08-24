@@ -175,6 +175,6 @@
   </div>
 
   {% if author.motto %}
-  <p class="author__motto" lang="zh-Hans">{{ author.motto }}</p>
+  <p class="author__motto" lang="zh-Hans">{{ author.motto }}{% if author.motto_author %}<span class="author__motto-by">——{{ author.motto_author }}</span>{% endif %}</p>
   {% endif %}
 </div>
