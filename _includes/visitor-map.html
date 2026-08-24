@@ -1,6 +1,7 @@
-<!-- Visitor map: MapMyVisitors widget by default; when VISITOR_API below is set
-     to a deployed copy of worker/visitor-worker.js, an interactive Leaflet map
-     replaces it (per-location popups: time, city, state, country). -->
+<!-- Visitor map: shows the MapMyVisitors widget; every page view is ALSO logged
+     to the self-hosted Cloudflare worker (worker/visitor-worker.js) at
+     VISITOR_API, which keeps the full private log. Set SHOW_WORKER_MAP = true
+     to swap the widget for a Leaflet map drawn from that worker's data. -->
 <style>
   #visitor-globe { height: 380px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
   #visitor-stats, #visitor-widget-note { font-size: 0.85em; color: #6b7a8a; margin-top: 0.5em; }
@@ -17,11 +18,13 @@
 
 <script>
   var VISITOR_API = 'https://visitor-log.yutian-pang.workers.dev';
+  var SHOW_WORKER_MAP = false;  /* true = replace the widget with the Leaflet map below */
 
-  if (VISITOR_API) {
-    if (/yutianpang\.com$/.test(location.hostname)) {
-      fetch(VISITOR_API + '/hit').catch(function () {});
-    }
+  if (VISITOR_API && /yutianpang\.com$/.test(location.hostname)) {
+    fetch(VISITOR_API + '/hit').catch(function () {});
+  }
+
+  if (VISITOR_API && SHOW_WORKER_MAP) {
     (function () {
       var lcss = document.createElement('link');
       lcss.rel = 'stylesheet';
