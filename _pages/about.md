@@ -12,7 +12,7 @@ I am a postdoctoral research fellow in the Department of Aerospace Engineering &
 
 My path has crossed the model–data spectrum in stages. My Ph.D. at Arizona State University, anchored in a five-year NASA aviation data-science project, was data-driven work: Bayesian deep learning and graph models that predict air traffic behavior from operational data. My postdoc at UT Austin has added the model-driven side — flight simulation, trajectory optimization, and hybrid methods that couple the two traditions. Throughout, the methods are built to be deployed, or ready for deployment, rather than to stay on paper.
 
-Alongside academia, I have worked in industry. A year at Thales as a machine learning engineer brought a focus on security and privacy research, such as embedding protection for the Thales data security platform. I have also been involved in multiple startups across aerospace, autonomous driving, and healthcare — most recently as co-founder and CTO of [Wyzzy](https://calls.wyzzy.ai/), an agentic-AI healthcare startup in Austin whose product is deployed in dental offices in Dallas, TX.
+Alongside academia, I have worked in industry. A year at Thales as a machine learning engineer brought a focus on security and privacy research, such as embedding protection for the Thales data security platform. I have also been involved in multiple startups across aerospace, autonomous driving, and healthcare — most recently as co-founder and CTO of [Wyzzy](https://calls.wyzzy.ai/), an agentic-AI healthcare startup whose product is deployed in dental offices in Dallas, TX.
 
 I am always open to collaborations and research opportunities. Please reach me at yutian DOT pang AT outlook DOT com.
 
