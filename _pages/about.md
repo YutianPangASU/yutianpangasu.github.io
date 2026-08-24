@@ -16,6 +16,8 @@ Alongside academia, I have worked in industry. A year at Thales as a machine lea
 
 I am always open to collaborations and research opportunities. Please reach me at yutian DOT pang AT outlook DOT com.
 
+夫抱火厝之积薪之下，而寝其上，火未及燃，因谓之安，偷安者也。
+
 Research areas
 ======
 * **Human–AI teaming in safety-critical operations** — how human operators and intelligent systems can share responsibility in high-stakes environments: understanding human communication and workload, and designing decision support that complements rather than replaces human judgment.
