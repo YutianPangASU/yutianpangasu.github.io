@@ -107,7 +107,7 @@ export default {
 
     if (url.pathname === "/visits") {
       const { results } = await env.DB
-        .prepare("SELECT ts, country, region, city, lat, lon FROM visits ORDER BY id DESC LIMIT 2000")
+        .prepare("SELECT ts, country, region, city, lat, lon FROM visits ORDER BY ts DESC, id DESC LIMIT 2000")
         .all();
       return json({ visits: results }, { "Cache-Control": "public, max-age=120" });
     }
@@ -117,7 +117,7 @@ export default {
         return new Response("Forbidden", { status: 403 });
       }
       const { results } = await env.DB
-        .prepare("SELECT ts, ip, country, region, city, org, asn, ua FROM visits ORDER BY id DESC LIMIT 5000")
+        .prepare("SELECT ts, ip, country, region, city, org, asn, ua FROM visits ORDER BY ts DESC, id DESC LIMIT 5000")
         .all();
       const esc = v => String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;");
       const rows = results.map(r =>
@@ -129,7 +129,7 @@ export default {
 <style>body{font:13px/1.5 monospace;margin:2rem;color:#182430}
 table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:4px 8px;text-align:left}
 th{background:#edf3f7}</style>
-<h2>Visitor log — ${results.length} entries</h2>
+<h2>Visitor log — ${results.length} entries · <a href="https://yutianpang.com">yutianpang.com</a></h2>
 <table><tr><th>Time (UTC)</th><th>IP</th><th>Country</th><th>Region</th><th>City</th><th>Network</th><th>User agent</th></tr>${rows}</table>`;
       return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
     }
