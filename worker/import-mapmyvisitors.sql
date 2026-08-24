@@ -1,9 +1,9 @@
--- Import of MapMyVisitors history (Aug 18-24, 2026) for yutianpang.com
--- Source: public aggregate at https://mapmyvisitors.com/web/1c7j8 (283 visits,
--- 32 geolocated across 13 places, 251 unknown location; per-visit timestamps
--- known only for the 50 most recent). Undated rows carry the Aug 18 sentinel
--- timestamp and are labeled in the ua column. IPs were never public - all NULL.
--- Safe to re-run: the DELETE removes any previous import first.
+/* Import of MapMyVisitors history (Aug 18-24, 2026) for yutianpang.com */
+/* Source: public aggregate at https://mapmyvisitors.com/web/1c7j8 (283 visits, */
+/* 32 geolocated across 13 places, 251 unknown location; per-visit timestamps */
+/* known only for the 50 most recent). Undated rows carry the Aug 18 sentinel */
+/* timestamp and are labeled in the ua column. IPs were never public - all NULL. */
+/* Safe to re-run: the DELETE removes any previous import first. */
 DELETE FROM visits WHERE ua LIKE 'mapmyvisitors-import%';
 INSERT INTO visits (ts, ip, country, region, city, lat, lon, ua, asn, org) VALUES
 ('2026-08-18T00:00:00.000Z',NULL,'Austria',NULL,NULL,48.2,16.3667,'mapmyvisitors-import (undated; between Aug 18 and Aug 24, 2026)',NULL,NULL),
