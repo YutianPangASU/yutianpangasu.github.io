@@ -44,7 +44,7 @@ author:
   semantic         : # URL
   ssrn             : # URL
   pubmed           : # URL
-  researchgate     : # URL
+  researchgate     : "https://www.researchgate.net/profile/Yutian-Pang"
   scopus           : # URL
   zotero           : # URL
 
@@ -180,6 +180,7 @@ social:
     - "https://github.com/YutianPangASU"
     - "https://www.linkedin.com/in/yutianpang/"
     - "https://orcid.org/0000-0001-6343-9641"
+    - "https://www.researchgate.net/profile/Yutian-Pang"
 
 
 # Analytics
