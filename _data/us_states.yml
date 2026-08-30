@@ -1,0 +1,105 @@
+# Maps state names (and postal abbreviations) to the two letter codes used
+# by the map in _includes/us-map.html. Used by /footprint/ to shade states
+# based on the "state" field of each park in _data/travel.yml.
+Alabama: al
+Alaska: ak
+Arizona: az
+Arkansas: ar
+California: ca
+Colorado: co
+Connecticut: ct
+Delaware: de
+Florida: fl
+Georgia: ga
+Hawaii: hi
+Idaho: id
+Illinois: il
+Indiana: in
+Iowa: ia
+Kansas: ks
+Kentucky: ky
+Louisiana: la
+Maine: me
+Maryland: md
+Massachusetts: ma
+Michigan: mi
+Minnesota: mn
+Mississippi: ms
+Missouri: mo
+Montana: mt
+Nebraska: ne
+Nevada: nv
+New Hampshire: nh
+New Jersey: nj
+New Mexico: nm
+New York: ny
+North Carolina: nc
+North Dakota: nd
+Ohio: oh
+Oklahoma: ok
+Oregon: or
+Pennsylvania: pa
+Rhode Island: ri
+South Carolina: sc
+South Dakota: sd
+Tennessee: tn
+Texas: tx
+Utah: ut
+Vermont: vt
+Virginia: va
+Washington: wa
+West Virginia: wv
+Wisconsin: wi
+Wyoming: wy
+District of Columbia: dc
+AL: al
+AK: ak
+AZ: az
+AR: ar
+CA: ca
+CO: co
+CT: ct
+DE: de
+FL: fl
+GA: ga
+HI: hi
+ID: id
+IL: il
+IN: in
+IA: ia
+KS: ks
+KY: ky
+LA: la
+ME: me
+MD: md
+MA: ma
+MI: mi
+MN: mn
+MS: ms
+MO: mo
+MT: mt
+NE: ne
+NV: nv
+NH: nh
+NJ: nj
+NM: nm
+NY: ny
+NC: nc
+ND: nd
+OH: oh
+OK: ok
+OR: or
+PA: pa
+RI: ri
+SC: sc
+SD: sd
+TN: tn
+TX: tx
+UT: ut
+VT: vt
+VA: va
+WA: wa
+WV: wv
+WI: wi
+WY: wy
+DC: dc

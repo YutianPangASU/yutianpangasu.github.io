@@ -1,0 +1,278 @@
+---
+layout: archive
+title: "My Footprint"
+permalink: /footprint/
+author_profile: true
+---
+
+{% include base_path %}
+
+{% assign travel_sections = site.data.travel | default: "" %}
+{% assign driven_routes = site.data.highways.driven | default: "" %}
+
+{% comment %} Collect visited state codes from the parks data {% endcomment %}
+{% assign visited_codes = "" | split: "" %}
+{% if travel_sections != "" and travel_sections != empty %}
+  {% for section in travel_sections %}
+    {% for park in section.parks %}
+      {% assign state_names = park.state | default: "" | split: "," %}
+      {% for sn in state_names %}
+        {% assign sname = sn | strip %}
+        {% assign code = site.data.us_states[sname] %}
+        {% if code %}
+          {% assign visited_codes = visited_codes | push: code %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+{% assign extra_states = site.data.visited_states.extra | default: "" %}
+{% if extra_states != "" and extra_states != empty %}
+  {% for sn in extra_states %}
+    {% assign sname = sn | strip %}
+    {% assign code = site.data.us_states[sname] %}
+    {% if code %}
+      {% assign visited_codes = visited_codes | push: code %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% assign visited_codes = visited_codes | uniq %}
+
+<style>
+  .fp-intro { margin-bottom: 1.5em; }
+  .fp-map, .fp-hwmap { width: 100%; height: auto; display: block; margin: 0.25em 0 0; }
+
+  .fp-map .state { fill: var(--global-thead-color, #dcdcdc); }
+  .fp-map .borders { stroke: var(--global-bg-color, #fff); stroke-width: 1; fill: none; }
+  .fp-map .separator1 { stroke: var(--global-border-color, #b0b0b0); stroke-width: 2; fill: none; }
+  .fp-map .dccircle { display: none; }
+
+  .fp-hwmap .hw-states { fill: none; stroke: var(--global-text-color-light, #888); stroke-opacity: 0.3; stroke-width: 1; }
+  .fp-hwmap .hwr { fill: none; stroke: var(--global-text-color-light, #888); stroke-opacity: 0.45; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+  .fp-hwmap.editing .hwr { stroke: var(--global-text-color-light, #888); stroke-opacity: 0.45; stroke-width: 3.5; cursor: pointer; }
+  .fp-hwmap.editing .hwr:hover { stroke-opacity: 0.8; }
+  .fp-hwmap.editing .hwr.picked { stroke: #1f6cb5; stroke-opacity: 1; }
+
+  .fp-caption { color: var(--global-text-color-light); font-size: 0.85em; margin: 0.4em 0 1.75em; }
+  .fp-swatch { display: inline-block; width: 0.85em; height: 0.85em; border-radius: 3px; vertical-align: -0.1em; margin-right: 0.35em; }
+  .fp-stats { color: var(--global-text-color-light); font-size: 0.9em; margin: 0 0 2em; }
+
+  .fp-section + .fp-section { margin-top: 2.5em; }
+  .fp-park { margin: 1.5em 0 2.25em; }
+  .fp-park-name { margin: 0 0 0.15em; font-size: 1.1em; }
+  .fp-park-meta { margin: 0 0 0.7em; color: var(--global-text-color-light); font-size: 0.85em; }
+  .fp-park-note { margin: 0 0 0.7em; font-size: 0.9em; }
+  .fp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+  .fp-photo { display: block; overflow: hidden; border-radius: 6px; border: 1px solid var(--global-border-color); aspect-ratio: 4 / 3; }
+  .fp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s ease; }
+  .fp-photo:hover img { transform: scale(1.04); }
+  .fp-soon { color: var(--global-text-color-light); font-size: 0.85em; font-style: italic; }
+
+  #fp-edit-panel { position: fixed; bottom: 1em; right: 1em; z-index: 900; width: 240px; background: var(--global-bg-color, #fff); border: 1px solid var(--global-border-color, #ccc); border-radius: 8px; padding: 0.75em; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); }
+  #fp-edit-panel h4 { margin: 0 0 0.4em; font-size: 0.95em; }
+  #fp-edit-count { font-size: 0.8em; color: var(--global-text-color-light); margin: 0 0 0.4em; }
+  #fp-edit-yaml { width: 100%; height: 9em; font-family: monospace; font-size: 0.75em; resize: vertical; }
+  #fp-edit-copy { margin-top: 0.4em; font-size: 0.8em; cursor: pointer; }
+
+  #fp-lightbox { position: fixed; inset: 0; z-index: 1000; display: none; background: rgba(0, 0, 0, 0.93); align-items: center; justify-content: center; }
+  #fp-lightbox.open { display: flex; }
+  #fp-lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; }
+  #fp-lightbox img { max-width: 90vw; max-height: 84vh; object-fit: contain; border-radius: 4px; }
+  #fp-lightbox figcaption { color: #eee; font-size: 0.9em; margin-top: 0.75em; text-align: center; }
+  .fp-lb-btn { position: absolute; background: none; border: none; color: #fff; font-size: 2em; line-height: 1; cursor: pointer; padding: 0.3em 0.5em; opacity: 0.7; }
+  .fp-lb-btn:hover { opacity: 1; }
+  #fp-lb-close { top: 0.3em; right: 0.3em; }
+  #fp-lb-prev { left: 0.1em; top: 50%; transform: translateY(-50%); }
+  #fp-lb-next { right: 0.1em; top: 50%; transform: translateY(-50%); }
+</style>
+
+{% if visited_codes != empty %}
+<style>
+  {% for code in visited_codes %}.fp-map .{{ code }}{% unless forloop.last %}, {% endunless %}{% endfor %} { fill: #2e8b57; }
+</style>
+{% endif %}
+
+{% if driven_routes != "" and driven_routes != empty %}
+<style>
+  {% for r in driven_routes %}.fp-hwmap .{{ r | downcase | replace: "-", "" }}{% unless forloop.last %}, {% endunless %}{% endfor %} { stroke: #1f6cb5; stroke-opacity: 1; stroke-width: 2; }
+</style>
+{% endif %}
+
+<p class="fp-intro">I enjoy road trips and have driven more than 100,000 miles across the United States. This page follows those miles: the states I have set foot in, the Interstates I have driven, and the national and state parks I have visited, with photos from each stop.</p>
+
+{% include us-map.html %}
+<p class="fp-caption"><span class="fp-swatch" style="background:#2e8b57;"></span>States I have set foot in</p>
+
+{% include us-highways.html %}
+<p class="fp-caption"><span class="fp-swatch" style="background:#1f6cb5;"></span>Interstates I have driven &middot; hover a route for its number</p>
+
+{% if travel_sections != "" and travel_sections != empty %}
+
+{% assign image_exts = ".jpg|.jpeg|.png|.webp|.gif|.JPG|.JPEG|.PNG|.WEBP|.GIF" | split: "|" %}
+{% assign park_count = 0 %}
+{% assign photo_count = 0 %}
+{% for section in travel_sections %}
+  {% assign park_count = park_count | plus: section.parks.size %}
+{% endfor %}
+{% for f in site.static_files %}
+  {% if f.path contains "/images/travel/" %}
+    {% if image_exts contains f.extname %}
+      {% assign photo_count = photo_count | plus: 1 %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+<p class="fp-stats">{{ park_count }} park{% unless park_count == 1 %}s{% endunless %}
+ &middot; {{ photo_count }} photo{% unless photo_count == 1 %}s{% endunless %}
+ &middot; {{ visited_codes | size }} state{% unless visited_codes.size == 1 %}s{% endunless %}{% if driven_routes != "" and driven_routes != empty %}
+ &middot; {{ driven_routes | size }} Interstate{% unless driven_routes.size == 1 %}s{% endunless %}{% endif %}
+ &middot; click any photo to view it full size</p>
+
+{% for section in travel_sections %}
+<div class="fp-section">
+  <h2>{{ section.section }}</h2>
+  {% for park in section.parks %}
+  {% assign prefix = "/images/travel/" | append: park.slug | append: "/" %}
+  {% assign park_files = site.static_files | where_exp: "f", "f.path contains prefix" | sort: "path" %}
+  <div class="fp-park" id="{{ park.slug }}">
+    <h3 class="fp-park-name">{{ park.name }}</h3>
+    <p class="fp-park-meta">{{ park.state }}{% if park.visited %} &middot; {{ park.visited }}{% endif %}</p>
+    {% if park.note %}<p class="fp-park-note">{{ park.note }}</p>{% endif %}
+    {% assign shown = 0 %}
+    <div class="fp-grid">
+      {% for f in park_files %}
+        {% if image_exts contains f.extname %}
+          {% assign shown = shown | plus: 1 %}
+          <a class="fp-photo" href="{{ base_path }}{{ f.path }}" data-park="{{ park.name }}">
+            <img src="{{ base_path }}{{ f.path }}" alt="{{ park.name }}" loading="lazy">
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% if shown == 0 %}<p class="fp-soon">Photos coming soon.</p>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endfor %}
+
+{% else %}
+
+<p class="fp-soon">Park photos are on their way. Check back soon.</p>
+
+{% endif %}
+
+<div id="fp-edit-panel" hidden>
+  <h4>Pick driven Interstates</h4>
+  <p id="fp-edit-count"></p>
+  <textarea id="fp-edit-yaml" readonly spellcheck="false"></textarea>
+  <button id="fp-edit-copy">Copy for _data/highways.yml</button>
+</div>
+
+<div id="fp-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button id="fp-lb-close" class="fp-lb-btn" aria-label="Close">&times;</button>
+  <button id="fp-lb-prev" class="fp-lb-btn" aria-label="Previous photo">&#10094;</button>
+  <figure>
+    <img id="fp-lb-img" src="" alt="">
+    <figcaption id="fp-lb-caption"></figcaption>
+  </figure>
+  <button id="fp-lb-next" class="fp-lb-btn" aria-label="Next photo">&#10095;</button>
+</div>
+
+<script>
+  window.fpDriven = {% if driven_routes == "" or driven_routes == empty %}[]{% else %}{{ driven_routes | jsonify }}{% endif %};
+</script>
+<script>
+(function () {
+  /* ---- highway picker (owner edit mode: /footprint/?edit) ---- */
+  var hwmap = document.querySelector('.fp-hwmap');
+  if (hwmap && /[?&]edit/.test(location.search)) {
+    hwmap.classList.add('editing');
+    var panel = document.getElementById('fp-edit-panel');
+    panel.hidden = false;
+    var routes = Array.prototype.slice.call(hwmap.querySelectorAll('.hwr'));
+    var ta = document.getElementById('fp-edit-yaml');
+    var count = document.getElementById('fp-edit-count');
+    var refresh = function () {
+      var picked = routes.filter(function (p) { return p.classList.contains('picked'); })
+        .map(function (p) { return p.getAttribute('data-route'); });
+      picked.sort(function (a, b) {
+        var na = parseInt(a.replace(/\D/g, ''), 10);
+        var nb = parseInt(b.replace(/\D/g, ''), 10);
+        return na - nb || a.localeCompare(b);
+      });
+      count.textContent = picked.length + ' route' + (picked.length === 1 ? '' : 's') + ' selected';
+      ta.value = picked.length
+        ? 'driven:\n' + picked.map(function (r) { return '  - ' + r; }).join('\n')
+        : 'driven: []';
+    };
+    routes.forEach(function (p) {
+      if (window.fpDriven.indexOf(p.getAttribute('data-route')) !== -1) p.classList.add('picked');
+      p.addEventListener('click', function () { p.classList.toggle('picked'); refresh(); });
+    });
+    refresh();
+    document.getElementById('fp-edit-copy').addEventListener('click', function () {
+      ta.select();
+      if (navigator.clipboard) { navigator.clipboard.writeText(ta.value); }
+      else { document.execCommand('copy'); }
+    });
+  }
+
+  /* ---- photo lightbox ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.fp-photo'));
+  var box = document.getElementById('fp-lightbox');
+  if (!links.length || !box) return;
+  var img = document.getElementById('fp-lb-img');
+  var caption = document.getElementById('fp-lb-caption');
+  var prevBtn = document.getElementById('fp-lb-prev');
+  var nextBtn = document.getElementById('fp-lb-next');
+  var current = -1;
+
+  function groupOf(i) {
+    var park = links[i].getAttribute('data-park');
+    var group = [];
+    links.forEach(function (l, j) { if (l.getAttribute('data-park') === park) group.push(j); });
+    return group;
+  }
+
+  function show(i) {
+    current = i;
+    var link = links[i];
+    var group = groupOf(i);
+    var pos = group.indexOf(i);
+    img.src = link.href;
+    img.alt = link.getAttribute('data-park');
+    caption.textContent = link.getAttribute('data-park') + ' · ' + (pos + 1) + ' / ' + group.length;
+    prevBtn.style.visibility = group.length > 1 ? 'visible' : 'hidden';
+    nextBtn.style.visibility = group.length > 1 ? 'visible' : 'hidden';
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function step(delta) {
+    var group = groupOf(current);
+    var pos = group.indexOf(current);
+    show(group[(pos + delta + group.length) % group.length]);
+  }
+
+  function close() {
+    box.classList.remove('open');
+    img.src = '';
+    current = -1;
+    document.body.style.overflow = '';
+  }
+
+  links.forEach(function (link, i) {
+    link.addEventListener('click', function (e) { e.preventDefault(); show(i); });
+  });
+  document.getElementById('fp-lb-close').addEventListener('click', close);
+  prevBtn.addEventListener('click', function () { step(-1); });
+  nextBtn.addEventListener('click', function () { step(1); });
+  box.addEventListener('click', function (e) { if (e.target === box) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>

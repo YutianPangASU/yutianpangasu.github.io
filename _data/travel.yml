@@ -1,0 +1,38 @@
+# Parks shown on the Footprint page (/footprint/), in the order listed here.
+#
+# How to add a park:
+#   1. Add an entry under the right section below (or add a new section).
+#   2. Create a folder  images/travel/<slug>/  and drop photos in it
+#      (jpg, jpeg, png, webp, or gif). Photos appear automatically, sorted
+#      by filename, so prefix them with numbers to control the order,
+#      e.g. 01-valley.jpg, 02-sunset.jpg.
+#   3. Resize photos to roughly 1600px on the long edge before adding them,
+#      so the repo and the page stay light.
+#
+# Fields:
+#   name    - full park name, shown as the heading
+#   slug    - folder name under images/travel/ (lowercase, no spaces)
+#   state   - state or states, shown under the name
+#   visited - when you went, free text (e.g. "March 2024" or "2021, 2024")
+#   note    - optional one line about the trip
+#
+# Example:
+#
+# - section: National Parks
+#   parks:
+#     - name: Yosemite National Park
+#       slug: yosemite
+#       state: California
+#       visited: June 2024
+#       note: Half Dome from Glacier Point at sunset.
+#     - name: Big Bend National Park
+#       slug: big-bend
+#       state: Texas
+#       visited: November 2024
+#
+# - section: State Parks
+#   parks:
+#     - name: Enchanted Rock State Natural Area
+#       slug: enchanted-rock
+#       state: Texas
+#       visited: October 2024

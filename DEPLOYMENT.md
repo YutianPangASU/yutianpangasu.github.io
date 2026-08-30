@@ -19,6 +19,14 @@ Previous custom single-page design: branch `custom-site`.
 - **Talks**: `_talks/`
 - **CV**: `_pages/cv.md` + replace `files/Yutian_Pang_CV.pdf`
 - **Photo**: `images/profile.jpg` (square-cropped headshot; replace to update)
+- **Footprint page** (`/footprint/`, travel log with maps and park photos):
+  - Parks and photos: add the park to `_data/travel.yml`, drop resized photos
+    (~1600px long edge) into `images/travel/<slug>/` (folders for all 63
+    national parks already exist; see `images/travel/README.md`). States on
+    the US map shade automatically from each park's `state` field; states
+    visited without a park entry go in `_data/visited_states.yml`.
+  - Driven Interstates: open `/footprint/?edit`, click routes on the highway
+    map, copy the generated list into `_data/highways.yml`.
 - Push to deploy: `git add -A && git commit -m "update" && git push`
   (live in ~1 minute).
 

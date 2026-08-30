@@ -1,0 +1,13 @@
+# Interstate highways I have driven, highlighted on the map at /footprint/.
+#
+# Easiest way to build this list: open https://yutianpang.com/footprint/?edit
+# (or the same URL on a local preview), click highways on the map to toggle
+# them, then copy the generated list from the panel and paste it here.
+#
+# Route names match the map labels: I-10, I-35, I-35E, I-635, and so on.
+driven: []
+# Example:
+# driven:
+#   - I-10
+#   - I-35
+#   - I-40
