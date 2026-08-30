@@ -18,10 +18,10 @@ Alongside academia, I have industry experience. I worked full-time at Thales as 
 
 Research areas
 ======
-* **Human–AI teaming in safety-critical operations** — how human operators and intelligent systems can share responsibility in high-stakes environments: understanding human communication and workload, and designing decision support that complements rather than replaces human judgment.
-* **System intelligence for networked operations** — learning the collective behavior of large-scale networked systems from operational data, predicting how they evolve, and quantifying the uncertainty in those predictions so they can inform real decisions.
-* **Scheduling & logistics under uncertainty** — allocating scarce resources such as runways, airspace, and vehicle fleets when demand, weather, and operations are only known probabilistically, from strategic planning down to real-time control.
-* **Trustworthy methods across the model–data spectrum** — combining the flexibility of data-driven learning with the rigor and guarantees of model-based analysis, so that methods earn the level of trust that safety-critical operation demands.
+* **Decision-making and optimization under uncertainty** — *what should we do?* Allocating scarce resources such as runways, airspace, and vehicle fleets, and designing schedules and trajectories, when demand, weather, and human behavior are only known probabilistically, from strategic planning down to real-time control.
+* **Safety, risk, and reliability of increasingly autonomous operations** — *how safe is it, and can we prove it?* Quantifying how communication, human, and autonomy uncertainties bound the capacity and reliability of operations, combining data-driven learning with the rigor and guarantees of model-based analysis.
+* **Human–AI teaming in safety-critical operations** — *how do humans stay in command?* Understanding pilot and controller communication and workload, and designing decision support that complements rather than replaces human judgment.
+* **Prediction of air traffic behavior under uncertainty** — *what will the system do?* Learning how aircraft, traffic flows, and airspace demand evolve from operational data, with calibrated uncertainty attached to every prediction so it can inform real decisions.
 
 Selected publications
 ======
