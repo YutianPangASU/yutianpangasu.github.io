@@ -21,6 +21,9 @@ bibtex: |
     pages = {104444},
     year = {2024}
   }
+header:
+  teaser: publications/2024-10-01-machine-learning-enhanced-aircraft-landing-scheduling-under.png
+figure_caption: "Overview of the machine learning enhanced optimization model for aircraft landing scheduling: flight data handling from the Sherlock Data Warehouse, quantile gradient boosting for landing time distributions, sequencing as a traveling salesman problem with time windows, and the optimized landing sequence against the first come first served baseline."
 ---
 
 Blends machine-learned arrival-time distributions with optimization to schedule aircraft landings that stay efficient under uncertainty.

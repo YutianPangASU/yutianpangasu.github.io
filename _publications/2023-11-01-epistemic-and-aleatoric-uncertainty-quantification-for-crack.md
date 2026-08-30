@@ -20,6 +20,9 @@ bibtex: |
     pages = {109547},
     year = {2023}
   }
+header:
+  teaser: publications/2023-11-01-epistemic-and-aleatoric-uncertainty-quantification-for-crack.png
+figure_caption: "Crack detections on the CrackForest and DeepCrack datasets: input image, prediction, ground truth, and the epistemic and aleatoric uncertainty maps produced by the Bayesian boundary aware network."
 ---
 
 Separates epistemic from aleatoric uncertainty in neural-network crack detection, enabling risk-aware structural inspection.

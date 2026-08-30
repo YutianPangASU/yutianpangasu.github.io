@@ -21,6 +21,9 @@ bibtex: |
     pages = {102113},
     year = {2023}
   }
+header:
+  teaser: publications/2023-08-01-air-traffic-controller-cognitive-workload-level-prediction.png
+figure_caption: "Human-in-the-loop experiment at the ASU TRACON simulation facility: retired controllers manage KPHX arrival scenarios with pseudo-pilots while workload and situational awareness probes collect ratings every three minutes."
 ---
 
 Predicts controller cognitive workload in real time on dynamical airspace graphs, with conformal-prediction guarantees on the estimates.

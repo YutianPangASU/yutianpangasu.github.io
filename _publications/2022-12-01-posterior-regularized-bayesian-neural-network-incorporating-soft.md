@@ -21,6 +21,9 @@ bibtex: |
     pages = {109047},
     year = {2022}
   }
+header:
+  teaser: publications/2022-12-01-posterior-regularized-bayesian-neural-network-incorporating-soft.png
+figure_caption: "Posterior predictive comparison: with the knowledge constraint (blue), predictions in the unobserved region (shaded band) respect the known conditional range; without it (black), the posterior drifts outside the admissible values."
 ---
 
 Injects soft and hard domain-knowledge constraints into Bayesian neural networks through posterior regularization.
