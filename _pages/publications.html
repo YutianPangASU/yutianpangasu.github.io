@@ -11,7 +11,14 @@ author_profile: true
 
 {% include base_path %}
 
-<p>My work follows the flight: the en-route airspace, the terminal maneuvering area (TRACON), and the airport surface, together with the safety, risk, and reliability threads running beneath all of it. Each area opens with its representative publications; the rest of that area &mdash; published articles, manuscripts under review, working papers, conference papers, and patents together &mdash; sits behind the expander below them. Within each list, first-authored and corresponding-authored papers come first, then second-authored, then the rest. Click any title for the paper page with figures, or the [bib] link for its BibTeX.</p>
+<p>My work follows the flight across three areas: en route airspace, the terminal maneuvering area (TRACON), and the airport surface. Safety, risk, and reliability run beneath all three.</p>
+
+<ul>
+  <li>Each area opens with its representative publications.</li>
+  <li>The expander below them holds the rest of that area: published articles, manuscripts under review, working papers, conference papers, and patents.</li>
+  <li>Within each list, papers I wrote as first or corresponding author come first, then second author papers, then the rest.</li>
+  <li>Click any title for the paper page with figures, or [bib] for its BibTeX.</li>
+</ul>
 
 {% for area in site.publication_area %}
   {% assign gnum = forloop.index %}
