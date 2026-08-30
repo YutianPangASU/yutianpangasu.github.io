@@ -125,7 +125,7 @@ publication_area:
       - 'Real-time runway incursion alerting from ATC speech and ADS-B'
       - 'Runway and taxiway exit prediction for landing aircraft'
   aam:
-    title: 'Advanced Air Mobility Operations'
+    title: 'Advanced Air Mobility and Autonomous Operations'
     description: 'Beyond crewed aviation, I study advanced air mobility, remotely piloted aircraft, and autonomous delivery operations:'
     topics:
       - 'Reliability of remotely piloted aircraft under communication uncertainties'
