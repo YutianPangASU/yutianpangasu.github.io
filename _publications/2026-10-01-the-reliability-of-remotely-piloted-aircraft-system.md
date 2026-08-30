@@ -2,7 +2,7 @@
 title: "The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties"
 collection: publications
 category: manuscripts
-area: safety-risk
+area: aam
 representative: true
 permalink: /publication/2026-10-01-the-reliability-of-remotely-piloted-aircraft-system
 excerpt: "A reliability framework showing how uncertainties in aeronautical communication links bound the safe performance of remotely piloted aircraft systems."

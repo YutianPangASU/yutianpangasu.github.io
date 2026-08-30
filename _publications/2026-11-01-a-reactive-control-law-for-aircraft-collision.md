@@ -2,7 +2,7 @@
 title: "A Reactive Control Law for Aircraft Collision Avoidance and Its Capacity Limits"
 collection: publications
 category: workingpapers
-area: safety-risk
+area: tracon
 permalink: /publication/2026-11-01-a-reactive-control-law-for-aircraft-collision
 excerpt: "A reactive control law for aircraft collision avoidance, with analytical bounds on the traffic capacity it can safely sustain."
 date: 2026-11-01
