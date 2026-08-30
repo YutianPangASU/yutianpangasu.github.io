@@ -11,9 +11,10 @@ author_profile: true
 
 {% include base_path %}
 
-<p>My work follows the flight: the en-route airspace, the terminal maneuvering area (TRACON), and the airport surface, together with the safety, risk, and reliability threads running beneath all of it. Each area opens with representative publications; the rest of that area &mdash; published articles, manuscripts under review, working papers, conference papers, and patents together &mdash; sits behind the expander below them, newest first. Click any title for the paper page with figures and BibTeX.</p>
+<p>My work follows the flight: the en-route airspace, the terminal maneuvering area (TRACON), and the airport surface, together with the safety, risk, and reliability threads running beneath all of it. Each area opens with its representative publications; the rest of that area &mdash; published articles, manuscripts under review, working papers, conference papers, and patents together &mdash; sits behind the expander below them. Within each list, first-authored and corresponding-authored papers come first, then second-authored, then the rest. Click any title for the paper page with figures, or the [bib] link for its BibTeX.</p>
 
 {% for area in site.publication_area %}
+  {% assign gnum = forloop.index %}
   {% assign area_posts = "" | split: "" %}
   {% for post in site.publications reversed %}
     {% if post.area == area[0] %}
@@ -21,6 +22,20 @@ author_profile: true
     {% endif %}
   {% endfor %}
   {% if area_posts.size == 0 %}{% continue %}{% endif %}
+
+  {% assign reps = "" | split: "" %}
+  {% assign rest = "" | split: "" %}
+  {% for r in (1..3) %}
+    {% for post in area_posts %}
+      {% if post.author_rank == r %}
+        {% if post.representative %}
+          {% assign reps = reps | push: post %}
+        {% else %}
+          {% assign rest = rest | push: post %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
 
   <h2>{{ area[1].title }}</h2><hr />
   {% if area[1].description %}
@@ -34,33 +49,17 @@ author_profile: true
     </ul>
   {% endif %}
 
-  {% for post in area_posts %}
-    {% if post.representative %}
-      {% include archive-single.html %}
-    {% endif %}
+  {% for post in reps %}
+    {% include publication-line.html post=post num=forloop.index gnum=gnum rep=true %}
   {% endfor %}
 
-  {% assign rest = area_posts | where_exp: "item", "item.representative != true" %}
   {% if rest.size > 0 %}
     <details class="area-more">
-      <summary>All work in this area ({{ rest.size }} more)</summary>
-      <ul>
-        {% for post in rest %}
-          <li>
-            <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>.
-            {% if post.authors %}{{ post.authors }}.{% endif %}
-            {% if post.category == 'workingpapers' %}
-              Working paper, in preparation.
-            {% elsif post.category == 'underreview' %}
-              {{ post.venue }}.
-            {% elsif post.category == 'patents' %}
-              {{ post.venue }}, {{ post.date | default: "1900-01-01" | date: "%Y" }}.
-            {% else %}
-              <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}.
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+      <summary>All papers in this area ({{ rest.size }} more)</summary>
+      {% for post in rest %}
+        {% assign n = forloop.index | plus: reps.size %}
+        {% include publication-line.html post=post num=n gnum=gnum %}
+      {% endfor %}
     </details>
   {% endif %}
 {% endfor %}

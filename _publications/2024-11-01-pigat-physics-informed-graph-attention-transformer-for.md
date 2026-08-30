@@ -9,6 +9,7 @@ excerpt: "A physics-informed graph attention transformer that forecasts air traf
 date: 2024-11-01
 venue: "IEEE Transactions on Intelligent Transportation Systems"
 authors: "Xu, Q., <b>Pang, Y.</b>, Zhou, X., & Liu, Y."
+author_rank: 2
 citation: "Xu, Q., <b>Pang, Y.</b>, Zhou, X., & Liu, Y. (2024). “PIGAT: Physics-Informed Graph Attention Transformer for Air Traffic State Prediction.” <i>IEEE Transactions on Intelligent Transportation Systems</i>."
 bibtex: |
   @article{xu2024pigat,

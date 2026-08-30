@@ -10,6 +10,7 @@ date: 2026-12-01
 venue: "Journal of Air Transport Management"
 arxiv: "https://arxiv.org/abs/2606.11017"
 authors: "Porcayo, A., <b>Pang, Y.</b>*, Thomas, M., & Clarke, J."
+author_rank: 1
 citation: "Porcayo, A., <b>Pang, Y.</b>*, Thomas, M., & Clarke, J. (2026). “Data-Driven Runway and Taxiway Exits Prediction of Landing Aircraft: A Case Study at Hartsfield-Jackson Atlanta International Airport.” <i>Journal of Air Transport Management</i>."
 bibtex: |
   @article{porcayo2026data,

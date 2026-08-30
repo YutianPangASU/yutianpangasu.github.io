@@ -8,6 +8,7 @@ excerpt: "Formulates last-mile delivery over a ring-widget network structure for
 date: 2026-12-01
 venue: "Working paper"
 authors: "Liang, J., <b>Pang, Y.</b>*, & Clarke, J."
+author_rank: 1
 citation: "Liang, J., <b>Pang, Y.</b>*, & Clarke, J. (2026). “An Optimization Formulation for Last-Mile Delivery Using Ring Widget Structure.” <i>Working paper</i>."
 bibtex: |
   @unpublished{liang2026optimization,

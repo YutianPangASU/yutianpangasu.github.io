@@ -8,6 +8,7 @@ excerpt: "Augments spatio-temporal attention with vectorized procedure maps so t
 date: 2026-09-01
 venue: "Under review at Transportation Research Part C"
 authors: "<b>Pang, Y.</b>, Hu, J., Iyer, H., Zhao, X., & Clarke, J."
+author_rank: 1
 citation: "<b>Pang, Y.</b>, Hu, J., Iyer, H., Zhao, X., & Clarke, J. (2026). “V-STAR: VectorNet-Augmented Spatio-Temporal Attention and Reasoning for Procedure-Aware Aircraft Trajectory Prediction.” <i>Transportation Research Part C</i>."
 bibtex: |
   @unpublished{pang2026vstar,

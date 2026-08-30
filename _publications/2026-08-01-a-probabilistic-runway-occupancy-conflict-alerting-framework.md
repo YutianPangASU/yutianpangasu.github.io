@@ -8,6 +8,7 @@ excerpt: "Real-time runway-incursion alerting that fuses ATC speech understandin
 date: 2026-08-01
 venue: "Under review at AIAA Journal of Aerospace Information Systems"
 authors: "Dong, Z., <b>Pang, Y.</b>*, & Clarke, J."
+author_rank: 1
 citation: "Dong, Z., <b>Pang, Y.</b>*, & Clarke, J. (2026). “A Probabilistic Runway Occupancy Conflict Alerting Framework for Real-Time Runway Incursion Detection from ATC Speech and ADS-B.” <i>AIAA Journal of Aerospace Information Systems</i>."
 bibtex: |
   @unpublished{dong2026probabilistic,

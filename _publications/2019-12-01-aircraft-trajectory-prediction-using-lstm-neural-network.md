@@ -8,6 +8,7 @@ excerpt: "An LSTM network with embedded convolutional layers for aircraft trajec
 date: 2019-12-01
 venue: "11th Annual Conference of the Prognostics and Health Management Society"
 authors: "<b>Pang, Y.</b>, Hu, J., Cheng, S., & Liu, Y."
+author_rank: 1
 citation: "<b>Pang, Y.</b>, Hu, J., Cheng, S., & Liu, Y. (2019). “Aircraft trajectory prediction using LSTM neural network with embedded convolutional layer.” <i>11th Annual Conference of the Prognostics and Health Management Society</i>."
 bibtex: |
   @inproceedings{pang2019aircraft,

@@ -8,6 +8,7 @@ excerpt: "Physics-informed deep networks that predict fracture patterns across r
 date: 2022-10-01
 venue: "Engineering Fracture Mechanics"
 authors: "Wei, H., Yao, H., <b>Pang, Y.</b>, & Liu, Y."
+author_rank: 3
 citation: "Wei, H., Yao, H., <b>Pang, Y.</b>, & Liu, Y. (2022). “Fracture Pattern Prediction with Random Microstructure using Physics-Informed Deep Neural Networks.” <i>Engineering Fracture Mechanics</i>, 108497."
 bibtex: |
   @article{wei2022fracture,

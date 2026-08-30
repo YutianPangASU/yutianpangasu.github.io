@@ -8,6 +8,7 @@ excerpt: "Approximate Bayesian variational inference applied to neural networks 
 date: 2020-12-01
 venue: "AIAA AVIATION 2020 Forum"
 authors: "<b>Pang, Y.</b>, Wang, Y., & Liu, Y."
+author_rank: 1
 citation: "<b>Pang, Y.</b>, Wang, Y., & Liu, Y. (2020). “Probabilistic Aircraft Trajectory Prediction with Weather Uncertainties using Approximate Bayesian Variational Inference to Neural Networks.” <i>AIAA AVIATION 2020 Forum</i>, p. 2897."
 bibtex: |
   @inproceedings{pang2020probabilisticb,

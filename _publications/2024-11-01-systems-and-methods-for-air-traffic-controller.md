@@ -8,6 +8,7 @@ excerpt: "Patents the conformalized dynamical graph learning approach to real-ti
 date: 2024-11-01
 venue: "U.S. Patent"
 authors: "Liu, Y., <b>Pang, Y.</b>, & Hu, J."
+author_rank: 2
 citation: "Liu, Y., <b>Pang, Y.</b>, & Hu, J. (2024). “Systems and Methods for Air Traffic Controller Workload Level Prediction using Conformalized Dynamical Graph Learning.” <i>U.S. Patent</i>."
 bibtex: |
   @misc{liu2024systemsb,

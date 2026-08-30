@@ -1,0 +1,16 @@
+{% include base_path %}
+<p class="pub-line{% if include.rep %} pub-line--rep{% endif %}">
+  <span class="pub-line__num">{{ include.gnum }}.{{ include.num }}</span>
+  <a class="pub-line__title" href="{{ base_path }}{{ include.post.url }}">{{ include.post.title }}</a>.
+  {{ include.post.authors }}.
+  {%- if include.post.category == 'workingpapers' %}
+  Working paper, in preparation.
+  {%- elsif include.post.category == 'underreview' %}
+  {{ include.post.venue }}.
+  {%- elsif include.post.category == 'patents' %}
+  {{ include.post.venue }}, {{ include.post.date | default: "1900-01-01" | date: "%Y" }}.
+  {%- else %}
+  <i>{{ include.post.venue }}</i>, {{ include.post.date | default: "1900-01-01" | date: "%Y" }}.
+  {%- endif %}
+  <a class="pub-line__bib" href="{{ base_path }}{{ include.post.url }}#bibtex">[bib]</a>
+</p>

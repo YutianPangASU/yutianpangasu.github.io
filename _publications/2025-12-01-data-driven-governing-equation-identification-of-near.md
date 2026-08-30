@@ -8,6 +8,7 @@ excerpt: "Recovers interpretable governing equations of near-terminal air traffi
 date: 2025-12-01
 venue: "Journal of Air Transport Management"
 authors: "Xu, Q., <b>Pang, Y.</b>, & Liu, Y."
+author_rank: 2
 citation: "Xu, Q., <b>Pang, Y.</b>, & Liu, Y. (2025). “Data-driven governing equation identification of near terminal air traffic flow dynamics.” <i>Journal of Air Transport Management</i>."
 bibtex: |
   @article{xu2025data,

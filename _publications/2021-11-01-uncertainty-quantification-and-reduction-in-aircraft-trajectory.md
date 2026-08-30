@@ -8,6 +8,7 @@ excerpt: "Fuses physics knowledge with data through Bayesian-entropy methods to 
 date: 2021-11-01
 venue: "Reliability Engineering & System Safety"
 authors: "Wang, Y., <b>Pang, Y.</b>, Chen, O., Iyer, H. N., Dutta, P., Menon, P. K., & Liu, Y."
+author_rank: 2
 citation: "Wang, Y., <b>Pang, Y.</b>, Chen, O., Iyer, H. N., Dutta, P., Menon, P. K., & Liu, Y. (2021). “Uncertainty quantification and reduction in aircraft trajectory prediction using Bayesian-Entropy information fusion.” <i>Reliability Engineering & System Safety</i>, 107650."
 bibtex: |
   @article{wang2021uncertainty,

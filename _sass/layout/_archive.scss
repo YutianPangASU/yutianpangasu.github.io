@@ -329,14 +329,31 @@ details.area-more {
     cursor: pointer;
     font-size: $type-size-6;
     color: var(--global-link-color);
+    margin-bottom: 0.5em;
+  }
+}
+
+.pub-line {
+  margin: 0 0 0.65em;
+  padding-left: 2.6em;
+  text-indent: -2.6em;
+  font-size: $type-size-5;
+  line-height: 1.45;
+
+  .pub-line__num {
+    display: inline-block;
+    min-width: 2.2em;
+    text-indent: 0;
+    font-variant-numeric: tabular-nums;
+    color: var(--global-text-color-light);
   }
 
-  ul {
-    margin: 0.5em 0 0;
+  .pub-line__bib {
     font-size: $type-size-6;
-
-    li {
-      margin-bottom: 0.5em;
-    }
+    white-space: nowrap;
   }
+}
+
+.pub-line--rep .pub-line__title {
+  font-weight: 600;
 }

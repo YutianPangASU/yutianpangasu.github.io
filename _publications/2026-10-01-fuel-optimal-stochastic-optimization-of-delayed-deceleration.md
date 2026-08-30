@@ -8,6 +8,7 @@ excerpt: "Stochastic optimization of delayed-deceleration and continuous-descent
 date: 2026-10-01
 venue: "Under review at AIAA Journal of Aircraft"
 authors: "<b>Pang, Y.</b>* & Clarke, J."
+author_rank: 1
 citation: "<b>Pang, Y.</b>* & Clarke, J. (2026). “Fuel-Optimal Stochastic Optimization of Delayed Deceleration and Continuous Descent Approach Procedures under Wind Uncertainty.” <i>AIAA Journal of Aircraft</i>."
 bibtex: |
   @unpublished{pang2026fuel,

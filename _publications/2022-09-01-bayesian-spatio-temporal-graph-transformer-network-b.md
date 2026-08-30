@@ -9,6 +9,7 @@ excerpt: "A Bayesian spatio-temporal graph transformer that predicts the traject
 date: 2022-09-01
 venue: "Knowledge-Based Systems"
 authors: "<b>Pang, Y.</b>, Zhao, X., Hu, J., Yan, H., & Liu, Y."
+author_rank: 1
 citation: "<b>Pang, Y.</b>, Zhao, X., Hu, J., Yan, H., & Liu, Y. (2022). “Bayesian Spatio-Temporal Graph Transformer Network (B-STAR) for Multi-Aircraft Trajectory Prediction.” <i>Knowledge-Based Systems</i>, 249, 108998."
 bibtex: |
   @article{pang2022bayesian,

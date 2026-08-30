@@ -8,6 +8,7 @@ excerpt: "Characterizes the tradeoff between communication load and autonomy lev
 date: 2026-10-01
 venue: "Working paper"
 authors: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J."
+author_rank: 1
 citation: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J. (2026). “Communication and Autonomy Level Tradeoff for Autonomous Systems Resource Allocation.” <i>Working paper</i>."
 bibtex: |
   @unpublished{pang2026communication,

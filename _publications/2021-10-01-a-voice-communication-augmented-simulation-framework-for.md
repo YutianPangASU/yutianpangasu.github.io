@@ -8,6 +8,7 @@ excerpt: "A simulation framework that injects realistic pilot-controller voice c
 date: 2021-10-01
 venue: "IEEE Transactions on Intelligent Transportation Systems"
 authors: "Wang, Y., <b>Pang, Y.</b>, Gorceski, S., Kostiuk, P., Mohen, M. T., Menon, P. K., & Liu, Y."
+author_rank: 2
 citation: "Wang, Y., <b>Pang, Y.</b>, Gorceski, S., Kostiuk, P., Mohen, M. T., Menon, P. K., & Liu, Y. (2021). “A Voice Communication-Augmented Simulation Framework for Aircraft Trajectory Simulation.” <i>IEEE Transactions on Intelligent Transportation Systems</i>."
 bibtex: |
   @article{wang2021voice,

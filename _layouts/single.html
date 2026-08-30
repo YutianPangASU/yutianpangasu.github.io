@@ -60,7 +60,7 @@ layout: default
         {{ content }}
 
         {% if page.bibtex %}
-          <div class="bibtex">
+          <div class="bibtex" id="bibtex">
             <p class="bibtex__label">Recommended citation <button type="button" class="bibtex__copy" onclick="navigator.clipboard.writeText(this.closest('.bibtex').querySelector('code').textContent).then(()=>{this.textContent='copied';setTimeout(()=>{this.textContent='copy BibTeX'},1500)})">copy BibTeX</button></p>
             <pre><code>{{ page.bibtex | strip | escape }}</code></pre>
           </div>

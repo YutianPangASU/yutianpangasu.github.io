@@ -10,6 +10,7 @@ date: 2022-12-01
 venue: "Knowledge-Based Systems"
 arxiv: "https://arxiv.org/abs/2210.08608"
 authors: "Huang, J., <b>Pang, Y.</b>, Zhao, X., Liu, Y., & Yan, H."
+author_rank: 2
 citation: "Huang, J., <b>Pang, Y.</b>, Zhao, X., Liu, Y., & Yan, H. (2022). “Posterior Regularized Bayesian Neural Network Incorporating Soft and Hard Knowledge Constraints.” <i>Knowledge-Based Systems</i>, 249, 109047."
 bibtex: |
   @article{huang2022posterior,

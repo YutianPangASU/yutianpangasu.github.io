@@ -8,6 +8,7 @@ excerpt: "Physics-based learning that predicts aircraft waiting times in congest
 date: 2022-12-01
 venue: "AIAA AVIATION 2022 Forum"
 authors: "Xu, Q., <b>Pang, Y.</b>, Zhang, Z., & Liu, Y."
+author_rank: 2
 citation: "Xu, Q., <b>Pang, Y.</b>, Zhang, Z., & Liu, Y. (2022). “Physics-Based Learning for Aircraft Waiting Time Prediction.” <i>AIAA AVIATION 2022 Forum</i>, p. 3826."
 bibtex: |
   @inproceedings{xu2022physics,

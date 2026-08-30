@@ -9,6 +9,7 @@ excerpt: "An optimization framework for same-day delivery routing that honors ve
 date: 2026-06-01
 venue: "Under review at International Journal of Systems Science: Operations & Logistics"
 authors: "Liang, J., <b>Pang, Y.</b>*, & Clarke, J."
+author_rank: 1
 citation: "Liang, J., <b>Pang, Y.</b>*, & Clarke, J. (2026). “Optimizing Same-Day Delivery: A Framework Incorporating Vehicle Capacity and Time Guarantees.” <i>International Journal of Systems Science: Operations & Logistics</i>."
 bibtex: |
   @unpublished{liang2026optimizing,

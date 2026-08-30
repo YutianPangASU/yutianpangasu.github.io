@@ -8,6 +8,7 @@ excerpt: "Recurrent networks that predict aircraft trajectories using weather fe
 date: 2019-11-01
 venue: "AIAA AVIATION 2019 Forum"
 authors: "<b>Pang, Y.</b>, Yao, H., Hu, J., & Liu, Y."
+author_rank: 1
 citation: "<b>Pang, Y.</b>, Yao, H., Hu, J., & Liu, Y. (2019). “A Recurrent Neural Network Approach for Aircraft Trajectory Prediction with Weather Features From Sherlock.” <i>AIAA AVIATION 2019 Forum</i>, p. 3413."
 bibtex: |
   @inproceedings{pang2019recurrent,

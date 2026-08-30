@@ -10,6 +10,7 @@ date: 2026-09-01
 venue: "Transportation Research Part C: Emerging Technologies"
 arxiv: "https://arxiv.org/abs/2503.04974"
 authors: "<b>Pang, Y.</b>*, Kendall, A. P., Porcayo, A., Barsotti, M., Jain, A., & Clarke, J."
+author_rank: 1
 citation: "<b>Pang, Y.</b>*, Kendall, A. P., Porcayo, A., Barsotti, M., Jain, A., & Clarke, J. (2026). “From Voice to Safety: Language AI Powered Pilot-ATC Communication Understanding for Airport Surface Movement Collision Risk Assessment.” <i>Transportation Research Part C: Emerging Technologies</i>, 184, 105540."
 bibtex: |
   @article{pang2026from,

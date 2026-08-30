@@ -8,6 +8,7 @@ excerpt: "A Bayesian ensemble graph attention network that forecasts air-traffic
 date: 2023-09-01
 venue: "Transportation Research Part C: Emerging Technologies"
 authors: "Xu, Q., <b>Pang, Y.</b>, & Liu, Y."
+author_rank: 2
 citation: "Xu, Q., <b>Pang, Y.</b>, & Liu, Y. (2023). “Air Traffic Density Prediction using Bayesian Ensemble Graph Attention Network (BEGAN).” <i>Transportation Research Part C: Emerging Technologies</i>."
 bibtex: |
   @article{xu2023air,

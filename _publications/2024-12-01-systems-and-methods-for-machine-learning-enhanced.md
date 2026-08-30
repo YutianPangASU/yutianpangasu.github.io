@@ -8,6 +8,7 @@ excerpt: "Patents the machine-learning-enhanced landing scheduling framework dev
 date: 2024-12-01
 venue: "U.S. Patent"
 authors: "Liu, Y., <b>Pang, Y.</b>, & Hu, J."
+author_rank: 2
 citation: "Liu, Y., <b>Pang, Y.</b>, & Hu, J. (2024). “Systems and Methods for Machine Learning-Enhanced Aircraft Landing Scheduling Under Uncertainties.” <i>U.S. Patent</i>."
 bibtex: |
   @misc{liu2024systemsc,

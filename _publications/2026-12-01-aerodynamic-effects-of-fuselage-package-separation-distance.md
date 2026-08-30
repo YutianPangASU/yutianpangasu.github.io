@@ -8,6 +8,7 @@ excerpt: "Shows how the separation distance between fuselage and carried package
 date: 2026-12-01
 venue: "AIAA AVIATION 2026 Forum"
 authors: "Bhujel, S., <b>Pang, Y.</b>, Snyder, P., Tang, C., & Hu, J."
+author_rank: 2
 citation: "Bhujel, S., <b>Pang, Y.</b>, Snyder, P., Tang, C., & Hu, J. (2026). “Aerodynamic Effects of Fuselage-Package Separation Distance on UAV Performance.” <i>AIAA AVIATION 2026 Forum</i>, DOI: 10.2514/6.2026-4760."
 bibtex: |
   @inproceedings{bhujel2026aerodynamic,

@@ -8,6 +8,7 @@ excerpt: "Bayesian uncertainty quantification for neural-network-based structura
 date: 2025-12-01
 venue: "AIAA SCITECH 2025 Forum"
 authors: "Rathnakumar, R., Liu, Y., & <b>Pang, Y.</b>"
+author_rank: 3
 citation: "Rathnakumar, R., Liu, Y., & <b>Pang, Y.</b> (2025). “Bayesian Approach for Uncertainty Quantification of Neural Networks-Based Crack Diagnostics.” <i>AIAA SCITECH 2025 Forum</i>, p. 1959."
 bibtex: |
   @inproceedings{rathnakumar2025bayesian,
