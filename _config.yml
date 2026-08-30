@@ -100,7 +100,7 @@ publication_category:
 # Research-area grouping used on the Publications page; order here is display order
 publication_area:
   enroute:
-    title: 'Understanding the Impact of Uncertainties on En-Route Operations'
+    title: 'Understanding the Impact of Uncertainties (e.g., Weather) on En-Route Operations'
     description: 'In the en-route phase, I study how convective weather and other uncertainties impact flights and traffic flow:'
     topics:
       - 'Probabilistic aircraft trajectory prediction under weather uncertainty'
