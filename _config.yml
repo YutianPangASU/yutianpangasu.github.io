@@ -118,7 +118,7 @@ publication_area:
       - 'Runway capacity under communication and human uncertainties'
       - 'Collision avoidance control laws and their capacity limits'
   airport-ground:
-    title: 'Safety and Reliability of Airport Surface Operations'
+    title: 'Safety and Reliability Studies of Airport Surface Operations'
     description: 'On the airport surface, I turn pilot and controller voice communication and surveillance data into safety and efficiency tools:'
     topics:
       - 'Surface-movement collision risk assessment from pilot-ATC radio calls'
