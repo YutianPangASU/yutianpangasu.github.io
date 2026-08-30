@@ -42,7 +42,7 @@ Publications
 ======
 See the [Publications](/publications/) page, or the full CV PDF above.
 
-Talks
+Invited conference talks
 ======
 <ul>{% for post in site.talks reversed %}
   {% include archive-single-talk-cv.html  %}

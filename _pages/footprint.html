@@ -60,9 +60,12 @@ author_profile: true
 
   .fp-hwmap .hw-states { fill: none; stroke: var(--global-text-color-light, #888); stroke-opacity: 0.3; stroke-width: 1; }
   .fp-hwmap .hwr { fill: none; stroke: var(--global-text-color-light, #888); stroke-opacity: 0.45; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
-  .fp-hwmap.editing .hwr { stroke: var(--global-text-color-light, #888); stroke-opacity: 0.45; stroke-width: 3.5; cursor: pointer; }
-  .fp-hwmap.editing .hwr:hover { stroke-opacity: 0.8; }
+  .fp-hwmap.editing .hwr { stroke: var(--global-text-color-light, #888); stroke-opacity: 0.45; stroke-width: 3.5; }
   .fp-hwmap.editing .hwr.picked { stroke: #1f6cb5; stroke-opacity: 1; }
+  .fp-hwmap .hw-hits use { fill: none; stroke: transparent; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
+  .fp-hwmap.editing .hw-hits use { cursor: pointer; }
+  .fp-hwmap .hw-routes .hwr.hwr-hover { stroke-width: 3; stroke-opacity: 1; }
+  #fp-hw-tip { position: fixed; z-index: 950; background: rgba(20, 20, 20, 0.85); color: #fff; font-size: 0.8em; padding: 0.15em 0.5em; border-radius: 4px; pointer-events: none; white-space: nowrap; }
 
   .fp-caption { color: var(--global-text-color-light); font-size: 0.85em; margin: 0.4em 0 1.75em; }
   .fp-swatch { display: inline-block; width: 0.85em; height: 0.85em; border-radius: 3px; vertical-align: -0.1em; margin-right: 0.35em; }
@@ -201,6 +204,8 @@ author_profile: true
   </details>
 </div>
 
+<div id="fp-hw-tip" hidden></div>
+
 <div id="fp-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button id="fp-lb-close" class="fp-lb-btn" aria-label="Close">&times;</button>
   <button id="fp-lb-prev" class="fp-lb-btn" aria-label="Previous photo">&#10094;</button>
@@ -220,15 +225,38 @@ author_profile: true
 </script>
 <script>
 (function () {
+  /* ---- highway hover tooltips (fat invisible hit layer over the thin strokes) ---- */
+  var hwsvg = document.querySelector('.fp-hwmap');
+  var hwTip = document.getElementById('fp-hw-tip');
+  var hwHits = hwsvg ? Array.prototype.slice.call(hwsvg.querySelectorAll('.hw-hits use')) : [];
+  hwHits.forEach(function (u) {
+    var route = u.getAttribute('data-route');
+    var target = hwsvg.querySelector(u.getAttribute('href'));
+    if (!target) return;
+    u.addEventListener('pointerenter', function () {
+      target.classList.add('hwr-hover');
+      hwTip.textContent = route;
+      hwTip.hidden = false;
+    });
+    u.addEventListener('pointermove', function (e) {
+      hwTip.style.left = (e.clientX + 14) + 'px';
+      hwTip.style.top = (e.clientY + 14) + 'px';
+    });
+    u.addEventListener('pointerleave', function () {
+      target.classList.remove('hwr-hover');
+      hwTip.hidden = true;
+    });
+  });
+
   /* ---- owner edit mode: /footprint/?edit ---- */
   if (/[?&]edit/.test(location.search)) {
     document.getElementById('fp-edit-panel').hidden = false;
 
-    /* Interstates: click routes on the highway map */
-    var hwmap = document.querySelector('.fp-hwmap');
-    if (hwmap) {
-      hwmap.classList.add('editing');
-      var routes = Array.prototype.slice.call(hwmap.querySelectorAll('.hwr'));
+    /* Interstates: click routes on the highway map (via the fat hit layer) */
+    if (hwsvg) {
+      hwsvg.classList.add('editing');
+      var routes = hwHits.map(function (u) { return hwsvg.querySelector(u.getAttribute('href')); })
+        .filter(Boolean);
       var hwTa = document.getElementById('fp-yaml-hw');
       var hwCnt = document.getElementById('fp-cnt-hw');
       var hwRefresh = function () {
@@ -246,7 +274,11 @@ author_profile: true
       };
       routes.forEach(function (p) {
         if (window.fpDriven.indexOf(p.getAttribute('data-route')) !== -1) p.classList.add('picked');
-        p.addEventListener('click', function () { p.classList.toggle('picked'); hwRefresh(); });
+      });
+      hwHits.forEach(function (u) {
+        var p = hwsvg.querySelector(u.getAttribute('href'));
+        if (!p) return;
+        u.addEventListener('click', function () { p.classList.toggle('picked'); hwRefresh(); });
       });
       hwRefresh();
     }
