@@ -138,9 +138,9 @@ publication_area:
       - 'Physics-informed learning for fracture and structural health monitoring'
       - 'Adversarial robustness of Bayesian neural networks'
       - 'Maintenance scheduling under uncertainty'
-  civil-logistics:
-    title: 'Civil Logistics'
-    description: 'The same optimization and learning tools carry over to civil logistics:'
+  aam:
+    title: 'Advanced Air Mobility Operations'
+    description: 'Beyond crewed aviation, I study advanced air mobility and autonomous delivery operations:'
     topics:
       - 'Last-mile and same-day delivery routing with capacity and time guarantees'
       - 'UAV package delivery aerodynamics'

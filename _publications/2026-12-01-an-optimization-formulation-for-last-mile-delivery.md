@@ -2,7 +2,7 @@
 title: "An Optimization Formulation for Last-Mile Delivery Using Ring Widget Structure"
 collection: publications
 category: workingpapers
-area: civil-logistics
+area: aam
 permalink: /publication/2026-12-01-an-optimization-formulation-for-last-mile-delivery
 excerpt: "Formulates last-mile delivery over a ring-widget network structure for provably efficient routing."
 date: 2026-12-01

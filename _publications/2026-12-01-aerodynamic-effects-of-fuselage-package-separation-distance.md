@@ -2,7 +2,7 @@
 title: "Aerodynamic Effects of Fuselage-Package Separation Distance on UAV Performance"
 collection: publications
 category: conferences
-area: civil-logistics
+area: aam
 permalink: /publication/2026-12-01-aerodynamic-effects-of-fuselage-package-separation-distance
 excerpt: "Shows how the separation distance between fuselage and carried package changes UAV aerodynamic performance in delivery configurations."
 date: 2026-12-01
