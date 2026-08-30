@@ -7,6 +7,7 @@ permalink: /publication/2021-11-01-uncertainty-quantification-and-reduction-in-a
 excerpt: "Fuses physics knowledge with data through Bayesian-entropy methods to tighten the uncertainty of trajectory predictions."
 date: 2021-11-01
 venue: "Reliability Engineering & System Safety"
+authors: "Wang, Y., <b>Pang, Y.</b>, Chen, O., Iyer, H. N., Dutta, P., Menon, P. K., & Liu, Y."
 citation: "Wang, Y., <b>Pang, Y.</b>, Chen, O., Iyer, H. N., Dutta, P., Menon, P. K., & Liu, Y. (2021). “Uncertainty quantification and reduction in aircraft trajectory prediction using Bayesian-Entropy information fusion.” <i>Reliability Engineering & System Safety</i>, 107650."
 bibtex: |
   @article{wang2021uncertainty,

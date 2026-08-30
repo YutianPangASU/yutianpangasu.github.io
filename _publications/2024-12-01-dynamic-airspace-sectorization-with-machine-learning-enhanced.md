@@ -7,6 +7,7 @@ permalink: /publication/2024-12-01-dynamic-airspace-sectorization-with-machine-l
 excerpt: "Repartitions airspace sectors dynamically using learned controller-workload predictions, balancing load across the system."
 date: 2024-12-01
 venue: "Journal of Air Transport Management"
+authors: "Xu, Q., <b>Pang, Y.</b>, & Liu, Y."
 citation: "Xu, Q., <b>Pang, Y.</b>, & Liu, Y. (2024). “Dynamic airspace sectorization with machine learning enhanced workload prediction and clustering.” <i>Journal of Air Transport Management</i>."
 bibtex: |
   @article{xu2024dynamic,

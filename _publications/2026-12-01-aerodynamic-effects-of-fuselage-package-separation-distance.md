@@ -2,11 +2,12 @@
 title: "Aerodynamic Effects of Fuselage-Package Separation Distance on UAV Performance"
 collection: publications
 category: conferences
-area: autonomy-logistics
+area: civil-logistics
 permalink: /publication/2026-12-01-aerodynamic-effects-of-fuselage-package-separation-distance
 excerpt: "Shows how the separation distance between fuselage and carried package changes UAV aerodynamic performance in delivery configurations."
 date: 2026-12-01
 venue: "AIAA AVIATION 2026 Forum"
+authors: "Bhujel, S., <b>Pang, Y.</b>, Snyder, P., Tang, C., & Hu, J."
 citation: "Bhujel, S., <b>Pang, Y.</b>, Snyder, P., Tang, C., & Hu, J. (2026). “Aerodynamic Effects of Fuselage-Package Separation Distance on UAV Performance.” <i>AIAA AVIATION 2026 Forum</i>, DOI: 10.2514/6.2026-4760."
 bibtex: |
   @inproceedings{bhujel2026aerodynamic,

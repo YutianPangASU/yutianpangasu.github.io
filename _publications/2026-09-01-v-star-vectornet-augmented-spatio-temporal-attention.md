@@ -7,6 +7,7 @@ permalink: /publication/2026-09-01-v-star-vectornet-augmented-spatio-temporal-at
 excerpt: "Augments spatio-temporal attention with vectorized procedure maps so that trajectory predictions respect published terminal-area procedures."
 date: 2026-09-01
 venue: "Under review at Transportation Research Part C"
+authors: "<b>Pang, Y.</b>, Hu, J., Iyer, H., Zhao, X., & Clarke, J."
 citation: "<b>Pang, Y.</b>, Hu, J., Iyer, H., Zhao, X., & Clarke, J. (2026). “V-STAR: VectorNet-Augmented Spatio-Temporal Attention and Reasoning for Procedure-Aware Aircraft Trajectory Prediction.” <i>Transportation Research Part C</i>."
 bibtex: |
   @unpublished{pang2026vstar,

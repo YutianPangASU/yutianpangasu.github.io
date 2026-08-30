@@ -8,6 +8,7 @@ permalink: /publication/2021-12-01-data-driven-trajectory-prediction-with-weathe
 excerpt: "Among the first Bayesian deep-learning frameworks for aircraft trajectory prediction to treat convective weather as a first-class source of uncertainty; my most-cited work."
 date: 2021-12-01
 venue: "Transportation Research Part C: Emerging Technologies"
+authors: "<b>Pang, Y.</b>, Zhao, X., Yan, H., & Liu, Y."
 citation: "<b>Pang, Y.</b>, Zhao, X., Yan, H., & Liu, Y. (2021). “Data-driven trajectory prediction with weather uncertainties: A Bayesian deep learning approach.” <i>Transportation Research Part C: Emerging Technologies</i>, 130, 103326."
 bibtex: |
   @article{pang2021data,

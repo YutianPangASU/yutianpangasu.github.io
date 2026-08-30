@@ -9,6 +9,7 @@ excerpt: "A reliability framework showing how uncertainties in aeronautical comm
 date: 2026-10-01
 venue: "Reliability Engineering & System Safety"
 arxiv: "https://arxiv.org/abs/2501.07743"
+authors: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J."
 citation: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J. (2026). “The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties.” <i>Reliability Engineering & System Safety</i>."
 bibtex: |
   @article{pang2026reliability,

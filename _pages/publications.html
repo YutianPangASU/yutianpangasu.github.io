@@ -26,6 +26,13 @@ author_profile: true
   {% if area[1].description %}
     <p class="archive__area-description">{{ area[1].description }}</p>
   {% endif %}
+  {% if area[1].topics %}
+    <ul class="archive__area-topics">
+      {% for topic in area[1].topics %}
+        <li>{{ topic }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   {% for post in area_posts %}
     {% if post.representative %}
@@ -41,6 +48,7 @@ author_profile: true
         {% for post in rest %}
           <li>
             <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>.
+            {% if post.authors %}{{ post.authors }}.{% endif %}
             {% if post.category == 'workingpapers' %}
               Working paper, in preparation.
             {% elsif post.category == 'underreview' %}

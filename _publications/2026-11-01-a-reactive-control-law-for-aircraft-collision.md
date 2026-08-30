@@ -7,6 +7,7 @@ permalink: /publication/2026-11-01-a-reactive-control-law-for-aircraft-collision
 excerpt: "A reactive control law for aircraft collision avoidance, with analytical bounds on the traffic capacity it can safely sustain."
 date: 2026-11-01
 venue: "Working paper"
+authors: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J."
 citation: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J. (2026). “A Reactive Control Law for Aircraft Collision Avoidance and Its Capacity Limits.” <i>Working paper</i>."
 bibtex: |
   @unpublished{pang2026reactive,

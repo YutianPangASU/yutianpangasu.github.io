@@ -8,6 +8,7 @@ excerpt: "A nonlinear-programming formulation of TRACON arrival optimization tha
 date: 2026-11-01
 venue: "Annual Modeling and Simulation Conference 2026"
 arxiv: "https://arxiv.org/abs/2604.18454"
+authors: "<b>Pang, Y.</b>, Delahaye, D., & Clarke, J."
 citation: "<b>Pang, Y.</b>, Delahaye, D., & Clarke, J. (2026). “Geometric Trajectory Optimization for TRACON Arrivals: An NLP Approach with ATC Vectoring Maneuver Modeling.” <i>Annual Modeling and Simulation Conference 2026</i>."
 bibtex: |
   @inproceedings{pang2026geometric,

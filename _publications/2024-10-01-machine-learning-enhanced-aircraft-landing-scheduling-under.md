@@ -9,6 +9,7 @@ excerpt: "Blends machine-learned arrival-time distributions with optimization to
 date: 2024-10-01
 venue: "Transportation Research Part C: Emerging Technologies"
 arxiv: "https://arxiv.org/abs/2311.16030"
+authors: "<b>Pang, Y.</b>, Zhao, P., Hu, J., & Liu, Y."
 citation: "<b>Pang, Y.</b>, Zhao, P., Hu, J., & Liu, Y. (2024). “Machine Learning-Enhanced Aircraft Landing Scheduling under Uncertainties.” <i>Transportation Research Part C: Emerging Technologies</i>, 158, 104444."
 bibtex: |
   @article{pang2024machine,

@@ -101,22 +101,50 @@ publication_category:
 publication_area:
   enroute:
     title: 'En-Route Operations'
-    description: 'In the en-route phase, I study how convective weather and other uncertainties impact flights and traffic flow: probabilistic aircraft trajectory prediction under weather uncertainty, air traffic state and density prediction, dynamic airspace sectorization, and controller cognitive workload.'
+    description: 'In the en-route phase, I study how convective weather and other uncertainties impact flights and traffic flow:'
+    topics:
+      - 'Probabilistic aircraft trajectory prediction under weather uncertainty'
+      - 'Air traffic state and density prediction for flow management'
+      - 'Dynamic airspace sectorization with learned workload prediction'
+      - 'Controller cognitive workload prediction'
   tracon:
     title: 'TRACON Automation'
-    description: 'In the terminal maneuvering area, I build automation for arrival operations: trajectory-based co-optimization of arrival scheduling and descent design, fuel-optimal descent procedures under wind uncertainty, multi-aircraft and procedure-aware trajectory prediction, and machine-learning-enhanced landing scheduling.'
+    description: 'In the terminal maneuvering area, I build automation for arrival operations:'
+    topics:
+      - 'Trajectory-based co-optimization of arrival scheduling and descent design'
+      - 'Fuel-optimal descent procedures under wind uncertainty'
+      - 'Multi-aircraft and procedure-aware trajectory prediction'
+      - 'Machine-learning-enhanced landing scheduling and autonomous landing'
   airport-ground:
     title: 'Airport & Ground Operations'
-    description: 'On the airport surface, I turn pilot and controller voice communication and surveillance data into safety and efficiency tools: surface-movement collision risk assessment, real-time runway incursion alerting, and runway and taxiway exit prediction for landing aircraft.'
+    description: 'On the airport surface, I turn pilot and controller voice communication and surveillance data into safety and efficiency tools:'
+    topics:
+      - 'Surface-movement collision risk assessment from pilot-ATC radio calls'
+      - 'Real-time runway incursion alerting from ATC speech and ADS-B'
+      - 'Runway and taxiway exit prediction for landing aircraft'
   safety-risk:
     title: 'Aviation Safety & Risk'
-    description: 'Across phases of flight, I quantify how communication, human, and autonomy uncertainties translate into operational risk: runway capacity impacts, the reliability of remotely piloted aircraft, collision avoidance and its capacity limits, and explainable risk analysis from safety reports.'
+    description: 'Across phases of flight, I quantify how communication, human, and autonomy uncertainties translate into operational risk:'
+    topics:
+      - 'Runway capacity under communication and human uncertainties'
+      - 'Reliability of remotely piloted aircraft systems'
+      - 'Collision avoidance control laws and their capacity limits'
+      - 'Explainable risk analysis from aviation safety reports'
   reliability-ai:
     title: 'Reliability & Trustworthy AI'
-    description: 'Beneath the applications sits methodological work on trustworthy machine learning and reliability engineering: Bayesian uncertainty quantification, physics-informed learning, adversarial robustness, and maintenance scheduling under uncertainty.'
-  autonomy-logistics:
-    title: 'Autonomy & Logistics'
-    description: 'The same optimization and learning tools carry beyond crewed aviation: last-mile and same-day delivery routing, UAV package delivery aerodynamics, and multi-agent reinforcement learning for decentralized decision-making.'
+    description: 'Beneath the applications sits methodological work on trustworthy machine learning and reliability engineering:'
+    topics:
+      - 'Bayesian uncertainty quantification for deep learning'
+      - 'Physics-informed learning for fracture and structural health monitoring'
+      - 'Adversarial robustness of Bayesian neural networks'
+      - 'Maintenance scheduling under uncertainty'
+  civil-logistics:
+    title: 'Civil Logistics'
+    description: 'The same optimization and learning tools carry over to civil logistics:'
+    topics:
+      - 'Last-mile and same-day delivery routing with capacity and time guarantees'
+      - 'UAV package delivery aerodynamics'
+      - 'Multi-agent reinforcement learning for decentralized decision-making'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews

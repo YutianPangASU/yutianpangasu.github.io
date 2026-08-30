@@ -8,6 +8,7 @@ excerpt: "Quantifies how pilot-controller communication delays and human respons
 date: 2026-11-01
 venue: "Journal of Air Transport Management"
 arxiv: "https://arxiv.org/abs/2510.09943"
+authors: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J."
 citation: "<b>Pang, Y.</b>*, Kendall, A., & Clarke, J. (2026). “Modeling the Impact of Communication and Human Uncertainties on Runway Capacity in Terminal Airspace.” <i>Journal of Air Transport Management</i>."
 bibtex: |
   @article{pang2026modeling,
