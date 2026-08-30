@@ -2,12 +2,76 @@
 #
 # Easiest way to build this list: open https://yutianpang.com/footprint/?edit
 # (or the same URL on a local preview), click highways on the map to toggle
-# them, then copy the generated list from the panel and paste it here.
+# them, then copy the generated list from the panel and paste it here,
+# replacing the driven: list below.
 #
 # Route names match the map labels: I-10, I-35, I-35E, I-635, and so on.
-driven: []
-# Example:
-# driven:
-#   - I-10
-#   - I-35
-#   - I-40
+driven:
+ - I-4
+ - I-5
+ - I-8
+ - I-10
+ - I-15
+ - I-17
+ - I-19
+ - I-20
+ - I-29
+ - I-30
+ - I-35
+ - I-35E
+ - I-35W
+ - I-37
+ - I-40
+ - I-44
+ - I-45
+ - I-65
+ - I-70
+ - I-75
+ - I-80
+ - I-88
+ - I-90
+ - I-94
+ - I-95
+ - I-110
+ - I-129
+ - I-135
+ - I-180
+ - I-195
+ - I-205
+ - I-210
+ - I-215
+ - I-229
+ - I-235
+ - I-240
+ - I-244
+ - I-280
+ - I-290
+ - I-294
+ - I-335
+ - I-355
+ - I-380
+ - I-395
+ - I-405
+ - I-410
+ - I-435
+ - I-465
+ - I-470
+ - I-480
+ - I-494
+ - I-505
+ - I-515
+ - I-580
+ - I-595
+ - I-605
+ - I-610
+ - I-635
+ - I-670
+ - I-680
+ - I-694
+ - I-710
+ - I-780
+ - I-805
+ - I-820
+ - I-865
+ - I-880
+ - I-980

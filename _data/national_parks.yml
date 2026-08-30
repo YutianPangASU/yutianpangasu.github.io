@@ -1,0 +1,65 @@
+# All 63 US national parks: reference list for the park picker in the
+# /footprint/?edit panel. Slugs match the folders under images/travel/.
+- { name: Acadia National Park, slug: acadia, state: Maine }
+- { name: National Park of American Samoa, slug: american-samoa, state: American Samoa }
+- { name: Arches National Park, slug: arches, state: Utah }
+- { name: Badlands National Park, slug: badlands, state: South Dakota }
+- { name: Big Bend National Park, slug: big-bend, state: Texas }
+- { name: Biscayne National Park, slug: biscayne, state: Florida }
+- { name: Black Canyon of the Gunnison National Park, slug: black-canyon-of-the-gunnison, state: Colorado }
+- { name: Bryce Canyon National Park, slug: bryce-canyon, state: Utah }
+- { name: Canyonlands National Park, slug: canyonlands, state: Utah }
+- { name: Capitol Reef National Park, slug: capitol-reef, state: Utah }
+- { name: Carlsbad Caverns National Park, slug: carlsbad-caverns, state: New Mexico }
+- { name: Channel Islands National Park, slug: channel-islands, state: California }
+- { name: Congaree National Park, slug: congaree, state: South Carolina }
+- { name: Crater Lake National Park, slug: crater-lake, state: Oregon }
+- { name: Cuyahoga Valley National Park, slug: cuyahoga-valley, state: Ohio }
+- { name: Death Valley National Park, slug: death-valley, state: "California, Nevada" }
+- { name: Denali National Park, slug: denali, state: Alaska }
+- { name: Dry Tortugas National Park, slug: dry-tortugas, state: Florida }
+- { name: Everglades National Park, slug: everglades, state: Florida }
+- { name: Gates of the Arctic National Park, slug: gates-of-the-arctic, state: Alaska }
+- { name: Gateway Arch National Park, slug: gateway-arch, state: Missouri }
+- { name: Glacier National Park, slug: glacier, state: Montana }
+- { name: Glacier Bay National Park, slug: glacier-bay, state: Alaska }
+- { name: Grand Canyon National Park, slug: grand-canyon, state: Arizona }
+- { name: Grand Teton National Park, slug: grand-teton, state: Wyoming }
+- { name: Great Basin National Park, slug: great-basin, state: Nevada }
+- { name: Great Sand Dunes National Park, slug: great-sand-dunes, state: Colorado }
+- { name: Great Smoky Mountains National Park, slug: great-smoky-mountains, state: "Tennessee, North Carolina" }
+- { name: Guadalupe Mountains National Park, slug: guadalupe-mountains, state: Texas }
+- { name: Haleakala National Park, slug: haleakala, state: Hawaii }
+- { name: Hawaii Volcanoes National Park, slug: hawaii-volcanoes, state: Hawaii }
+- { name: Hot Springs National Park, slug: hot-springs, state: Arkansas }
+- { name: Indiana Dunes National Park, slug: indiana-dunes, state: Indiana }
+- { name: Isle Royale National Park, slug: isle-royale, state: Michigan }
+- { name: Joshua Tree National Park, slug: joshua-tree, state: California }
+- { name: Katmai National Park, slug: katmai, state: Alaska }
+- { name: Kenai Fjords National Park, slug: kenai-fjords, state: Alaska }
+- { name: Kings Canyon National Park, slug: kings-canyon, state: California }
+- { name: Kobuk Valley National Park, slug: kobuk-valley, state: Alaska }
+- { name: Lake Clark National Park, slug: lake-clark, state: Alaska }
+- { name: Lassen Volcanic National Park, slug: lassen-volcanic, state: California }
+- { name: Mammoth Cave National Park, slug: mammoth-cave, state: Kentucky }
+- { name: Mesa Verde National Park, slug: mesa-verde, state: Colorado }
+- { name: Mount Rainier National Park, slug: mount-rainier, state: Washington }
+- { name: New River Gorge National Park, slug: new-river-gorge, state: West Virginia }
+- { name: North Cascades National Park, slug: north-cascades, state: Washington }
+- { name: Olympic National Park, slug: olympic, state: Washington }
+- { name: Petrified Forest National Park, slug: petrified-forest, state: Arizona }
+- { name: Pinnacles National Park, slug: pinnacles, state: California }
+- { name: Redwood National Park, slug: redwood, state: California }
+- { name: Rocky Mountain National Park, slug: rocky-mountain, state: Colorado }
+- { name: Saguaro National Park, slug: saguaro, state: Arizona }
+- { name: Sequoia National Park, slug: sequoia, state: California }
+- { name: Shenandoah National Park, slug: shenandoah, state: Virginia }
+- { name: Theodore Roosevelt National Park, slug: theodore-roosevelt, state: North Dakota }
+- { name: Virgin Islands National Park, slug: virgin-islands, state: US Virgin Islands }
+- { name: Voyageurs National Park, slug: voyageurs, state: Minnesota }
+- { name: White Sands National Park, slug: white-sands, state: New Mexico }
+- { name: Wind Cave National Park, slug: wind-cave, state: South Dakota }
+- { name: Wrangell-St. Elias National Park, slug: wrangell-st-elias, state: Alaska }
+- { name: Yellowstone National Park, slug: yellowstone, state: "Wyoming, Montana, Idaho" }
+- { name: Yosemite National Park, slug: yosemite, state: California }
+- { name: Zion National Park, slug: zion, state: Utah }

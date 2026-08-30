@@ -10,33 +10,40 @@ author_profile: true
 {% assign travel_sections = site.data.travel | default: "" %}
 {% assign driven_routes = site.data.highways.driven | default: "" %}
 
-{% comment %} Collect visited state codes from the parks data {% endcomment %}
-{% assign visited_codes = "" | split: "" %}
+{% comment %} Collect visited state codes: park_codes from parks (locked in the picker), extra_codes from visited_states.yml {% endcomment %}
+{% assign park_codes = "" | split: "" %}
+{% assign park_slugs = "" | split: "" %}
 {% if travel_sections != "" and travel_sections != empty %}
   {% for section in travel_sections %}
     {% for park in section.parks %}
+      {% if park.slug %}
+        {% assign park_slugs = park_slugs | push: park.slug %}
+      {% endif %}
       {% assign state_names = park.state | default: "" | split: "," %}
       {% for sn in state_names %}
         {% assign sname = sn | strip %}
         {% assign code = site.data.us_states[sname] %}
         {% if code %}
-          {% assign visited_codes = visited_codes | push: code %}
+          {% assign park_codes = park_codes | push: code %}
         {% endif %}
       {% endfor %}
     {% endfor %}
   {% endfor %}
 {% endif %}
+{% assign park_codes = park_codes | uniq %}
+{% assign extra_codes = "" | split: "" %}
 {% assign extra_states = site.data.visited_states.extra | default: "" %}
 {% if extra_states != "" and extra_states != empty %}
   {% for sn in extra_states %}
     {% assign sname = sn | strip %}
     {% assign code = site.data.us_states[sname] %}
     {% if code %}
-      {% assign visited_codes = visited_codes | push: code %}
+      {% assign extra_codes = extra_codes | push: code %}
     {% endif %}
   {% endfor %}
 {% endif %}
-{% assign visited_codes = visited_codes | uniq %}
+{% assign extra_codes = extra_codes | uniq %}
+{% assign visited_codes = park_codes | concat: extra_codes | uniq %}
 
 <style>
   .fp-intro { margin-bottom: 1.5em; }
@@ -46,6 +53,10 @@ author_profile: true
   .fp-map .borders { stroke: var(--global-bg-color, #fff); stroke-width: 1; fill: none; }
   .fp-map .separator1 { stroke: var(--global-border-color, #b0b0b0); stroke-width: 2; fill: none; }
   .fp-map .dccircle { display: none; }
+  .fp-map.editing g.state path { fill: var(--global-thead-color, #dcdcdc); cursor: pointer; }
+  .fp-map.editing g.state path:hover { fill: #7fb598; }
+  .fp-map.editing g.state path.st-picked, .fp-map.editing g.state path.st-locked { fill: #2e8b57; }
+  .fp-map.editing g.state path.st-locked { cursor: default; }
 
   .fp-hwmap .hw-states { fill: none; stroke: var(--global-text-color-light, #888); stroke-opacity: 0.3; stroke-width: 1; }
   .fp-hwmap .hwr { fill: none; stroke: var(--global-text-color-light, #888); stroke-opacity: 0.45; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
@@ -68,11 +79,17 @@ author_profile: true
   .fp-photo:hover img { transform: scale(1.04); }
   .fp-soon { color: var(--global-text-color-light); font-size: 0.85em; font-style: italic; }
 
-  #fp-edit-panel { position: fixed; bottom: 1em; right: 1em; z-index: 900; width: 240px; background: var(--global-bg-color, #fff); border: 1px solid var(--global-border-color, #ccc); border-radius: 8px; padding: 0.75em; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); }
+  #fp-edit-panel { position: fixed; bottom: 1em; right: 1em; z-index: 900; width: 280px; max-height: 85vh; overflow-y: auto; background: var(--global-bg-color, #fff); border: 1px solid var(--global-border-color, #ccc); border-radius: 8px; padding: 0.75em; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); }
   #fp-edit-panel h4 { margin: 0 0 0.4em; font-size: 0.95em; }
-  #fp-edit-count { font-size: 0.8em; color: var(--global-text-color-light); margin: 0 0 0.4em; }
-  #fp-edit-yaml { width: 100%; height: 9em; font-family: monospace; font-size: 0.75em; resize: vertical; }
-  #fp-edit-copy { margin-top: 0.4em; font-size: 0.8em; cursor: pointer; }
+  #fp-edit-panel details { margin: 0.4em 0; border-top: 1px solid var(--global-border-color, #ccc); padding-top: 0.4em; }
+  #fp-edit-panel summary { cursor: pointer; font-size: 0.85em; font-weight: bold; }
+  #fp-edit-panel summary span { font-weight: normal; color: var(--global-text-color-light); }
+  .fp-edit-hint { font-size: 0.72em; color: var(--global-text-color-light); margin: 0.3em 0; }
+  #fp-edit-panel textarea { width: 100%; height: 8em; font-family: monospace; font-size: 0.72em; resize: vertical; }
+  .fp-copy { margin-top: 0.3em; font-size: 0.8em; cursor: pointer; }
+  #fp-np-list { max-height: 11em; overflow-y: auto; border: 1px solid var(--global-border-color, #ccc); border-radius: 4px; padding: 0.3em 0.4em; margin-bottom: 0.4em; }
+  #fp-np-list label { display: flex; align-items: center; gap: 0.4em; font-size: 0.72em; margin: 0.15em 0; }
+  #fp-np-list input { margin: 0; flex: none; }
 
   #fp-lightbox { position: fixed; inset: 0; z-index: 1000; display: none; background: rgba(0, 0, 0, 0.93); align-items: center; justify-content: center; }
   #fp-lightbox.open { display: flex; }
@@ -162,10 +179,26 @@ author_profile: true
 {% endif %}
 
 <div id="fp-edit-panel" hidden>
-  <h4>Pick driven Interstates</h4>
-  <p id="fp-edit-count"></p>
-  <textarea id="fp-edit-yaml" readonly spellcheck="false"></textarea>
-  <button id="fp-edit-copy">Copy for _data/highways.yml</button>
+  <h4>Edit mode</h4>
+  <details open>
+    <summary>Interstates <span id="fp-cnt-hw"></span></summary>
+    <p class="fp-edit-hint">Click routes on the highway map, then paste into _data/highways.yml.</p>
+    <textarea id="fp-yaml-hw" readonly spellcheck="false"></textarea>
+    <button class="fp-copy" data-for="fp-yaml-hw" type="button">Copy</button>
+  </details>
+  <details>
+    <summary>States <span id="fp-cnt-st"></span></summary>
+    <p class="fp-edit-hint">Click states on the state map, then paste into _data/visited_states.yml. States shaded by a park entry are locked here.</p>
+    <textarea id="fp-yaml-st" readonly spellcheck="false"></textarea>
+    <button class="fp-copy" data-for="fp-yaml-st" type="button">Copy</button>
+  </details>
+  <details>
+    <summary>National parks <span id="fp-cnt-np"></span></summary>
+    <p class="fp-edit-hint">Tick parks you have visited, then paste into _data/travel.yml and fill in the visited dates. Parks already listed there are ticked and locked.</p>
+    <div id="fp-np-list"></div>
+    <textarea id="fp-yaml-np" readonly spellcheck="false"></textarea>
+    <button class="fp-copy" data-for="fp-yaml-np" type="button">Copy</button>
+  </details>
 </div>
 
 <div id="fp-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -180,40 +213,113 @@ author_profile: true
 
 <script>
   window.fpDriven = {% if driven_routes == "" or driven_routes == empty %}[]{% else %}{{ driven_routes | jsonify }}{% endif %};
+  window.fpParkStates = {{ park_codes | jsonify }};
+  window.fpExtraStates = {{ extra_codes | jsonify }};
+  window.fpParks = {{ park_slugs | jsonify }};
+  window.fpNPS = {{ site.data.national_parks | jsonify }};
 </script>
 <script>
 (function () {
-  /* ---- highway picker (owner edit mode: /footprint/?edit) ---- */
-  var hwmap = document.querySelector('.fp-hwmap');
-  if (hwmap && /[?&]edit/.test(location.search)) {
-    hwmap.classList.add('editing');
-    var panel = document.getElementById('fp-edit-panel');
-    panel.hidden = false;
-    var routes = Array.prototype.slice.call(hwmap.querySelectorAll('.hwr'));
-    var ta = document.getElementById('fp-edit-yaml');
-    var count = document.getElementById('fp-edit-count');
-    var refresh = function () {
-      var picked = routes.filter(function (p) { return p.classList.contains('picked'); })
-        .map(function (p) { return p.getAttribute('data-route'); });
-      picked.sort(function (a, b) {
-        var na = parseInt(a.replace(/\D/g, ''), 10);
-        var nb = parseInt(b.replace(/\D/g, ''), 10);
-        return na - nb || a.localeCompare(b);
+  /* ---- owner edit mode: /footprint/?edit ---- */
+  if (/[?&]edit/.test(location.search)) {
+    document.getElementById('fp-edit-panel').hidden = false;
+
+    /* Interstates: click routes on the highway map */
+    var hwmap = document.querySelector('.fp-hwmap');
+    if (hwmap) {
+      hwmap.classList.add('editing');
+      var routes = Array.prototype.slice.call(hwmap.querySelectorAll('.hwr'));
+      var hwTa = document.getElementById('fp-yaml-hw');
+      var hwCnt = document.getElementById('fp-cnt-hw');
+      var hwRefresh = function () {
+        var picked = routes.filter(function (p) { return p.classList.contains('picked'); })
+          .map(function (p) { return p.getAttribute('data-route'); });
+        picked.sort(function (a, b) {
+          var na = parseInt(a.replace(/\D/g, ''), 10);
+          var nb = parseInt(b.replace(/\D/g, ''), 10);
+          return na - nb || a.localeCompare(b);
+        });
+        hwCnt.textContent = '(' + picked.length + ')';
+        hwTa.value = picked.length
+          ? 'driven:\n' + picked.map(function (r) { return '  - ' + r; }).join('\n')
+          : 'driven: []';
+      };
+      routes.forEach(function (p) {
+        if (window.fpDriven.indexOf(p.getAttribute('data-route')) !== -1) p.classList.add('picked');
+        p.addEventListener('click', function () { p.classList.toggle('picked'); hwRefresh(); });
       });
-      count.textContent = picked.length + ' route' + (picked.length === 1 ? '' : 's') + ' selected';
-      ta.value = picked.length
-        ? 'driven:\n' + picked.map(function (r) { return '  - ' + r; }).join('\n')
-        : 'driven: []';
-    };
-    routes.forEach(function (p) {
-      if (window.fpDriven.indexOf(p.getAttribute('data-route')) !== -1) p.classList.add('picked');
-      p.addEventListener('click', function () { p.classList.toggle('picked'); refresh(); });
-    });
-    refresh();
-    document.getElementById('fp-edit-copy').addEventListener('click', function () {
-      ta.select();
-      if (navigator.clipboard) { navigator.clipboard.writeText(ta.value); }
-      else { document.execCommand('copy'); }
+      hwRefresh();
+    }
+
+    /* States: click states on the state map (park-derived states are locked) */
+    var stmap = document.querySelector('.fp-map');
+    if (stmap) {
+      stmap.classList.add('editing');
+      var states = Array.prototype.slice.call(stmap.querySelectorAll('g.state path'))
+        .map(function (p) { return { el: p, code: (p.getAttribute('class') || '').split(' ')[0] }; })
+        .filter(function (s) { return /^[a-z]{2}$/.test(s.code); });
+      var stTa = document.getElementById('fp-yaml-st');
+      var stCnt = document.getElementById('fp-cnt-st');
+      var stRefresh = function () {
+        var picked = states.filter(function (s) { return s.el.classList.contains('st-picked'); })
+          .map(function (s) { return s.code.toUpperCase(); }).sort();
+        stCnt.textContent = '(' + (window.fpParkStates.length + picked.length) + ' shaded)';
+        stTa.value = picked.length
+          ? 'extra:\n' + picked.map(function (c) { return '  - ' + c; }).join('\n')
+          : 'extra: []';
+      };
+      states.forEach(function (s) {
+        if (window.fpParkStates.indexOf(s.code) !== -1) { s.el.classList.add('st-locked'); return; }
+        if (window.fpExtraStates.indexOf(s.code) !== -1) s.el.classList.add('st-picked');
+        s.el.addEventListener('click', function () { s.el.classList.toggle('st-picked'); stRefresh(); });
+      });
+      stRefresh();
+    }
+
+    /* National parks: tick list generating travel.yml entries */
+    var npList = document.getElementById('fp-np-list');
+    if (npList && window.fpNPS) {
+      var npTa = document.getElementById('fp-yaml-np');
+      var npCnt = document.getElementById('fp-cnt-np');
+      var boxes = [];
+      window.fpNPS.forEach(function (park) {
+        var label = document.createElement('label');
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        var have = window.fpParks.indexOf(park.slug) !== -1;
+        cb.checked = have;
+        cb.disabled = have;
+        label.appendChild(cb);
+        label.appendChild(document.createTextNode(park.name.replace(' National Park', '')));
+        npList.appendChild(label);
+        boxes.push({ cb: cb, park: park, have: have });
+      });
+      var npRefresh = function () {
+        var picked = boxes.filter(function (b) { return b.cb.checked && !b.have; });
+        var total = boxes.filter(function (b) { return b.cb.checked; }).length;
+        npCnt.textContent = '(' + total + ' of ' + boxes.length + ')';
+        if (!picked.length) { npTa.value = ''; return; }
+        var lines = ['- section: National Parks', '  parks:'];
+        picked.forEach(function (b) {
+          lines.push('    - name: ' + b.park.name);
+          lines.push('      slug: ' + b.park.slug);
+          lines.push('      state: ' + (b.park.state.indexOf(',') !== -1 ? '"' + b.park.state + '"' : b.park.state));
+          lines.push('      visited: ');
+        });
+        npTa.value = lines.join('\n');
+      };
+      npList.addEventListener('change', npRefresh);
+      npRefresh();
+    }
+
+    /* copy buttons */
+    Array.prototype.slice.call(document.querySelectorAll('.fp-copy')).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var ta = document.getElementById(btn.getAttribute('data-for'));
+        ta.select();
+        if (navigator.clipboard) { navigator.clipboard.writeText(ta.value); }
+        else { document.execCommand('copy'); }
+      });
     });
   }
 

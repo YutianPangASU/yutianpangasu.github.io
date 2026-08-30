@@ -25,8 +25,11 @@ Previous custom single-page design: branch `custom-site`.
     national parks already exist; see `images/travel/README.md`). States on
     the US map shade automatically from each park's `state` field; states
     visited without a park entry go in `_data/visited_states.yml`.
-  - Driven Interstates: open `/footprint/?edit`, click routes on the highway
-    map, copy the generated list into `_data/highways.yml`.
+  - Everything is pickable at `/footprint/?edit`: click Interstates on the
+    highway map (paste into `_data/highways.yml`), click states on the state
+    map (paste into `_data/visited_states.yml`; park-derived states are
+    locked), and tick national parks in the panel checklist (paste the
+    generated entries into `_data/travel.yml`, then fill in visited dates).
 - Push to deploy: `git add -A && git commit -m "update" && git push`
   (live in ~1 minute).
 
