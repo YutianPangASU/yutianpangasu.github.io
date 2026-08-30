@@ -1,9 +1,31 @@
 # Extra states to shade on the /footprint/ map, for states you have set
 # foot in that have no park entry in _data/travel.yml. States from park
 # entries shade automatically; list additional ones here (full name or
-# postal abbreviation, matching _data/us_states.yml).
-extra: []
-# Example:
-# extra:
-#   - Ohio
-#   - NV
+# postal abbreviation, matching _data/us_states.yml). Pick by clicking
+# states at /footprint/?edit and paste the list here.
+extra:
+  - AZ
+  - CA
+  - CO
+  - FL
+  - GA
+  - IA
+  - ID
+  - IL
+  - IN
+  - KS
+  - MD
+  - MN
+  - MO
+  - MT
+  - ND
+  - NE
+  - NM
+  - NV
+  - OK
+  - OR
+  - SD
+  - TX
+  - UT
+  - VA
+  - WY
