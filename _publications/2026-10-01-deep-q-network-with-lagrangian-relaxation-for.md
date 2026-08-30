@@ -2,7 +2,7 @@
 title: "Deep Q-Network With Lagrangian Relaxation for Autonomous Aircraft Landing"
 collection: publications
 category: conferences
-area: safety-security
+area: tracon
 permalink: /publication/2026-10-01-deep-q-network-with-lagrangian-relaxation-for
 excerpt: "Deep Q-learning with Lagrangian relaxation for safe autonomous aircraft landing decisions."
 date: 2026-10-01

@@ -3,6 +3,7 @@ title: "Data-driven trajectory prediction with weather uncertainties: A Bayesian
 collection: publications
 category: manuscripts
 area: enroute
+representative: true
 permalink: /publication/2021-12-01-data-driven-trajectory-prediction-with-weather-uncertainties
 excerpt: "Among the first Bayesian deep-learning frameworks for aircraft trajectory prediction to treat convective weather as a first-class source of uncertainty; my most-cited work."
 date: 2021-12-01

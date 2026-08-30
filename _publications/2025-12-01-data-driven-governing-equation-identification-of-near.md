@@ -2,7 +2,7 @@
 title: "Data-driven governing equation identification of near terminal air traffic flow dynamics"
 collection: publications
 category: manuscripts
-area: terminal
+area: tracon
 permalink: /publication/2025-12-01-data-driven-governing-equation-identification-of-near
 excerpt: "Recovers interpretable governing equations of near-terminal air traffic flow dynamics directly from operational data."
 date: 2025-12-01

@@ -2,7 +2,8 @@
 title: "Decentralized graph-based multi-agent reinforcement learning using reward machines"
 collection: publications
 category: manuscripts
-area: optimization
+area: autonomy-logistics
+representative: true
 permalink: /publication/2023-10-01-decentralized-graph-based-multi-agent-reinforcement-learning
 excerpt: "Decentralized multi-agent reinforcement learning that exploits reward-machine structure over graphs for scalable coordination."
 date: 2023-10-01
@@ -20,3 +21,5 @@ bibtex: |
 ---
 
 Decentralized multi-agent reinforcement learning that exploits reward-machine structure over graphs for scalable coordination.
+
+**Representative publication** of this research line.

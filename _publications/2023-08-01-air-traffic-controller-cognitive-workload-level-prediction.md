@@ -3,6 +3,7 @@ title: "Air Traffic Controller Cognitive Workload Level Prediction using Conform
 collection: publications
 category: manuscripts
 area: enroute
+representative: true
 permalink: /publication/2023-08-01-air-traffic-controller-cognitive-workload-level-prediction
 excerpt: "Predicts controller cognitive workload in real time on dynamical airspace graphs, with conformal-prediction guarantees on the estimates."
 date: 2023-08-01

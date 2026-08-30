@@ -2,7 +2,7 @@
 title: "Optimal maintenance scheduling under uncertainties using Linear Programming-enhanced Reinforcement Learning"
 collection: publications
 category: manuscripts
-area: optimization
+area: reliability-ai
 permalink: /publication/2022-11-01-optimal-maintenance-scheduling-under-uncertainties-using-linear
 excerpt: "Couples linear programming with reinforcement learning to schedule maintenance actions under uncertainty."
 date: 2022-11-01

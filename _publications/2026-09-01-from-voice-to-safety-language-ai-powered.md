@@ -2,8 +2,8 @@
 title: "From Voice to Safety: Language AI Powered Pilot-ATC Communication Understanding for Airport Surface Movement Collision Risk Assessment"
 collection: publications
 category: manuscripts
-area: language-ai
-also_areas: [airport-ground]
+area: airport-ground
+representative: true
 permalink: /publication/2026-09-01-from-voice-to-safety-language-ai-powered
 excerpt: "Language AI that interprets pilot-ATC radio communication and fuses it with surveillance data to assess collision risk during airport surface movement."
 date: 2026-09-01

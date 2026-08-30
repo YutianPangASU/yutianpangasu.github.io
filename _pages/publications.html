@@ -11,51 +11,48 @@ author_profile: true
 
 {% include base_path %}
 
-<p>Published work is grouped by operational phase &mdash; from the airport surface through the terminal area to the en-route center &mdash; and then by research area. Each paper is listed under its primary area (a few that span two phases appear under both); newest first within each group. Manuscripts under review and unfinished working papers are listed separately at the end.</p>
+<p>My work follows the flight: the en-route airspace, the terminal maneuvering area (TRACON), and the airport surface, together with the safety, risk, and reliability threads running beneath all of it. Each area opens with representative publications; the rest of that area &mdash; published articles, manuscripts under review, working papers, conference papers, and patents together &mdash; sits behind the expander below them, newest first. Click any title for the paper page with figures and BibTeX.</p>
 
-{% if site.publication_area %}
-  {% for area in site.publication_area %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category == 'underreview' or post.category == 'workingpapers' %}
-        {% continue %}
-      {% endif %}
-      {% unless post.area == area[0] or post.also_areas contains area[0] %}
-        {% continue %}
-      {% endunless %}
-      {% unless title_shown %}
-        <h2>{{ area[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
+{% for area in site.publication_area %}
+  {% assign area_posts = "" | split: "" %}
+  {% for post in site.publications reversed %}
+    {% if post.area == area[0] %}
+      {% assign area_posts = area_posts | push: post %}
+    {% endif %}
+  {% endfor %}
+  {% if area_posts.size == 0 %}{% continue %}{% endif %}
+
+  <h2>{{ area[1].title }}</h2><hr />
+  {% if area[1].description %}
+    <p class="archive__area-description">{{ area[1].description }}</p>
+  {% endif %}
+
+  {% for post in area_posts %}
+    {% if post.representative %}
       {% include archive-single.html %}
-    {% endfor %}
+    {% endif %}
   {% endfor %}
 
-  {% assign title_shown = false %}
-  {% for post in site.publications reversed %}
-    {% if post.category != 'underreview' %}
-      {% continue %}
-    {% endif %}
-    {% unless title_shown %}
-      <h2>Under Review</h2><hr />
-      {% assign title_shown = true %}
-    {% endunless %}
-    {% include archive-single.html %}
-  {% endfor %}
-
-  {% assign title_shown = false %}
-  {% for post in site.publications reversed %}
-    {% if post.category != 'workingpapers' %}
-      {% continue %}
-    {% endif %}
-    {% unless title_shown %}
-      <h2>Working Papers</h2><hr />
-      {% assign title_shown = true %}
-    {% endunless %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
+  {% assign rest = area_posts | where_exp: "item", "item.representative != true" %}
+  {% if rest.size > 0 %}
+    <details class="area-more">
+      <summary>All work in this area ({{ rest.size }} more)</summary>
+      <ul>
+        {% for post in rest %}
+          <li>
+            <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>.
+            {% if post.category == 'workingpapers' %}
+              Working paper, in preparation.
+            {% elsif post.category == 'underreview' %}
+              {{ post.venue }}.
+            {% elsif post.category == 'patents' %}
+              {{ post.venue }}, {{ post.date | default: "1900-01-01" | date: "%Y" }}.
+            {% else %}
+              <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}.
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </details>
+  {% endif %}
+{% endfor %}

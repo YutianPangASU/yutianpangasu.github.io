@@ -2,7 +2,7 @@
 title: "Evaluating the Robustness of Bayesian Neural Networks Against Different Types of Attacks"
 collection: publications
 category: conferences
-area: safety-security
+area: reliability-ai
 permalink: /publication/2021-12-01-evaluating-the-robustness-of-bayesian-neural-networks
 excerpt: "Evaluates how Bayesian neural networks hold up against different classes of adversarial attacks."
 date: 2021-12-01

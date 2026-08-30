@@ -2,7 +2,7 @@
 title: "Geometric Trajectory Optimization for TRACON Arrivals: An NLP Approach with ATC Vectoring Maneuver Modeling"
 collection: publications
 category: conferences
-area: terminal
+area: tracon
 permalink: /publication/2026-11-01-geometric-trajectory-optimization-for-tracon-arrivals-an
 excerpt: "A nonlinear-programming formulation of TRACON arrival optimization that models controller vectoring maneuvers geometrically."
 date: 2026-11-01

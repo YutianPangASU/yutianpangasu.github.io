@@ -297,3 +297,32 @@
     }
   }
 }
+
+/*
+   Publications page: research-area descriptions and per-area expanders
+   ========================================================================== */
+
+.archive__area-description {
+  margin: 0.25em 0 1em;
+  font-size: $type-size-6;
+  color: var(--global-text-color-light);
+}
+
+details.area-more {
+  margin: 0.5em 0 2em;
+
+  summary {
+    cursor: pointer;
+    font-size: $type-size-6;
+    color: var(--global-link-color);
+  }
+
+  ul {
+    margin: 0.5em 0 0;
+    font-size: $type-size-6;
+
+    li {
+      margin-bottom: 0.5em;
+    }
+  }
+}

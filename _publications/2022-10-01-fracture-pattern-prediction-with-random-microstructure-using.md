@@ -2,7 +2,7 @@
 title: "Fracture Pattern Prediction with Random Microstructure using Physics-Informed Deep Neural Networks"
 collection: publications
 category: manuscripts
-area: risk-reliability
+area: reliability-ai
 permalink: /publication/2022-10-01-fracture-pattern-prediction-with-random-microstructure-using
 excerpt: "Physics-informed deep networks that predict fracture patterns across random material microstructures."
 date: 2022-10-01

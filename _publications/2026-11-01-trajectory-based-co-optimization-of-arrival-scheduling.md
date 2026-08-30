@@ -2,18 +2,19 @@
 title: "Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area"
 collection: publications
 category: underreview
-area: terminal
+area: tracon
+representative: true
 permalink: /publication/2026-11-01-trajectory-based-co-optimization-of-arrival-scheduling
 excerpt: "Jointly optimizes arrival sequencing and descent-path geometry in the terminal maneuvering area from recorded trajectory data."
 date: 2026-11-01
-venue: "To be submitted to AIAA Journal"
+venue: "Under review at Aerospace Science and Technology"
 arxiv: "https://arxiv.org/abs/2608.22480"
-citation: "<b>Pang, Y.</b>* & Clarke, J. (2026). “Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area.” <i>AIAA Journal</i>."
+citation: "<b>Pang, Y.</b>* & Clarke, J. (2026). “Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area.” <i>Aerospace Science and Technology</i>."
 bibtex: |
   @unpublished{pang2026trajectoryb,
     title = {Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area},
     author = {Pang, Y. and Clarke, J.},
-    note = {To be submitted to AIAA Journal},
+    note = {Under review at Aerospace Science and Technology},
     year = {2026}
   }
 header:
@@ -69,3 +70,5 @@ Jointly optimizes arrival sequencing and descent-path geometry in the terminal m
 </figure>
 
 \* Corresponding author.
+
+**Representative publication** of this research line.

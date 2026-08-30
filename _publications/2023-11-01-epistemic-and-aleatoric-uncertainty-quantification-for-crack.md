@@ -2,7 +2,8 @@
 title: "Epistemic and aleatoric uncertainty quantification for crack detection using a Bayesian Boundary Aware Convolutional Network"
 collection: publications
 category: manuscripts
-area: computer-vision
+area: reliability-ai
+representative: true
 permalink: /publication/2023-11-01-epistemic-and-aleatoric-uncertainty-quantification-for-crack
 excerpt: "Separates epistemic from aleatoric uncertainty in neural-network crack detection, enabling risk-aware structural inspection."
 date: 2023-11-01
@@ -20,3 +21,5 @@ bibtex: |
 ---
 
 Separates epistemic from aleatoric uncertainty in neural-network crack detection, enabling risk-aware structural inspection.
+
+**Representative publication** of this research line.

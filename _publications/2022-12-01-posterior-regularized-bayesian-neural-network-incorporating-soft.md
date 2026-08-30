@@ -2,7 +2,8 @@
 title: "Posterior Regularized Bayesian Neural Network Incorporating Soft and Hard Knowledge Constraints"
 collection: publications
 category: manuscripts
-area: risk-reliability
+area: reliability-ai
+representative: true
 permalink: /publication/2022-12-01-posterior-regularized-bayesian-neural-network-incorporating-soft
 excerpt: "Injects soft and hard domain-knowledge constraints into Bayesian neural networks through posterior regularization."
 date: 2022-12-01
@@ -21,3 +22,5 @@ bibtex: |
 ---
 
 Injects soft and hard domain-knowledge constraints into Bayesian neural networks through posterior regularization.
+
+**Representative publication** of this research line.

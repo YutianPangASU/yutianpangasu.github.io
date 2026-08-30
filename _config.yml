@@ -99,22 +99,24 @@ publication_category:
 
 # Research-area grouping used on the Publications page; order here is display order
 publication_area:
+  enroute:
+    title: 'En-Route Operations'
+    description: 'In the en-route phase, I study how convective weather and other uncertainties impact flights and traffic flow: probabilistic aircraft trajectory prediction under weather uncertainty, air traffic state and density prediction, dynamic airspace sectorization, and controller cognitive workload.'
+  tracon:
+    title: 'TRACON Automation'
+    description: 'In the terminal maneuvering area, I build automation for arrival operations: trajectory-based co-optimization of arrival scheduling and descent design, fuel-optimal descent procedures under wind uncertainty, multi-aircraft and procedure-aware trajectory prediction, and machine-learning-enhanced landing scheduling.'
   airport-ground:
     title: 'Airport & Ground Operations'
-  terminal:
-    title: 'Near-Terminal Automation'
-  enroute:
-    title: 'En-Route & Center-Level Decision Support'
-  language-ai:
-    title: 'Language AI for Aviation'
-  computer-vision:
-    title: 'Computer Vision'
-  optimization:
-    title: 'Optimization & Logistics'
-  safety-security:
-    title: 'Safety & Security'
-  risk-reliability:
-    title: 'Risk & Reliability'
+    description: 'On the airport surface, I turn pilot and controller voice communication and surveillance data into safety and efficiency tools: surface-movement collision risk assessment, real-time runway incursion alerting, and runway and taxiway exit prediction for landing aircraft.'
+  safety-risk:
+    title: 'Aviation Safety & Risk'
+    description: 'Across phases of flight, I quantify how communication, human, and autonomy uncertainties translate into operational risk: runway capacity impacts, the reliability of remotely piloted aircraft, collision avoidance and its capacity limits, and explainable risk analysis from safety reports.'
+  reliability-ai:
+    title: 'Reliability & Trustworthy AI'
+    description: 'Beneath the applications sits methodological work on trustworthy machine learning and reliability engineering: Bayesian uncertainty quantification, physics-informed learning, adversarial robustness, and maintenance scheduling under uncertainty.'
+  autonomy-logistics:
+    title: 'Autonomy & Logistics'
+    description: 'The same optimization and learning tools carry beyond crewed aviation: last-mile and same-day delivery routing, UAV package delivery aerodynamics, and multi-agent reinforcement learning for decentralized decision-making.'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews

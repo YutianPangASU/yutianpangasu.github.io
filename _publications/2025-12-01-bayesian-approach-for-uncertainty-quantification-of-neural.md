@@ -2,7 +2,7 @@
 title: "Bayesian Approach for Uncertainty Quantification of Neural Networks-Based Crack Diagnostics"
 collection: publications
 category: conferences
-area: computer-vision
+area: reliability-ai
 permalink: /publication/2025-12-01-bayesian-approach-for-uncertainty-quantification-of-neural
 excerpt: "Bayesian uncertainty quantification for neural-network-based structural crack diagnostics."
 date: 2025-12-01

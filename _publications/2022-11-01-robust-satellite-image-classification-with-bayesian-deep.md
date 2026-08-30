@@ -2,7 +2,7 @@
 title: "Robust Satellite Image Classification with Bayesian Deep Learning"
 collection: publications
 category: conferences
-area: computer-vision
+area: reliability-ai
 permalink: /publication/2022-11-01-robust-satellite-image-classification-with-bayesian-deep
 excerpt: "Bayesian deep learning for satellite image classification that stays robust under distribution shift."
 date: 2022-11-01

@@ -2,7 +2,8 @@
 title: "Bayesian Spatio-Temporal Graph Transformer Network (B-STAR) for Multi-Aircraft Trajectory Prediction"
 collection: publications
 category: manuscripts
-area: terminal
+area: tracon
+representative: true
 permalink: /publication/2022-09-01-bayesian-spatio-temporal-graph-transformer-network-b
 excerpt: "A Bayesian spatio-temporal graph transformer that predicts the trajectories of many interacting aircraft jointly, with quantified uncertainty."
 date: 2022-09-01

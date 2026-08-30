@@ -2,7 +2,7 @@
 title: "A Voice Communication-Augmented Simulation Framework for Aircraft Trajectory Simulation"
 collection: publications
 category: manuscripts
-area: language-ai
+area: safety-risk
 permalink: /publication/2021-10-01-a-voice-communication-augmented-simulation-framework-for
 excerpt: "A simulation framework that injects realistic pilot-controller voice communication into aircraft trajectory modeling."
 date: 2021-10-01

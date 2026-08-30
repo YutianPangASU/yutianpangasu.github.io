@@ -2,17 +2,17 @@
 title: "A Probabilistic Runway Occupancy Conflict Alerting Framework for Real-Time Runway Incursion Detection from ATC Speech and ADS-B"
 collection: publications
 category: underreview
-area: language-ai
+area: airport-ground
 permalink: /publication/2026-08-01-a-probabilistic-runway-occupancy-conflict-alerting-framework
 excerpt: "Real-time runway-incursion alerting that fuses ATC speech understanding with ADS-B surveillance into probabilistic runway-occupancy conflicts."
 date: 2026-08-01
-venue: "Under review at Journal of Air Transport Management"
-citation: "<b>Pang, Y.</b>*, Dong, Z., & Clarke, J. (2026). “A Probabilistic Runway Occupancy Conflict Alerting Framework for Real-Time Runway Incursion Detection from ATC Speech and ADS-B.” <i>Journal of Air Transport Management</i>."
+venue: "Under review at AIAA Journal of Aerospace Information Systems"
+citation: "Dong, Z., <b>Pang, Y.</b>*, & Clarke, J. (2026). “A Probabilistic Runway Occupancy Conflict Alerting Framework for Real-Time Runway Incursion Detection from ATC Speech and ADS-B.” <i>AIAA Journal of Aerospace Information Systems</i>."
 bibtex: |
-  @unpublished{pang2026probabilistic,
+  @unpublished{dong2026probabilistic,
     title = {A Probabilistic Runway Occupancy Conflict Alerting Framework for Real-Time Runway Incursion Detection from ATC Speech and ADS-B},
-    author = {Pang, Y. and Dong, Z. and Clarke, J.},
-    note = {Under review at Journal of Air Transport Management},
+    author = {Dong, Z. and Pang, Y. and Clarke, J.},
+    note = {Under review at AIAA Journal of Aerospace Information Systems},
     year = {2026}
   }
 header:
