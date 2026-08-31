@@ -54,8 +54,8 @@ author_profile: true
   .fp-map .separator1 { stroke: var(--global-border-color, #b0b0b0); stroke-width: 2; fill: none; }
   .fp-map .dccircle { display: none; }
   .fp-map.editing g.state path { fill: var(--global-thead-color, #dcdcdc); cursor: pointer; }
-  .fp-map.editing g.state path:hover { fill: #7fb598; }
-  .fp-map.editing g.state path.st-picked, .fp-map.editing g.state path.st-locked { fill: #2e8b57; }
+  .fp-map.editing g.state path:hover { fill: #5cb57e; }
+  .fp-map.editing g.state path.st-picked, .fp-map.editing g.state path.st-locked { fill: #8fd19e; }
   .fp-map.editing g.state path.st-locked { cursor: default; }
 
   .fp-hwmap .hw-states { fill: none; stroke: var(--global-text-color-light, #888); stroke-opacity: 0.3; stroke-width: 1; }
@@ -108,7 +108,7 @@ author_profile: true
 
 {% if visited_codes != empty %}
 <style>
-  {% for code in visited_codes %}.fp-map .{{ code }}{% unless forloop.last %}, {% endunless %}{% endfor %} { fill: #2e8b57; }
+  {% for code in visited_codes %}.fp-map .{{ code }}{% unless forloop.last %}, {% endunless %}{% endfor %} { fill: #8fd19e; }
 </style>
 {% endif %}
 
@@ -121,7 +121,7 @@ author_profile: true
 <p class="fp-intro">I enjoy road trips and have driven more than 100,000 miles across the United States. This page follows those miles: the states I have set foot in, the Interstates I have driven, and the national and state parks I have visited, with photos from each stop. One glance at the map tells me New England is overdue for a road trip.</p>
 
 {% include us-map.html %}
-<p class="fp-caption"><span class="fp-swatch" style="background:#2e8b57;"></span>States I have set foot in</p>
+<p class="fp-caption"><span class="fp-swatch" style="background:#8fd19e;"></span>States I have set foot in</p>
 
 {% include us-highways.html %}
 <p class="fp-caption"><span class="fp-swatch" style="background:#1f6cb5;"></span>Interstates I have driven &middot; hover a route for its number</p>
