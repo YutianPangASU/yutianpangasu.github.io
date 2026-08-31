@@ -3,6 +3,7 @@ permalink: /
 title: "About me"
 seo_title: "Yutian Pang Homepage"
 author_profile: true
+body_class: has-wallpaper
 redirect_from: 
   - /about/
   - /about.html
@@ -51,3 +52,10 @@ News
 Visitors
 ======
 {% include visitor-map.html %}
+
+<div class="wallpaper-backdrop" aria-hidden="true">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
