@@ -10,6 +10,7 @@ venue: "Annual Modeling and Simulation Conference 2026"
 arxiv: "https://arxiv.org/abs/2604.18454"
 authors: "<b>Pang, Y.</b>, Delahaye, D., & Clarke, J."
 author_rank: 1
+pin: 3
 citation: "<b>Pang, Y.</b>, Delahaye, D., & Clarke, J. (2026). “Geometric Trajectory Optimization for TRACON Arrivals: An NLP Approach with ATC Vectoring Maneuver Modeling.” <i>Annual Modeling and Simulation Conference 2026</i>."
 bibtex: |
   @inproceedings{pang2026geometric,

@@ -10,6 +10,7 @@ venue: "Under review at Transportation Research Part C"
 arxiv: "https://arxiv.org/abs/2604.17776"
 authors: "<b>Pang, Y.</b>*, Delahaye, D., & Clarke, J."
 author_rank: 1
+pin: 2
 citation: "<b>Pang, Y.</b>*, Delahaye, D., & Clarke, J. (2026). “Trajectory-Based Optimization for Air Traffic Control in the Terminal Maneuvering Area.” <i>Transportation Research Part C</i>."
 bibtex: |
   @unpublished{pang2026trajectory,
