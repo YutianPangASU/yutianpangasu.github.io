@@ -16,6 +16,8 @@ Alongside academia, I have **industry experience**. I worked full-time at Thales
 
 I am always open to collaborations and research opportunities. Please reach me at **yutian DOT pang AT outlook DOT com.**
 
+<img src="/images/overview-web.webp" alt="Overview of my research expertise: air transportation, air traffic control, advanced air mobility, and advanced aerial operations, addressed with complementary data-driven and model-driven methods combined into hybrid methods, and a path from a NASA-sponsored Ph.D. at ASU through Thales and a UT Austin postdoc to startup products, delivering deployment-ready solutions." style="width: 100%; border-radius: 6px;" />
+
 Research areas
 ======
 * **Decision-making and optimization under uncertainty** — *what should we do?* Allocating scarce resources such as runways, airspace, and vehicle fleets, and designing schedules and trajectories, when demand, weather, and human behavior are only known probabilistically, from strategic planning down to real-time control.
