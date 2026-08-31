@@ -3,6 +3,7 @@ layout: archive
 title: "CV"
 permalink: /cv/
 author_profile: true
+wallpaper: /images/wallpapers/wall3-bg.webp
 redirect_from:
   - /resume
 ---

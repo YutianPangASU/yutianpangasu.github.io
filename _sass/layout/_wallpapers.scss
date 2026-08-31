@@ -1,5 +1,7 @@
 /* ==========================================================================
-   HOMEPAGE WALLPAPER BACKDROP
+   PER-PAGE WALLPAPER BACKDROP
+   One faded background image per page, set via `wallpaper:` in the page
+   front matter and rendered by _layouts/default.html.
    ========================================================================== */
 
 /* let the backdrop show through: the canvas color still comes from html */
@@ -14,26 +16,15 @@ body.has-wallpaper {
   bottom: 0;
   left: 0;
   z-index: -1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.16;
   pointer-events: none;
-
-  div {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.16;
-  }
-
-  div:nth-child(1) { background-image: url("/images/wallpapers/wall1-bg.webp"); }
-  div:nth-child(2) { background-image: url("/images/wallpapers/wall2-bg.webp"); }
-  div:nth-child(3) { background-image: url("/images/wallpapers/wall3-bg.webp"); }
-  div:nth-child(4) { background-image: url("/images/wallpapers/wall4-bg.webp"); }
 }
 
-/* fade the images further in dark mode so text stays readable */
-html[data-theme="dark"] .wallpaper-backdrop div {
+/* fade the image further in dark mode so text stays readable */
+html[data-theme="dark"] .wallpaper-backdrop {
   opacity: 0.12;
 }
 

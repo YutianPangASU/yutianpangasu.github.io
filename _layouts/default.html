@@ -11,7 +11,9 @@ layout: compress
     {% include head/custom.html %}
   </head>
 
-  <body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
+  <body{% if page.wallpaper %} class="has-wallpaper"{% endif %}>
+
+    {% if page.wallpaper %}<div class="wallpaper-backdrop" style="background-image: url('{{ page.wallpaper }}');" aria-hidden="true"></div>{% endif %}
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
