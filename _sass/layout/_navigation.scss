@@ -180,7 +180,8 @@
   a {
     display: block;
     margin: 0 1rem;
-    padding: 0.5rem 0;
+    /* 0.58em per side keeps the bar at ~1.77x the 1.5 line height of the nav text */
+    padding: 0.58em 0;
     color: var(--global-masthead-link-color);
     text-decoration: none;
 

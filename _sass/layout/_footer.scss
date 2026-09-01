@@ -31,9 +31,9 @@
     @include clearfix;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1em;
+    margin-top: 0;
     max-width: 100%;
-    padding: 0 1em 1em;
+    padding: 0 1em;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
@@ -68,6 +68,8 @@
 .page__footer-copyright {
   font-family: $global-font-family;
   font-size: $type-size-7;
+  /* 0.58em per side keeps the bar at ~1.77x the 1.5 line height of the copyright text */
+  padding: 0.58em 0;
 }
 
 .page__footer-follow {
