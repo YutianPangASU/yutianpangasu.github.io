@@ -68,8 +68,8 @@
 .page__footer-copyright {
   font-family: $global-font-family;
   font-size: $type-size-7;
-  /* 0.58em per side keeps the bar at ~1.77x the 1.5 line height of the copyright text */
-  padding: 0.58em 0;
+  /* bar hugs the copyright line: barely taller than the text itself */
+  padding: 0.1em 0;
 }
 
 .page__footer-follow {

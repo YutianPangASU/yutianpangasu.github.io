@@ -21,6 +21,7 @@ body.has-wallpaper {
   background-repeat: no-repeat;
   opacity: 0.16;
   pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 /* fade the image further in dark mode so text stays readable */
@@ -28,8 +29,48 @@ html[data-theme="dark"] .wallpaper-backdrop {
   opacity: 0.12;
 }
 
+/* view mode: raise the backdrop above everything at full strength;
+   must come after the dark-mode rule to win the specificity tie */
+body.wallpaper-view .wallpaper-backdrop {
+  z-index: 30;
+  opacity: 1;
+  background-color: var(--global-bg-color);
+  pointer-events: auto; /* click the image to exit view mode */
+  cursor: zoom-out;
+}
+
+/* small fixed toggle, kept above the backdrop in view mode */
+.wallpaper-toggle {
+  position: fixed;
+  right: 1em;
+  bottom: 2em; /* clears the fixed footer bar */
+  z-index: 31;
+  padding: 0.3em 0.8em;
+  border: 1px solid var(--global-border-color);
+  border-radius: 2em;
+  background: var(--global-bg-color);
+  color: var(--global-text-color-light);
+  font-family: $sans-serif-narrow;
+  font-size: $type-size-7;
+  cursor: pointer;
+  opacity: 0.85;
+
+  &:hover {
+    opacity: 1;
+    color: var(--global-text-color);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* footer is not fixed on mobile, so the button can sit at the edge */
+  .wallpaper-toggle {
+    bottom: 1em;
+  }
+}
+
 @media print {
-  .wallpaper-backdrop {
+  .wallpaper-backdrop,
+  .wallpaper-toggle {
     display: none;
   }
 }

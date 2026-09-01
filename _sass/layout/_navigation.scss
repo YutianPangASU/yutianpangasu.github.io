@@ -180,8 +180,8 @@
   a {
     display: block;
     margin: 0 1rem;
-    /* 0.58em per side keeps the bar at ~1.77x the 1.5 line height of the nav text */
-    padding: 0.58em 0;
+    /* slim bar: just enough breathing room around the 1.5 line height of the nav text */
+    padding: 0.25em 0;
     color: var(--global-masthead-link-color);
     text-decoration: none;
 
@@ -192,7 +192,7 @@
 
   button {
     position: absolute;
-    height: 2.5rem;
+    height: 100%;
     right: 0;
     padding: 0 0.5rem;
     border: 0;
