@@ -13,28 +13,7 @@ layout: compress
 
   <body{% if page.wallpaper %} class="has-wallpaper"{% endif %}>
 
-    {% if page.wallpaper %}
-    <div class="wallpaper-backdrop" style="background-image: url('{{ page.wallpaper }}');" aria-hidden="true"></div>
-    <button id="wallpaper-toggle" class="wallpaper-toggle" aria-pressed="false">View Wallpaper</button>
-    <script>
-      (function() {
-        var toggle = document.getElementById('wallpaper-toggle');
-        var backdrop = document.querySelector('.wallpaper-backdrop');
-        function setView(on) {
-          document.body.classList.toggle('wallpaper-view', on);
-          toggle.setAttribute('aria-pressed', String(on));
-          toggle.textContent = on ? 'Hide Wallpaper' : 'View Wallpaper';
-        }
-        toggle.addEventListener('click', function() {
-          setView(!document.body.classList.contains('wallpaper-view'));
-        });
-        backdrop.addEventListener('click', function() { setView(false); });
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape') { setView(false); }
-        });
-      })();
-    </script>
-    {% endif %}
+    {% if page.wallpaper %}<div class="wallpaper-backdrop" style="background-image: url('{{ page.wallpaper }}');" aria-hidden="true"></div>{% endif %}
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
