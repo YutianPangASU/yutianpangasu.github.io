@@ -19,11 +19,6 @@ Alongside academia, I have **industry experience**. I worked full-time at Thales
 
 I am always open to collaborations and research opportunities. Please reach me at **yutian DOT pang AT outlook DOT com.**
 
-<blockquote class="epigraph" lang="zh-Hans">
-  <p>夫抱火厝之积薪之下，而寝其上，火未及燃，因谓之安，偷安者也。</p>
-  <footer>——贾谊</footer>
-</blockquote>
-
 Research areas
 ======
 * **Decision-making and optimization under uncertainty** — *what should we do?* Allocating scarce resources such as runways, airspace, and vehicle fleets, and designing schedules and trajectories, when demand, weather, and human behavior are only known probabilistically, from strategic planning down to real-time control.

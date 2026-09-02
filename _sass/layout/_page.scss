@@ -469,26 +469,3 @@
   font-size: $type-size-6;
   color: var(--global-link-color);
 }
-
-/* epigraph quotation on the homepage */
-.page__content .epigraph {
-  margin: 2em 0;
-  padding: 0.25em 1em;
-  border-left: 0.25em solid var(--global-border-color);
-  font-style: normal;
-  font-family: Georgia, "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun", serif;
-  color: var(--global-text-color);
-
-  p {
-    margin: 0 0 0.4em;
-    font-size: 1.1em;
-    line-height: 1.8;
-    letter-spacing: 0.03em;
-  }
-
-  footer {
-    font-size: $type-size-6;
-    text-align: right;
-    opacity: 0.8;
-  }
-}
