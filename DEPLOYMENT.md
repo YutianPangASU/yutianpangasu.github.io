@@ -33,6 +33,44 @@ Previous custom single-page design: branch `custom-site`.
 - Push to deploy: `git add -A && git commit -m "update" && git push`
   (live in ~1 minute).
 
+## Contact form (`/contact/`)
+
+Visitors write a message (name, email, topic, text) on the Contact tab
+(`_pages/contact.html`). The page POSTs it to the visitor worker
+(`worker/visitor-worker.js`, endpoint `/contact`), which stores it in D1 and
+emails it to you through Resend with Reply-To set to the sender, so replying
+from Outlook goes straight back to them. Subjects look like
+`[Website] [Code request] Jane Doe`, handy for an Outlook rule.
+
+Private inbox with every message and a "mark handled" toggle:
+`<worker-url>/inbox` (same admin key/cookie as the visit log; also linked from
+the visit log header). Messages are kept there even if the email fails to send.
+
+One-time setup (worker → Settings → Variables and Secrets):
+
+1. https://resend.com account (created 2026-09-03 with `yutian.pang@outlook.com`)
+   → API Keys. Add the key as secret `RESEND_API_KEY`.
+2. Add variable `CONTACT_TO` = `yutian.pang@outlook.com`. It must be the
+   Resend account's own address: the default sender `onboarding@resend.dev`
+   delivers only there (a UT address would be rejected until the domain is
+   verified, see below). No DNS change is required for this.
+3. Paste the current `worker/visitor-worker.js` into the worker and Deploy.
+4. Test: open https://yutianpang.com/contact/, send yourself a message, check
+   Outlook (and spam) and `<worker-url>/inbox`.
+
+Optional later:
+
+- **Send from your own domain** (nicer sender, lets `CONTACT_TO` be any
+  address such as the UT one, and needed before the worker could ever email
+  visitors): Resend → Domains → Add `yutianpang.com`, add the TXT records it
+  lists at GoDaddy, then set variable `MAIL_FROM` to
+  `yutianpang.com <contact@yutianpang.com>`.
+- **Captcha** if spam gets through the honeypot and rate limits (5 per IP per
+  hour, 100 per day): Cloudflare → Turnstile → Add widget (hostname
+  `yutianpang.com`, Managed). Put the secret key in the worker as
+  `TURNSTILE_SECRET` and the site key in `_config.yml` under
+  `contact.turnstile_site_key`, then push.
+
 ## Analytics (Google Analytics 4)
 
 Create a GA4 property for https://yutianpang.com at
