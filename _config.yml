@@ -143,7 +143,7 @@ publication_area:
       - 'Adversarial robustness of Bayesian neural networks'
       - 'Maintenance scheduling under uncertainty'
 
-# Contact form (/contact/). Messages go to the Cloudflare worker in
+# Reach-out panel (_includes/contact-panel.html, opens via #contact). Messages go to the Cloudflare worker in
 # worker/visitor-worker.js (POST /contact), which emails them and keeps a copy
 # at <api>/inbox. Set turnstile_site_key once a Turnstile widget exists for
 # yutianpang.com (Cloudflare dashboard → Turnstile); empty = no captcha.

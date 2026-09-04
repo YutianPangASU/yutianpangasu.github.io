@@ -33,14 +33,21 @@ Previous custom single-page design: branch `custom-site`.
 - Push to deploy: `git add -A && git commit -m "update" && git push`
   (live in ~1 minute).
 
-## Contact form (`/contact/`)
+## Reach-out panel (message form)
 
-Visitors write a message (name, email, topic, text) on the Contact tab
-(`_pages/contact.html`). The page POSTs it to the visitor worker
-(`worker/visitor-worker.js`, endpoint `/contact`), which stores it in D1 and
-emails it to you through Resend with Reply-To set to the sender, so replying
-from Outlook goes straight back to them. Subjects look like
-`[Website] [Code request] Jane Doe`, handy for an Outlook rule.
+A folded "Reach out" tab sits on the right edge of every page
+(`_includes/contact-panel.html`, included from `_layouts/default.html`).
+Clicking it slides out a panel with name, email, a category (meeting
+request, code request, other) and a message. Any link to `#contact`,
+`#contact-code` or `#contact-meeting` also opens it with that category
+preselected (the Software tab's "reach out" link does this), and
+`/contact/` redirects to the homepage with the panel open. The panel POSTs
+to the visitor worker (`worker/visitor-worker.js`, endpoint `/contact`),
+which stores the message in D1 and emails it to you through Resend with
+Reply-To set to the sender, so replying from Outlook goes straight back to
+them. Subjects look like `[Website] [Code request] Jane Doe`, handy for an
+Outlook rule. To change the categories, edit the `<select>` and `hints` in
+the include and the `TOPICS` table in the worker (then re-paste the worker).
 
 Private inbox with every message and a "mark handled" toggle:
 `<worker-url>/inbox` (same admin key/cookie as the visit log; also linked from
@@ -55,7 +62,7 @@ One-time setup (worker → Settings → Variables and Secrets):
    delivers only there (a UT address would be rejected until the domain is
    verified, see below). No DNS change is required for this.
 3. Paste the current `worker/visitor-worker.js` into the worker and Deploy.
-4. Test: open https://yutianpang.com/contact/, send yourself a message, check
+4. Test: open https://yutianpang.com/#contact, send yourself a message, check
    Outlook (and spam) and `<worker-url>/inbox`.
 
 Optional later:

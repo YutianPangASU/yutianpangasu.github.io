@@ -15,9 +15,11 @@
  *                   A correct key sets a year-long cookie, after which plain
  *                   /admin opens directly in that browser; without key or
  *                   cookie the page shows a key prompt.
- *   POST /contact — receives messages from the site's Contact page (/contact/)
- *                   as JSON {name, email, topic, message}. Each message is
- *                   stored in D1 and emailed to CONTACT_TO through Resend with
+ *   POST /contact — receives messages from the site's reach-out panel
+ *                   (_includes/contact-panel.html) as JSON {name, email,
+ *                   topic, message}; topic is one of the TOPICS keys below.
+ *                   Each message is stored in D1 and emailed to CONTACT_TO
+ *                   through Resend with
  *                   Reply-To set to the sender, so replying from Outlook goes
  *                   straight back to them. Spam defences: a honeypot field, at
  *                   most 5 messages per IP per hour, at most 100 per day in
@@ -112,9 +114,9 @@ const BOT_RE = /bot|crawl|spider|slurp|preview|curl|wget|python|httpx|monitor|pi
 // Contact-form topics; the key is what the page sends, the value is the label
 // used in email subjects and the inbox.
 const TOPICS = {
+  meeting: "Meeting request",
   code: "Code request",
-  collaboration: "Collaboration",
-  other: "General",
+  other: "Other",
 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_PER_IP_PER_HOUR = 5;
@@ -306,11 +308,11 @@ h2{margin-bottom:.25rem}.nav{color:#6b7a8a;margin-bottom:1.5rem}
 .msg header form{margin:0 0 0 auto}.msg header button{padding:2px 10px;font-size:12px}
 .meta{color:#6b7a8a;font-size:12px;flex-basis:100%}
 .tag{font-size:11px;padding:1px 8px;border-radius:10px;background:#edf3f7;color:#3b4b5c;text-transform:uppercase;letter-spacing:.03em}
-.t-code{background:#e3f2fd;color:#0d47a1}.t-collaboration{background:#e8f5e9;color:#1b5e20}
+.t-meeting{background:#e8f5e9;color:#1b5e20}.t-code{background:#e3f2fd;color:#0d47a1}
 pre{white-space:pre-wrap;word-wrap:break-word;font:inherit;margin:.75rem 0 0;padding-top:.75rem;border-top:1px solid #eef1f4}
 </style>
 <h2>Inbox — ${results.length} message${results.length === 1 ? "" : "s"}, ${open} open</h2>
-<div class="nav">${filters} · <a href="/admin">Visitor log</a> · <a href="https://yutianpang.com/contact/">Contact page</a></div>
+<div class="nav">${filters} · <a href="/admin">Visitor log</a> · <a href="https://yutianpang.com/#contact">Reach-out panel</a></div>
 ${cards || "<p>No messages yet.</p>"}`;
 }
 

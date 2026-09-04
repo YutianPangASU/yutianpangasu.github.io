@@ -1,0 +1,205 @@
+<!-- Reach-out panel: a folded tab on the right edge of every page that slides
+     out a message form. Posts to the Cloudflare worker (worker/visitor-worker.js,
+     POST /contact); settings live under `contact:` in _config.yml. Opens from
+     the tab, from any link to #contact (or #contact-code / #contact-meeting to
+     preselect a category), or when the page loads with that hash. -->
+<style>
+  #contact-panel {
+    position: fixed; top: 0; right: 0; height: 100vh; width: 23rem; max-width: 100vw;
+    box-sizing: border-box; z-index: 15;
+    padding: calc(38px + 1.75em) 1.5em 2em;
+    overflow-y: auto; scrollbar-width: thin;
+    background: var(--global-bg-color); color: var(--global-text-color);
+    border-left: 1px solid var(--global-border-color);
+    box-shadow: -4px 0 18px rgba(0, 0, 0, 0.12);
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+  }
+  #contact-panel.open { transform: translateX(0); }
+  @media (prefers-reduced-motion: reduce) { #contact-panel { transition: none; } }
+
+  #contact-tab {
+    position: absolute; left: -2.4rem; top: 38%; width: 2.4rem;
+    padding: 0.9em 0; margin: 0; border: 0; cursor: pointer;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font: 600 0.8em/1 sans-serif; letter-spacing: 0.06em; text-transform: uppercase;
+    color: #fff; background: var(--global-base-color);
+    border-radius: 0 6px 6px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  #contact-tab i { display: inline-block; transform: rotate(90deg); margin-top: 0.55em; }
+  #contact-tab:hover { filter: brightness(1.1); }
+
+  #contact-close {
+    position: absolute; top: calc(38px + 0.6em); right: 0.8em;
+    border: 0; background: transparent; color: var(--global-text-color-light);
+    font-size: 1.6em; line-height: 1; cursor: pointer; padding: 0.2em 0.4em;
+  }
+  #contact-close:hover { color: var(--global-text-color); }
+
+  #contact-panel h3 { margin: 0 0 0.4em; font-size: 1.1em; }
+  #contact-panel .contact-intro { font-size: 0.85em; line-height: 1.5; margin: 0 0 0.75em; }
+  #contact-panel label { display: block; font-size: 0.8em; font-weight: 600; margin: 0.9em 0 0.25em; }
+  #contact-panel input, #contact-panel select, #contact-panel textarea {
+    width: 100%; box-sizing: border-box; font-size: 0.9em; padding: 0.45em;
+    border: 1px solid var(--global-dark-border-color); border-radius: 4px;
+    background: var(--global-bg-color); color: var(--global-text-color);
+  }
+  #contact-panel textarea { min-height: 8.5em; resize: vertical; }
+  #contact-panel .contact-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  #contact-panel .cf-turnstile { margin-top: 0.9em; }
+  #contact-submit { margin-top: 1em; width: 100%; }
+  #contact-status { margin-top: 0.9em; padding: 0.6em 0.8em; border-radius: 4px; font-size: 0.85em; line-height: 1.45; border-left: 4px solid; background: var(--global-code-background-color); }
+  #contact-status.ok { border-color: #2e7d32; }
+  #contact-status.err { border-color: #c62828; }
+  #contact-panel .contact-note { font-size: 0.78em; color: var(--global-text-color-light); margin: 1.2em 0 0; }
+  @media (max-width: 30rem) { #contact-panel { width: 100vw; } }
+</style>
+
+<aside id="contact-panel" aria-label="Reach out" aria-hidden="true">
+  <button id="contact-tab" type="button" aria-controls="contact-panel" aria-expanded="false">Reach out <i class="fas fa-envelope" aria-hidden="true"></i></button>
+  <button id="contact-close" type="button" aria-label="Close">&times;</button>
+
+  <h3>Reach out</h3>
+  <p class="contact-intro">Looking for the code behind a paper, or want to set up a meeting? Leave a message and it lands in my inbox.</p>
+
+  <form id="contact-form" novalidate>
+    <label for="contact-name">Your name</label>
+    <input id="contact-name" name="name" type="text" required maxlength="100" autocomplete="name">
+
+    <label for="contact-email">Your email</label>
+    <input id="contact-email" name="email" type="email" required maxlength="200" autocomplete="email">
+
+    <label for="contact-topic">What is this about?</label>
+    <select id="contact-topic" name="topic">
+      <option value="meeting">Meeting request</option>
+      <option value="code">Code request</option>
+      <option value="other" selected>Other</option>
+    </select>
+
+    <label for="contact-message">Message</label>
+    <textarea id="contact-message" name="message" required maxlength="5000"></textarea>
+
+    <div class="contact-hp" aria-hidden="true">
+      <label for="contact-website">Website</label>
+      <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
+    </div>
+
+    {% if site.contact.turnstile_site_key and site.contact.turnstile_site_key != "" %}
+    <div class="cf-turnstile" data-sitekey="{{ site.contact.turnstile_site_key }}"></div>
+    {% endif %}
+
+    <button type="submit" class="btn btn--info" id="contact-submit">Send message</button>
+    <div id="contact-status" hidden></div>
+  </form>
+
+  <p class="contact-note">Prefer email? Write to <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.</p>
+</aside>
+
+<script>
+(function () {
+  var API = '{{ site.contact.api }}';
+  var panel = document.getElementById('contact-panel');
+  var tab = document.getElementById('contact-tab');
+  var closeBtn = document.getElementById('contact-close');
+  var form = document.getElementById('contact-form');
+  var nameEl = document.getElementById('contact-name');
+  var emailEl = document.getElementById('contact-email');
+  var topicEl = document.getElementById('contact-topic');
+  var msgEl = document.getElementById('contact-message');
+  var hpEl = document.getElementById('contact-website');
+  var statusEl = document.getElementById('contact-status');
+  var btn = document.getElementById('contact-submit');
+  var hints = {
+    meeting: 'What would you like to discuss, and when are you usually available?',
+    code: 'Which paper is it, and how do you plan to use the code or data?',
+    other: 'Write your message here.'
+  };
+
+  function setHint() { msgEl.placeholder = hints[topicEl.value] || hints.other; }
+  function isOpen() { return panel.classList.contains('open'); }
+  function open(topic) {
+    if (topic && hints[topic]) { topicEl.value = topic; setHint(); }
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    tab.setAttribute('aria-expanded', 'true');
+    setTimeout(function () { nameEl.focus(); }, 260);
+  }
+  function close() {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    tab.setAttribute('aria-expanded', 'false');
+  }
+  function topicFromHash(hash) {
+    var m = /^#contact(?:-([a-z]+))?$/.exec(hash || '');
+    return m ? (m[1] || '') : null;
+  }
+
+  setHint();
+  topicEl.addEventListener('change', setHint);
+  tab.addEventListener('click', function () { isOpen() ? close() : open(); });
+  closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) close(); });
+
+  // Any link to #contact, #contact-code, #contact-meeting opens the panel.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="#contact"]');
+    if (!a) return;
+    var t = topicFromHash(a.hash);
+    if (t === null) return;
+    e.preventDefault();
+    open(t);
+  });
+  var initial = topicFromHash(window.location.hash);
+  if (initial !== null) open(initial);
+
+  function show(kind, text) {
+    statusEl.className = kind;
+    statusEl.textContent = text;
+    statusEl.hidden = false;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = {
+      name: nameEl.value.trim(),
+      email: emailEl.value.trim(),
+      topic: topicEl.value,
+      message: msgEl.value.trim(),
+      website: hpEl.value
+    };
+    if (!data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) || data.message.length < 10) {
+      show('err', 'Please fill in your name, a valid email address, and a message of at least a few words.');
+      return;
+    }
+    var ts = form.querySelector('[name="cf-turnstile-response"]');
+    if (ts) data.turnstile = ts.value;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending';
+    statusEl.hidden = true;
+
+    fetch(API + '/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.error || 'Something went wrong.');
+        form.reset();
+        setHint();
+        btn.textContent = 'Sent';
+        show('ok', 'Thank you. Your message is on its way, and I usually reply within a few days.');
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = 'Send message';
+        show('err', (err.message || 'Something went wrong.') + ' You can also email me at {{ site.author.email }}.');
+        if (window.turnstile) { try { window.turnstile.reset(); } catch (_) {} }
+      });
+  });
+})();
+</script>
+{% if site.contact.turnstile_site_key and site.contact.turnstile_site_key != "" %}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{% endif %}
