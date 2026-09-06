@@ -17,7 +17,7 @@ My path has crossed the spectrum from models to data in stages. My Ph.D. at Ariz
 
 Alongside academia, I have **industry experience**. I worked full-time at Thales Group as a machine learning engineer in San Jose, California, where I built a background in security and privacy research for critical industries. A solution I developed there, an embedding protection tool, is now part of the Thales data security platform. Moreover, experience at **multiple startups** (across aerospace, autonomous driving, and healthcare) has demonstrated my capacity for **bold innovation and hands on execution**, delivering products across different industries. Currently, I serve as **co-founder and CTO of [Wyzzy](https://calls.wyzzy.ai/)**, an agentic-AI healthcare startup whose product is deployed in dental offices in Dallas, Texas.
 
-I am always open to collaborations and research opportunities. Please reach me at **yutian DOT pang AT outlook DOT com.**
+I am always open to collaborations and am actively looking for research opportunities worldwide. Please reach me at **yutian DOT pang AT outlook DOT com**, or send me a direct message through the panel on the right edge of this page.
 
 Research areas
 ======
