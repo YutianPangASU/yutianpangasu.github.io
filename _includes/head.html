@@ -12,5 +12,7 @@
   document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
 </script>
 
-<!-- For all browsers -->
-<link rel="stylesheet" href="{{ base_path }}/assets/css/main.css">
+<!-- For all browsers. The build-time query string busts the browser cache on
+     every deploy: GitHub Pages serves assets with max-age=600, and a stale
+     main.css against fresh markup breaks the masthead layout. -->
+<link rel="stylesheet" href="{{ base_path }}/assets/css/main.css?v={{ site.time | date: '%s' }}">
