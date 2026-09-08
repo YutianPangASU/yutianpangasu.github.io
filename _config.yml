@@ -107,7 +107,7 @@ publication_category:
 publication_area:
   enroute:
     title: 'Understanding the Impact of Uncertainties (e.g., Weather) on En-Route Operations'
-    title_zh: '不确定性（如天气）对航路运行影响的研究'
+    title_zh: '多源不确定性（气象等）对航路运行影响的研究'
     description: 'In the en-route phase, I study how convective weather and other uncertainties impact flights and traffic flow:'
     description_zh: '在航路阶段，我研究对流天气等不确定性如何影响航班与交通流：'
     topics:
@@ -122,7 +122,7 @@ publication_area:
       - '管制员认知工作负荷预测'
   tracon:
     title: 'Enhancing the Efficiency and Safety of TRACON Operations through Automation'
-    title_zh: '以自动化提升进近管制区运行的效率与安全'
+    title_zh: '基于自动化技术的进近管制区运行的效率与安全'
     description: 'In the terminal maneuvering area, I build automation for arrival operations and quantify the safety limits of terminal procedures:'
     description_zh: '在终端机动区，我为进港运行构建自动化方法，并量化终端飞行程序的安全边界：'
     topics:
