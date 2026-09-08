@@ -20,7 +20,7 @@ wallpaper: /images/wallpapers/wall3-bg.webp
 工作与任职
 ======
 * 2024 年 7 月 至今：博士后研究员，航空航天工程与工程力学系，得克萨斯大学奥斯汀分校
-* 2025 年 3 月 至今：联合创始人兼首席技术官，[Wyzzy](https://calls.wyzzy.ai/)，agentic AI 医疗健康初创公司，得克萨斯州奥斯汀
+* 2025 年 3 月 至今：联合创始人兼首席技术官，[Wyzzy](https://calls.wyzzy.ai/)，医疗 Agentic AI 初创公司，得克萨斯州奥斯汀
 * 2023 年 6 月 – 2024 年 7 月：机器学习工程师，泰雷兹美国公司（Thales USA），加州圣何塞
 
 荣誉与奖励
