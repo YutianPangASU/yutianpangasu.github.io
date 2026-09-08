@@ -1,0 +1,13 @@
+{% comment %}
+  Numbered list of selected papers, shared by the English (_pages/about.md) and
+  Chinese (_pages/zh/about.md) homepages. Titles, authors and venues stay in
+  English on both, so the list lives here once.
+{% endcomment %}
+1. **Pang, Y.**\*, Kendall, A., & Clarke, J. (2026). “[Modeling the Impact of Communication and Human Uncertainties on Runway Capacity in Terminal Airspace](/publication/2026-11-01-modeling-the-impact-of-communication-and-human).” *Journal of Air Transport Management*.
+2. **Pang, Y.**\*, Kendall, A., & Clarke, J. (2026). “[The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties](/publication/2026-10-01-the-reliability-of-remotely-piloted-aircraft-system).” *Reliability Engineering & System Safety*.
+3. **Pang, Y.**\*, Kendall, A. P., Porcayo, A., Barsotti, M., Jain, A., & Clarke, J. (2026). “[From Voice to Safety: Language AI Powered Pilot-ATC Communication Understanding for Airport Surface Movement Collision Risk Assessment](/publication/2026-09-01-from-voice-to-safety-language-ai-powered).” *Transportation Research Part C: Emerging Technologies*, 184, 105540.
+4. **Pang, Y.**, Zhao, P., Hu, J., & Liu, Y. (2024). “[Machine Learning-Enhanced Aircraft Landing Scheduling under Uncertainties](/publication/2024-10-01-machine-learning-enhanced-aircraft-landing-scheduling-under).” *Transportation Research Part C: Emerging Technologies*, 158, 104444.
+5. **Pang, Y.**, Hu, J., Lieber, C., Cooke, N., & Liu, Y. (2023). “[Air Traffic Controller Cognitive Workload Level Prediction using Conformal Dynamical Graph Learning](/publication/2023-08-01-air-traffic-controller-cognitive-workload-level-prediction).” *Advanced Engineering Informatics*, 57, 102113.
+6. **Pang, Y.**, Zhao, X., Hu, J., Yan, H., & Liu, Y. (2022). “[Bayesian Spatio-Temporal Graph Transformer Network (B-STAR) for Multi-Aircraft Trajectory Prediction](/publication/2022-09-01-bayesian-spatio-temporal-graph-transformer-network-b).” *Knowledge-Based Systems*, 249, 108998.
+7. **Pang, Y.**, Zhao, X., Yan, H., & Liu, Y. (2021). “[Data-driven trajectory prediction with weather uncertainties: A Bayesian deep learning approach](/publication/2021-12-01-data-driven-trajectory-prediction-with-weather-uncertainties).” *Transportation Research Part C: Emerging Technologies*, 130, 103326.
+8. **Pang, Y.**, Cheng, S., Hu, J., & Liu, Y. (2021). “[Evaluating the Robustness of Bayesian Neural Networks Against Different Types of Attacks](/publication/2021-12-01-evaluating-the-robustness-of-bayesian-neural-networks).” *CVPR 2021 Workshop on Adversarial Machine Learning in Real-World Computer Vision Systems*.

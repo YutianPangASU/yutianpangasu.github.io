@@ -1,0 +1,100 @@
+{% comment %}
+  Body of the Research page, shared by _pages/publications.html (English) and
+  _pages/zh/publications.html (Chinese). Which language renders is decided by
+  page.lang: prose is branched below, short labels go through t.html, and the
+  area titles, descriptions and topics come from the *_zh fields next to the
+  English ones under publication_area in _config.yml.
+{% endcomment %}
+{% if site.author.googlescholar %}
+  {% if page.lang == "zh" %}
+  <div class="wordwrap">您也可以在<a href="{{site.author.googlescholar}}">我的 Google Scholar 主页</a>上找到这些论文。</div>
+  {% else %}
+  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
+  {% endif %}
+{% endif %}
+
+{% include base_path %}
+
+{% if page.lang == "zh" %}
+<p>在应用层面，我的工作沿着空中交通管制中一次飞行的三个阶段展开：理解天气等不确定性如何影响<strong>航路运行</strong>，通过自动化提升<strong>进近管制区运行</strong>的效率与安全，以及研究机场<strong>场面运行</strong>的安全性与可靠性。近年来，我还开展了<strong>先进空中交通与自主运行</strong>方面的工作，例如 NASA 野火项目，这类运行有望成为未来空域系统的重要组成部分。</p>
+
+<p>在理论层面，我关注<strong>风险与可靠性</strong>、<strong>安全与信息安全</strong>，以及<strong>人工智能系统的可信性</strong>，这类系统正越来越多地用于空中交通管制等安全攸关的场景。</p>
+{% else %}
+<p>On the application side, my work follows the three phases of a flight in air traffic control: understanding how uncertainties such as weather impact <strong>en-route operations</strong>, enhancing the efficiency and safety of <strong>TRACON operations</strong> through automation, and studying the safety and reliability of airport <strong>surface operations</strong>. Recently, I have also worked on <strong>advanced air mobility and autonomous operations</strong>, such as the NASA wildfire project, which are expected to become a major part of the future airspace system.</p>
+
+<p>On the theoretical side, I focus on <strong>risk and reliability</strong>, <strong>safety and security</strong>, and the <strong>trustworthiness of AI systems</strong>, which are increasingly used in air traffic control and other safety-critical applications.</p>
+{% endif %}
+
+<!-- <ul>
+  <li>Each major area opens with its representative publications.</li>
+  <li>The expander below them holds the rest of that area: published articles, manuscripts under review, working papers, conference papers, and patents.</li>
+  <li>Within each list, papers I wrote as first or corresponding author come first, then second author papers, then the rest.</li>
+  <li>Click any title for the paper page with figures, or [bib] for its BibTeX.</li>
+</ul> -->
+
+{% for area in site.publication_area %}
+  {% assign gnum = forloop.index %}
+  {% assign area_posts = "" | split: "" %}
+  {% for post in site.publications reversed %}
+    {% if post.area == area[0] %}
+      {% assign area_posts = area_posts | push: post %}
+    {% endif %}
+  {% endfor %}
+  {% if area_posts.size == 0 %}{% continue %}{% endif %}
+
+  {% assign reps = "" | split: "" %}
+  {% assign rest = "" | split: "" %}
+  {% for r in (1..3) %}
+    {% assign rank_posts = "" | split: "" %}
+    {% for p in (1..9) %}
+      {% for post in area_posts %}
+        {% if post.author_rank == r and post.pin == p %}
+          {% assign rank_posts = rank_posts | push: post %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    {% for post in area_posts %}
+      {% if post.author_rank == r and post.pin == nil %}
+        {% assign rank_posts = rank_posts | push: post %}
+      {% endif %}
+    {% endfor %}
+    {% for post in rank_posts %}
+      {% if post.representative %}
+        {% assign reps = reps | push: post %}
+      {% else %}
+        {% assign rest = rest | push: post %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  {% assign meta = area[1] %}
+  <h2>{{ gnum }}. {% include t.html en=meta.title zh=meta.title_zh %}</h2><hr />
+  {% if meta.description %}
+    <p class="archive__area-description">{% include t.html en=meta.description zh=meta.description_zh %}</p>
+  {% endif %}
+  {% if meta.topics %}
+    {% assign topics_zh = meta.topics_zh %}
+    <ul class="archive__area-topics">
+      {% for topic in meta.topics %}
+        {% assign topic_zh = topics_zh[forloop.index0] %}
+        <li>{% include t.html en=topic zh=topic_zh %}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% for post in reps %}
+    {% include publication-line.html post=post num=forloop.index gnum=gnum rep=true %}
+  {% endfor %}
+
+  {% if rest.size > 0 %}
+    <details class="area-more">
+      {% capture more_en %}All papers in this area ({{ rest.size }} more){% endcapture %}
+      {% capture more_zh %}该方向的全部论文（另有 {{ rest.size }} 篇）{% endcapture %}
+      <summary>{% include t.html en=more_en zh=more_zh %}</summary>
+      {% for post in rest %}
+        {% assign n = forloop.index | plus: reps.size %}
+        {% include publication-line.html post=post num=n gnum=gnum %}
+      {% endfor %}
+    </details>
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,20 @@
+{% comment %}
+  Sets `switch_url` to the same page in the other language. English pages live at
+  the root, Chinese pages under /zh/ with the same path. An English page with no
+  Chinese counterpart (publication and talk pages) switches to the Chinese
+  homepage instead. Assignments inside an include land in the caller's scope,
+  the same way base_path does.
+{% endcomment %}
+{% if page.lang == "zh" %}
+  {% assign switch_url = page.url | remove_first: "/zh" %}
+  {% if switch_url == "" %}{% assign switch_url = "/" %}{% endif %}
+{% else %}
+  {% assign switch_candidate = "/zh" | append: page.url %}
+  {% assign switch_url = "/zh/" %}
+  {% for p in site.pages %}
+    {% if p.url == switch_candidate %}
+      {% assign switch_url = switch_candidate %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}

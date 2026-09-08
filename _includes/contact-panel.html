@@ -63,8 +63,8 @@
 <div id="contact-drawer">
   <button id="contact-tab" type="button" aria-controls="contact-panel" aria-expanded="false">{% include t.html en="Send a direct message" zh="给我留言" %} <i class="fas fa-envelope" aria-hidden="true"></i></button>
 
-  <aside id="contact-panel" aria-label="Reach out" aria-hidden="true">
-    <button id="contact-close" type="button" aria-label="Close" data-i18n-attr="aria-label" data-en="Close" data-zh="关闭">&times;</button>
+  <aside id="contact-panel" aria-label="{% include t.html en="Reach out" zh="联系我" %}" aria-hidden="true">
+    <button id="contact-close" type="button" aria-label="{% include t.html en="Close" zh="关闭" %}">&times;</button>
 
     <h3>{% include t.html en="Reach out" zh="联系我" %}</h3>
     <p class="contact-intro">{% include t.html en="Looking for the code behind a paper, or want to set up a meeting? Leave a message and it lands in my inbox." zh="想要某篇论文背后的代码，或者约个时间聊聊？留言即可，消息会直接进入我的邮箱。" %}</p>
@@ -78,9 +78,9 @@
 
       <label for="contact-topic">{% include t.html en="What is this about?" zh="您想聊什么？" %}</label>
       <select id="contact-topic" name="topic">
-        <option value="meeting" data-en="Meeting request" data-zh="预约交流">Meeting request</option>
-        <option value="code" data-en="Code request" data-zh="索取代码">Code request</option>
-        <option value="other" selected data-en="Other" data-zh="其他">Other</option>
+        <option value="meeting">{% include t.html en="Meeting request" zh="预约交流" %}</option>
+        <option value="code">{% include t.html en="Code request" zh="索取代码" %}</option>
+        <option value="other" selected>{% include t.html en="Other" zh="其他" %}</option>
       </select>
 
       <label for="contact-message">{% include t.html en="Message" zh="留言内容" %}</label>
@@ -95,7 +95,7 @@
       <div class="cf-turnstile" data-sitekey="{{ site.contact.turnstile_site_key }}"></div>
       {% endif %}
 
-      <button type="submit" class="btn btn--info" id="contact-submit" data-en="Send message" data-zh="发送留言">Send message</button>
+      <button type="submit" class="btn btn--info" id="contact-submit">{% include t.html en="Send message" zh="发送留言" %}</button>
       <div id="contact-status" hidden></div>
     </form>
 
@@ -147,6 +147,7 @@
 
   var topics = { meeting: 1, code: 1, other: 1 };
 
+  /* data-lang on <html> is set at build time from the page's lang front matter. */
   function L() { return document.documentElement.getAttribute('data-lang') === 'zh' ? strings.zh : strings.en; }
   function setHint() { var s = L(); msgEl.placeholder = s[topicEl.value] || s.other; }
   function isOpen() { return drawer.classList.contains('open'); }
@@ -185,9 +186,6 @@
   });
   var initial = topicFromHash(window.location.hash);
   if (initial !== null) { open(initial); }
-
-  /* Re-render the language-dependent strings when the masthead toggle flips. */
-  document.addEventListener('langchange', setHint);
 
   function show(kind, text) {
     statusEl.className = kind;

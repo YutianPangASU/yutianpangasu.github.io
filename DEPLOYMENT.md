@@ -35,47 +35,44 @@ Previous custom single-page design: branch `custom-site`.
 
 ## Bilingual content (中文 / ENG)
 
-Every page ships in both languages and a toggle in the upper right of the
-masthead switches between them. English is the default; the choice is kept in
-`localStorage` under `site-lang` and applied by a snippet in
-`_includes/head/custom.html` before the first paint, so there is no flash of
-the wrong language. Nothing is server-side and no URLs change.
+Every reader-facing page exists twice: English at the root (`/`, `/cv/`, …)
+and Chinese under `/zh/` with the same path (`/zh/`, `/zh/cv/`, …). English is
+the default simply because it is what the root URLs serve; nothing is stored in
+the browser and nothing redirects. The switch in the upper right of the
+masthead is a plain link to the same page in the other language, computed by
+`_includes/lang-switch-url.html`; on an English page that has no Chinese
+counterpart (publication and talk pages) it links to the Chinese homepage. Each
+page also carries `hreflang` alternates in its head.
 
-How it works: both languages sit in the HTML, each copy wrapped in a bare
-`.i18n-en` / `.i18n-zh` element, and `_sass/layout/_i18n.scss` reveals one
-based on `data-lang` on `<html>`. Chinese text renders in SimSun, with the
-nearest Song faces as fallbacks on machines that lack it.
+Where things live:
 
-Adding a translation:
+- **Chinese pages**: `_pages/zh/` — `about.md` (→ `/zh/`), `cv.md`,
+  `software.md`, `publications.html`, `footprint.html`. Each has `lang: zh` and
+  a `/zh/…` permalink; `lang` is what flips the nav links to `/zh/…`, sets
+  `<html lang="zh-Hans" data-lang="zh">`, and picks the Chinese strings in the
+  shared templates. English pages need nothing extra.
+- **Pages with heavy Liquid** (Research, Footprint) keep one body include —
+  `_includes/publications-body.html`, `_includes/footprint-body.html` — used by
+  both language pages, with the prose branched on `page.lang`. The selected
+  publications list on the homepage is `_includes/selected-publications.md`,
+  shared by both homepages because titles and venues stay in English.
+- **Short strings in shared templates** (nav, sidebar, footer, contact panel,
+  visitor map, publication lines): `{% include t.html en="Research" zh="科研" %}`
+  renders one language at build time; leave `zh` off to fall back to English.
+  Nav labels take `title_zh` in `_data/navigation.yml`; site title, author
+  fields and the `publication_area` titles/descriptions/topics take `*_zh`
+  fields beside the English ones in `_config.yml`.
+- Chinese text is set in SimSun (`_sass/layout/_i18n.scss`), with the nearest
+  Song faces as fallbacks on machines that lack it.
 
-- **Short strings in a template**: `{% include t.html en="Research" zh="科研" %}`.
-  Leave `zh` off and it falls back to the English.
-- **Prose in a Markdown page**: two sibling blocks —
-  `<div class="i18n-en" markdown="1"> … </div>` and
-  `<div class="i18n-zh" lang="zh-Hans" markdown="1"> … </div>`. Section headings
-  become raw `<h1 id="...">` with a `t.html` include so their anchors survive.
-- **Front matter**: `title_zh` next to `title` translates a page title;
-  `title_zh` in `_data/navigation.yml` translates a nav label; `title_zh`,
-  `description_zh` and `topics_zh` under `publication_area` in `_config.yml`
-  translate the research areas.
-- **Strings that live in an attribute or in JavaScript** (placeholders,
-  `<option>` labels, an SVG `<title>`): put `data-en` and `data-zh` on the
-  element, plus `data-i18n-attr="placeholder"` when writing an attribute rather
-  than the text. `_includes/lang-toggle.html` applies these and fires a
-  `langchange` event that the contact panel and the visitor map listen for.
-
-Only put `.i18n-en` / `.i18n-zh` on plain `<span>`/`<div>`/`<p>` wrappers: the
-CSS uses `display: revert`, so an element that carries its own display (a
-`.btn`, a grid cell) must hold the wrapper inside it rather than on it.
+Adding a page: write the English one as usual, then a `_pages/zh/` twin with
+`lang: zh` and the `/zh/` permalink — the switch finds it by URL. Updating the
+homepage news means editing both `_pages/about.md` and `_pages/zh/about.md`.
 
 Deliberately left in English: paper titles, author lists, journal names, and
-the publication pages' abstracts, which are the papers' own language; the US
-state names in the Footprint map tooltips; and the owner-only edit panel at
-`/footprint/?edit`.
-
-Shared material — the homepage overview figure, the selected-publications list,
-the visitor map — sits outside the language wrappers so it is not duplicated in
-the DOM.
+the publication pages themselves; the US state names in the Footprint map
+tooltips; the owner-only edit panel at `/footprint/?edit`; and the 404 and
+sitemap pages.
 
 ## Reach-out panel (message form)
 

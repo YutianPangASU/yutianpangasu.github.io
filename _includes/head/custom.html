@@ -2,19 +2,18 @@
 
 <!-- start custom head snippets -->
 
-<!-- Language (ENG default, 中文 via the masthead toggle). Runs before paint so
-     the page never flashes the wrong language. The compress layout folds every
-     page onto one line, so no // comments below. -->
-<script>
-(function () {
-  var lang = null;
-  try { lang = window.localStorage.getItem('site-lang'); } catch (e) { lang = null; }
-  if (lang !== 'zh' && lang !== 'en') { lang = 'en'; }
-  var root = document.documentElement;
-  root.setAttribute('data-lang', lang);
-  root.setAttribute('lang', lang === 'zh' ? 'zh-Hans' : 'en');
-})();
-</script>
+<!-- Language alternates: every page exists in English (root) and, where a
+     translation has been written, in Chinese under /zh/. See lang-switch-url.html. -->
+{% include lang-switch-url.html %}
+{% if page.lang == "zh" %}
+<link rel="alternate" hreflang="en" href="{{ base_path }}{{ switch_url }}">
+<link rel="alternate" hreflang="zh-Hans" href="{{ base_path }}{{ page.url }}">
+<link rel="alternate" hreflang="x-default" href="{{ base_path }}{{ switch_url }}">
+{% elsif switch_url != "/zh/" or page.url == "/" %}
+<link rel="alternate" hreflang="en" href="{{ base_path }}{{ page.url }}">
+<link rel="alternate" hreflang="zh-Hans" href="{{ base_path }}{{ switch_url }}">
+<link rel="alternate" hreflang="x-default" href="{{ base_path }}{{ page.url }}">
+{% endif %}
 
 <!-- Support for Academicons -->
 <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
