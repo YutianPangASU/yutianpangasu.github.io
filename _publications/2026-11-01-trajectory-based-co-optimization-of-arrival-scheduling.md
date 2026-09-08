@@ -8,7 +8,7 @@ permalink: /publication/2026-11-01-trajectory-based-co-optimization-of-arrival-s
 excerpt: "Jointly optimizes arrival sequencing and descent-path geometry in the terminal maneuvering area from recorded trajectory data."
 date: 2026-11-01
 venue: "Under review at Aerospace Science and Technology"
-arxiv: "https://arxiv.org/abs/2608.22480"
+arxiv: "https://arxiv.org/abs/2609.03234"
 authors: "<b>Pang, Y.</b>* & Clarke, J."
 author_rank: 1
 citation: "<b>Pang, Y.</b>* & Clarke, J. (2026). “Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area.” <i>Aerospace Science and Technology</i>."
