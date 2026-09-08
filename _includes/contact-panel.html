@@ -25,6 +25,12 @@
     border-radius: 0 6px 6px 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
   #contact-tab i { display: inline-block; transform: rotate(90deg); margin-top: 0.55em; }
+  /* The 180° spin makes the English label read bottom-up like a book spine.
+     Chinese in vertical-rl already stacks upright top-to-bottom, so on Chinese
+     pages the tab keeps its natural orientation (and its rounded edge stays on
+     the outside). */
+  html[data-lang="zh"] #contact-tab { transform: none; border-radius: 6px 0 0 6px; letter-spacing: 0.12em; }
+  html[data-lang="zh"] #contact-tab i { transform: none; }
   #contact-tab:hover { filter: brightness(1.1); }
 
   #contact-panel {

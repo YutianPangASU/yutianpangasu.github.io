@@ -5,7 +5,7 @@ layout: compress
 {% include base_path %}
 
 <!doctype html>
-<html lang="{% if page.lang == "zh" %}zh-Hans{% else %}{{ site.locale | slice: 0,2 }}{% endif %}" data-lang="{{ page.lang | default: "en" }}" class="no-js"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
+<html lang="{% if page.lang == "zh" %}zh-Hans{% else %}{{ site.locale | slice: 0,2 }}{% endif %}" data-lang="{{ page.lang | default: "en" }}" class="no-js">
   <head>
     {% include head.html %}
     {% include head/custom.html %}

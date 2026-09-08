@@ -23,11 +23,6 @@ body.has-wallpaper {
   pointer-events: none;
 }
 
-/* fade the image further in dark mode so text stays readable */
-html[data-theme="dark"] .wallpaper-backdrop {
-  opacity: 0.12;
-}
-
 @media print {
   .wallpaper-backdrop {
     display: none;

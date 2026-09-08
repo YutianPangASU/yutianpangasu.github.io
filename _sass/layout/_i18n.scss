@@ -18,9 +18,9 @@ html[data-lang="zh"] body {
 }
 
 /*
-   The switch sits at the right end of the masthead beside the theme toggle.
-   Both live in one .persist.tail list item because the greedy nav assumes a
-   single tail element and duplicates hidden links if it finds more.
+   The switch sits at the right end of the masthead, as the single .persist.tail
+   list item: the greedy nav assumes one tail element and duplicates hidden
+   links if it finds more.
 */
 
 .lang-toggle__opt {
@@ -36,26 +36,10 @@ html[data-lang="zh"] body {
 .greedy-nav .visible-links .nav-tools {
   white-space: nowrap;
 
-  .nav-tools__inner {
-    display: flex;
-    align-items: center;
-  }
-
-  /* The theme toggle keeps its id (and its click handler) but is now a span
-     inside the shared tail item rather than the list item itself. */
-  #theme-toggle {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  a {
-    margin: 0;
-  }
-
   .lang-toggle {
     display: inline-flex;
     align-items: baseline;
-    margin-right: 1rem;
+    margin: 0;
     padding: 0.25em 0;
     font-size: $type-size-6;
     letter-spacing: 0.02em;

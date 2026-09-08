@@ -23,19 +23,16 @@
             </li>
           {% endfor %}
           {% comment %}
-            The language switch and the theme toggle share one .persist.tail item:
-            the greedy nav in assets/js/main.min.js assumes a single tail element
-            and clones restored links once it finds more than one. The switch is a
-            plain link to the same page in the other language (see
-            lang-switch-url.html); English lives at the root, Chinese under /zh/.
+            Language switch: a plain link to the same page in the other language
+            (see lang-switch-url.html); English lives at the root, Chinese under
+            /zh/. It must stay the only .persist.tail item, because the greedy nav
+            in assets/js/main.min.js clones restored links if it finds more than one,
+            and it must be an <a>, since that script grabs every <button> in the nav.
           {% endcomment %}
           <li class="masthead__menu-item persist tail nav-tools">
-            <div class="nav-tools__inner">
-              <a id="lang-toggle" class="lang-toggle" href="{{ base_path }}{{ switch_url }}" hreflang="{% if page.lang == 'zh' %}en{% else %}zh-Hans{% endif %}" aria-label="{% if page.lang == 'zh' %}Switch to English / 切换到英文{% else %}Switch to Chinese / 切换到中文{% endif %}">
-                <span class="lang-toggle__opt lang-toggle__opt--zh{% if page.lang == 'zh' %} is-active{% endif %}" lang="zh-Hans">中文</span><span class="lang-toggle__sep" aria-hidden="true">/</span><span class="lang-toggle__opt lang-toggle__opt--en{% unless page.lang == 'zh' %} is-active{% endunless %}">ENG</span>
-              </a>
-              <span id="theme-toggle"><a role="button" aria-labelledby="theme-icon"><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a></span>
-            </div>
+            <a id="lang-toggle" class="lang-toggle" href="{{ base_path }}{{ switch_url }}" hreflang="{% if page.lang == 'zh' %}en{% else %}zh-Hans{% endif %}" aria-label="{% if page.lang == 'zh' %}Switch to English / 切换到英文{% else %}Switch to Chinese / 切换到中文{% endif %}">
+              <span class="lang-toggle__opt lang-toggle__opt--zh{% if page.lang == 'zh' %} is-active{% endif %}" lang="zh-Hans">中文</span><span class="lang-toggle__sep" aria-hidden="true">/</span><span class="lang-toggle__opt lang-toggle__opt--en{% unless page.lang == 'zh' %} is-active{% endunless %}">ENG</span>
+            </a>
           </li>
         </ul>
         <ul class="hidden-links hidden"></ul>
