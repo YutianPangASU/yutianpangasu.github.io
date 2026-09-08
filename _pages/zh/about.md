@@ -37,7 +37,7 @@ _我一直欢迎各种形式的合作，目前也在全球范围内积极寻找�
 * **2026 年 3 月** —— [The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties](/publication/2026-10-01-the-reliability-of-remotely-piloted-aircraft-system) 发表于 *Reliability Engineering & System Safety*。
 * **2026 年 1 月** —— [From Voice to Safety: Language AI Powered Pilot-ATC Communication Understanding for Airport Surface Movement Collision Risk Assessment](/publication/2026-09-01-from-voice-to-safety-language-ai-powered) 发表于 *Transportation Research Part C: Emerging Technologies*。
 * **2025 年 10 月** —— 在亚特兰大举行的 INFORMS 年会上作特邀报告。
-* **2025 年 3 月** —— 获 FAA 航空安全机器学习与人工智能数据挑战赛第二名。
+* **2025 年 3 月** —— 获 美国航空安全管理局航空安全机器学习与人工智能数据挑战赛第二名。
 * **2024 年 7 月** —— 加入得克萨斯大学奥斯汀分校，任博士后研究员。
 * **2023 年 5 月** —— 于亚利桑那州立大学获得博士学位，并获 ASU 机械与航空航天工程系杰出研究生科研奖。
 
