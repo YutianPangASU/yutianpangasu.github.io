@@ -5,13 +5,13 @@ main:
     title_zh: "科研"
     url: /publications/
 
-  - title: "Software Release"
-    title_zh: "开源软件"
-    url: /software/
-
   - title: "CV"
     title_zh: "简历"
     url: /cv/
+
+  - title: "Software Release"
+    title_zh: "开源软件"
+    url: /software/
 
   - title: "Footprint"
     title_zh: "足迹"
