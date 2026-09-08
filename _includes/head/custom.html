@@ -2,6 +2,20 @@
 
 <!-- start custom head snippets -->
 
+<!-- Language (ENG default, 中文 via the masthead toggle). Runs before paint so
+     the page never flashes the wrong language. The compress layout folds every
+     page onto one line, so no // comments below. -->
+<script>
+(function () {
+  var lang = null;
+  try { lang = window.localStorage.getItem('site-lang'); } catch (e) { lang = null; }
+  if (lang !== 'zh' && lang !== 'en') { lang = 'en'; }
+  var root = document.documentElement;
+  root.setAttribute('data-lang', lang);
+  root.setAttribute('lang', lang === 'zh' ? 'zh-Hans' : 'en');
+})();
+</script>
+
 <!-- Support for Academicons -->
 <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"></noscript>

@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Bilingual content — ENG by default, 中文 on demand
+   ========================================================================== */
+
+/*
+   Every translated string ships in the page twice, each copy wrapped in a bare
+   .i18n-en / .i18n-zh element. The toggle in the masthead flips data-lang on
+   <html> and these rules reveal one copy.
+
+   Put the classes on plain <span>/<div> wrappers only: `display: revert` rolls
+   back to the browser default, so an element carrying its own display (a .btn,
+   a grid cell, a flex child) must hold the wrapper inside it, not on it.
+*/
+
+.i18n-zh {
+  display: none;
+}
+
+html[data-lang="zh"] {
+  .i18n-en {
+    display: none;
+  }
+
+  .i18n-zh {
+    display: revert;
+  }
+
+  /* Latin faces first so English fragments (paper titles, venues) keep their
+     look. SimSun carries the Chinese text; the families behind it are the
+     nearest Song/serif faces on machines that do not ship SimSun. */
+  body {
+    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, SimSun, "宋体", NSimSun, "Songti SC", STSong, "Noto Serif CJK SC", "Source Han Serif SC", serif;
+  }
+}
+
+/*
+   Language toggle, pinned to the right of the masthead beside the theme
+   toggle. Both live in one .persist.tail list item because the greedy nav
+   assumes a single tail element and duplicates hidden links if it finds more.
+*/
+
+.lang-toggle__opt {
+  color: var(--global-text-color-light);
+  font-weight: 400;
+}
+
+html[data-lang="en"] .lang-toggle__opt--en,
+html[data-lang="zh"] .lang-toggle__opt--zh {
+  color: var(--global-masthead-link-color);
+  font-weight: 700;
+}
+
+.greedy-nav .visible-links .nav-tools {
+  white-space: nowrap;
+
+  .nav-tools__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  /* The theme toggle keeps its id (and its click handler) but is now a span
+     inside the shared tail item rather than the list item itself. */
+  #theme-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  a {
+    margin: 0;
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    align-items: baseline;
+    margin-right: 1rem;
+    padding: 0.25em 0;
+    font-size: $type-size-6;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+
+    &:before {
+      display: none;
+    }
+
+    /* tabindex="0" makes the toggle keyboard reachable, which also means a
+       mouse click focuses it; keep the theme's focus ring for keyboard use
+       only so clicking does not leave an outline behind. */
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    &:hover .lang-toggle__opt {
+      color: var(--global-masthead-link-color-hover);
+    }
+  }
+
+  .lang-toggle__sep {
+    margin: 0 0.3em;
+    color: var(--global-text-color-light);
+    font-weight: 400;
+  }
+}

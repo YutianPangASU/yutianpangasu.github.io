@@ -61,29 +61,29 @@
 </style>
 
 <div id="contact-drawer">
-  <button id="contact-tab" type="button" aria-controls="contact-panel" aria-expanded="false">Send a direct message <i class="fas fa-envelope" aria-hidden="true"></i></button>
+  <button id="contact-tab" type="button" aria-controls="contact-panel" aria-expanded="false">{% include t.html en="Send a direct message" zh="给我留言" %} <i class="fas fa-envelope" aria-hidden="true"></i></button>
 
   <aside id="contact-panel" aria-label="Reach out" aria-hidden="true">
-    <button id="contact-close" type="button" aria-label="Close">&times;</button>
+    <button id="contact-close" type="button" aria-label="Close" data-i18n-attr="aria-label" data-en="Close" data-zh="关闭">&times;</button>
 
-    <h3>Reach out</h3>
-    <p class="contact-intro">Looking for the code behind a paper, or want to set up a meeting? Leave a message and it lands in my inbox.</p>
+    <h3>{% include t.html en="Reach out" zh="联系我" %}</h3>
+    <p class="contact-intro">{% include t.html en="Looking for the code behind a paper, or want to set up a meeting? Leave a message and it lands in my inbox." zh="想要某篇论文背后的代码，或者约个时间聊聊？留言即可，消息会直接进入我的邮箱。" %}</p>
 
     <form id="contact-form" novalidate>
-      <label for="contact-name">Your name</label>
+      <label for="contact-name">{% include t.html en="Your name" zh="您的姓名" %}</label>
       <input id="contact-name" name="name" type="text" required maxlength="100" autocomplete="name">
 
-      <label for="contact-email">Your email</label>
+      <label for="contact-email">{% include t.html en="Your email" zh="您的邮箱" %}</label>
       <input id="contact-email" name="email" type="email" required maxlength="200" autocomplete="email">
 
-      <label for="contact-topic">What is this about?</label>
+      <label for="contact-topic">{% include t.html en="What is this about?" zh="您想聊什么？" %}</label>
       <select id="contact-topic" name="topic">
-        <option value="meeting">Meeting request</option>
-        <option value="code">Code request</option>
-        <option value="other" selected>Other</option>
+        <option value="meeting" data-en="Meeting request" data-zh="预约交流">Meeting request</option>
+        <option value="code" data-en="Code request" data-zh="索取代码">Code request</option>
+        <option value="other" selected data-en="Other" data-zh="其他">Other</option>
       </select>
 
-      <label for="contact-message">Message</label>
+      <label for="contact-message">{% include t.html en="Message" zh="留言内容" %}</label>
       <textarea id="contact-message" name="message" required maxlength="5000"></textarea>
 
       <div class="contact-hp" aria-hidden="true">
@@ -95,11 +95,11 @@
       <div class="cf-turnstile" data-sitekey="{{ site.contact.turnstile_site_key }}"></div>
       {% endif %}
 
-      <button type="submit" class="btn btn--info" id="contact-submit">Send message</button>
+      <button type="submit" class="btn btn--info" id="contact-submit" data-en="Send message" data-zh="发送留言">Send message</button>
       <div id="contact-status" hidden></div>
     </form>
 
-    <p class="contact-note">Prefer email? Write to <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.</p>
+    <p class="contact-note">{% include t.html en="Prefer email? Write to" zh="更习惯用邮件？请写信至" %} <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.</p>
   </aside>
 </div>
 
@@ -118,16 +118,41 @@
   var hpEl = document.getElementById('contact-website');
   var statusEl = document.getElementById('contact-status');
   var btn = document.getElementById('contact-submit');
-  var hints = {
-    meeting: 'What would you like to discuss, and when are you usually available?',
-    code: 'Which paper is it, and how do you plan to use the code or data?',
-    other: 'Write your message here.'
+  var strings = {
+    en: {
+      meeting: 'What would you like to discuss, and when are you usually available?',
+      code: 'Which paper is it, and how do you plan to use the code or data?',
+      other: 'Write your message here.',
+      invalid: 'Please fill in your name, a valid email address, and a message of at least a few words.',
+      sending: 'Sending',
+      sent: 'Sent',
+      send: 'Send message',
+      ok: 'Thank you. Your message is on its way, and I usually reply within a few days.',
+      failed: 'Something went wrong.',
+      emailFallback: ' You can also email me at {{ site.author.email }}.'
+    },
+    zh: {
+      meeting: '您想讨论什么？平时哪些时间方便？',
+      code: '是哪一篇论文？您打算如何使用其中的代码或数据？',
+      other: '请在此写下您的留言。',
+      invalid: '请填写您的姓名、有效的邮箱地址，以及至少几句话的留言内容。',
+      sending: '发送中',
+      sent: '已发送',
+      send: '发送留言',
+      ok: '谢谢您的留言，消息已经发出。我通常会在几天内回复。',
+      failed: '出了点问题。',
+      emailFallback: '您也可以直接发邮件到 {{ site.author.email }}。'
+    }
   };
 
-  function setHint() { msgEl.placeholder = hints[topicEl.value] || hints.other; }
+  var topics = { meeting: 1, code: 1, other: 1 };
+
+  function L() { return document.documentElement.getAttribute('data-lang') === 'zh' ? strings.zh : strings.en; }
+  function setHint() { var s = L(); msgEl.placeholder = s[topicEl.value] || s.other; }
   function isOpen() { return drawer.classList.contains('open'); }
   function open(topic) {
-    if (topic && hints[topic]) { topicEl.value = topic; setHint(); }
+    if (topic && topics[topic]) { topicEl.value = topic; }
+    setHint();
     drawer.classList.add('open');
     panel.setAttribute('aria-hidden', 'false');
     tab.setAttribute('aria-expanded', 'true');
@@ -161,6 +186,9 @@
   var initial = topicFromHash(window.location.hash);
   if (initial !== null) { open(initial); }
 
+  /* Re-render the language-dependent strings when the masthead toggle flips. */
+  document.addEventListener('langchange', setHint);
+
   function show(kind, text) {
     statusEl.className = kind;
     statusEl.textContent = text;
@@ -177,14 +205,14 @@
       website: hpEl.value
     };
     if (!data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) || data.message.length < 10) {
-      show('err', 'Please fill in your name, a valid email address, and a message of at least a few words.');
+      show('err', L().invalid);
       return;
     }
     var ts = form.querySelector('[name="cf-turnstile-response"]');
     if (ts) { data.turnstile = ts.value; }
 
     btn.disabled = true;
-    btn.textContent = 'Sending';
+    btn.textContent = L().sending;
     statusEl.hidden = true;
 
     fetch(API + '/contact', {
@@ -194,16 +222,16 @@
     })
       .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
       .then(function (r) {
-        if (!r.ok) { throw new Error(r.error || 'Something went wrong.'); }
+        if (!r.ok) { throw new Error(r.error || L().failed); }
         form.reset();
         setHint();
-        btn.textContent = 'Sent';
-        show('ok', 'Thank you. Your message is on its way, and I usually reply within a few days.');
+        btn.textContent = L().sent;
+        show('ok', L().ok);
       })
       .catch(function (err) {
         btn.disabled = false;
-        btn.textContent = 'Send message';
-        show('err', (err.message || 'Something went wrong.') + ' You can also email me at {{ site.author.email }}.');
+        btn.textContent = L().send;
+        show('err', (err.message || L().failed) + L().emailFallback);
         if (window.turnstile) { try { window.turnstile.reset(); } catch (_) {} }
       });
   });

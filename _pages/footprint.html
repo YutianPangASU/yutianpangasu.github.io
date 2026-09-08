@@ -1,6 +1,7 @@
 ---
 layout: archive
 title: "My Footprint"
+title_zh: "我的足迹"
 permalink: /footprint/
 author_profile: true
 wallpaper: /images/wallpapers/wall4-bg.webp
@@ -119,13 +120,13 @@ wallpaper: /images/wallpapers/wall4-bg.webp
 </style>
 {% endif %}
 
-<p class="fp-intro">I enjoy road trips and have driven more than 150,000 miles across the United States. This page follows those miles: the states I have set foot in and the Interstates I have driven. One glance at the map tells me New England is overdue for a road trip.</p>
+<p class="fp-intro"><span class="i18n-en">I enjoy road trips and have driven more than 150,000 miles across the United States. This page follows those miles: the states I have set foot in and the Interstates I have driven. One glance at the map tells me New England is overdue for a road trip.</span><span class="i18n-zh" lang="zh-Hans">我喜欢自驾旅行，已经在美国开了超过 15 万英里。这个页面记录的就是这些里程：我踏足过的州，以及我开过的州际公路。看一眼地图就知道，新英格兰地区早该去一趟了。</span></p>
 
 {% include us-map.html %}
-<p class="fp-caption"><span class="fp-swatch" style="background:#8fd19e;"></span>States I have set foot in</p>
+<p class="fp-caption"><span class="fp-swatch" style="background:#8fd19e;"></span>{% include t.html en="States I have set foot in" zh="我踏足过的州" %}</p>
 
 {% include us-highways.html %}
-<p class="fp-caption"><span class="fp-swatch" style="background:#1f6cb5;"></span>Interstates I have driven &middot; hover a route for its number</p>
+<p class="fp-caption"><span class="fp-swatch" style="background:#1f6cb5;"></span>{% include t.html en="Interstates I have driven &middot; hover a route for its number" zh="我开过的州际公路 &middot; 将鼠标移到线路上可查看编号" %}</p>
 
 {% if travel_sections != "" and travel_sections != empty %}
 
@@ -143,11 +144,17 @@ wallpaper: /images/wallpapers/wall4-bg.webp
   {% endif %}
 {% endfor %}
 
-<p class="fp-stats">{{ park_count }} park{% unless park_count == 1 %}s{% endunless %}
+{% capture stats_en %}{{ park_count }} park{% unless park_count == 1 %}s{% endunless %}
  &middot; {{ photo_count }} photo{% unless photo_count == 1 %}s{% endunless %}
  &middot; {{ visited_codes | size }} state{% unless visited_codes.size == 1 %}s{% endunless %}{% if driven_routes != "" and driven_routes != empty %}
  &middot; {{ driven_routes | size }} Interstate{% unless driven_routes.size == 1 %}s{% endunless %}{% endif %}
- &middot; click any photo to view it full size</p>
+ &middot; click any photo to view it full size{% endcapture %}
+{% capture stats_zh %}{{ park_count }} 个公园
+ &middot; {{ photo_count }} 张照片
+ &middot; {{ visited_codes | size }} 个州{% if driven_routes != "" and driven_routes != empty %}
+ &middot; {{ driven_routes | size }} 条州际公路{% endif %}
+ &middot; 点击任意照片可查看大图{% endcapture %}
+<p class="fp-stats">{% include t.html en=stats_en zh=stats_zh %}</p>
 
 {% for section in travel_sections %}
 <div class="fp-section">
@@ -170,7 +177,7 @@ wallpaper: /images/wallpapers/wall4-bg.webp
         {% endif %}
       {% endfor %}
     </div>
-    {% if shown == 0 %}<p class="fp-soon">Photos coming soon.</p>{% endif %}
+    {% if shown == 0 %}<p class="fp-soon">{% include t.html en="Photos coming soon." zh="照片即将上传。" %}</p>{% endif %}
   </div>
   {% endfor %}
 </div>

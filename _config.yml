@@ -10,6 +10,7 @@
 locale                   : "en-US"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
 title                    : "Yutian Pang"
+title_zh                 : "庞雨田"  # shown when the masthead 中文/ENG toggle is set to 中文
 title_separator          : "-"
 name                     : &name "Yutian Pang"
 description              : &description "Yutian Pang, PhD — Postdoctoral Fellow in Aerospace Engineering at UT Austin. Smart aviation research: air traffic control and advanced air mobility with AI, machine learning, and optimization."
@@ -25,10 +26,14 @@ author:
   # Biographic information
   avatar           : "profile.jpg"
   name             : "Yutian Pang, PhD"
+  name_zh          : "庞雨田 博士"
   pronouns         : # example: "she/her"  
   bio              : "Postdoctoral Fellow, Aerospace Engineering & Engineering Mechanics"
+  bio_zh           : "航空航天工程与工程力学系 博士后研究员"
   location         : "Austin, TX, USA"
+  location_zh      : "美国 得克萨斯州 奥斯汀"
   employer         : "The University of Texas at Austin"
+  employer_zh      : "得克萨斯大学奥斯汀分校"
   uri              : # URL
   email            : "yutian.pang@austin.utexas.edu"
   motto            : "夫抱火厝之积薪之下，而寝其上，火未及燃，因谓之安，偷安者也。"
@@ -101,15 +106,24 @@ publication_category:
 publication_area:
   enroute:
     title: 'Understanding the Impact of Uncertainties (e.g., Weather) on En-Route Operations'
+    title_zh: '不确定性（如天气）对航路运行影响的研究'
     description: 'In the en-route phase, I study how convective weather and other uncertainties impact flights and traffic flow:'
+    description_zh: '在航路阶段，我研究对流天气等不确定性如何影响航班与交通流：'
     topics:
       - 'Probabilistic aircraft trajectory prediction under weather uncertainty'
       - 'Air traffic state and density prediction for flow management'
       - 'Dynamic airspace sectorization with learned workload prediction'
       - 'Controller cognitive workload prediction'
+    topics_zh:
+      - '天气不确定性下的航空器概率轨迹预测'
+      - '面向流量管理的空中交通态势与密度预测'
+      - '基于工作负荷学习预测的动态空域扇区划分'
+      - '管制员认知工作负荷预测'
   tracon:
     title: 'Enhancing the Efficiency and Safety of TRACON Operations through Automation'
+    title_zh: '以自动化提升进近管制区运行的效率与安全'
     description: 'In the terminal maneuvering area, I build automation for arrival operations and quantify the safety limits of terminal procedures:'
+    description_zh: '在终端机动区，我为进港运行构建自动化方法，并量化终端飞行程序的安全边界：'
     topics:
       - 'Trajectory-based co-optimization of arrival scheduling and descent design'
       - 'Fuel-optimal descent procedures under wind uncertainty'
@@ -117,31 +131,60 @@ publication_area:
       - 'Machine-learning-enhanced landing scheduling and autonomous landing'
       - 'Runway capacity under communication and human uncertainties'
       - 'Collision avoidance control laws and their capacity limits'
+    topics_zh:
+      - '基于轨迹的进港排序与下降程序协同优化'
+      - '风场不确定性下的燃油最优下降程序'
+      - '多机与程序感知的轨迹预测'
+      - '机器学习增强的着陆排序与自主着陆'
+      - '通信与人因不确定性影响下的跑道容量'
+      - '避撞控制律及其容量极限'
   airport-ground:
     title: 'Safety and Reliability Studies of Airport Surface Operations'
+    title_zh: '机场场面运行的安全性与可靠性研究'
     description: 'On the airport surface, I turn pilot and controller voice communication and surveillance data into safety and efficiency tools:'
+    description_zh: '在机场场面，我把飞行员与管制员的话音通信和监视数据转化为安全与效率工具：'
     topics:
       - 'Surface-movement collision risk assessment from pilot-ATC radio calls'
       - 'Real-time runway incursion alerting from ATC speech and ADS-B'
       - 'Runway and taxiway exit prediction for landing aircraft'
+    topics_zh:
+      - '基于陆空通话的场面移动碰撞风险评估'
+      - '融合管制话音与 ADS-B 的实时跑道侵入告警'
+      - '着陆航空器的跑道与滑行道脱离口预测'
   aam:
     title: 'Advanced Air Mobility and Autonomous Operations'
+    title_zh: '先进空中交通与自主运行'
     description: 'Beyond crewed aviation, I study advanced air mobility, remotely piloted aircraft, and autonomous delivery operations:'
+    description_zh: '在有人驾驶航空之外，我研究先进空中交通、遥控驾驶航空器与自主配送运行：'
     topics:
       - 'Reliability of remotely piloted aircraft under communication uncertainties'
       - 'Communication and autonomy level tradeoffs in autonomous operations'
       - 'Last-mile and same-day delivery routing with capacity and time guarantees'
       - 'UAV package delivery aerodynamics'
       - 'Multi-agent reinforcement learning for decentralized decision-making'
+    topics_zh:
+      - '通信不确定性下遥控驾驶航空器的可靠性'
+      - '自主运行中通信水平与自主等级的权衡'
+      - '带容量与时限保证的最后一公里与当日配送路径规划'
+      - '无人机包裹投送的空气动力学'
+      - '面向分布式决策的多智能体强化学习'
   reliability-ai:
     title: 'Reliability & Trustworthy AI'
+    title_zh: '可靠性与可信人工智能'
     description: 'Beneath the applications sits methodological work on trustworthy machine learning and reliability engineering:'
+    description_zh: '支撑上述应用的，是可信机器学习与可靠性工程方面的方法研究：'
     topics:
       - 'Explainable risk analysis from aviation safety reports'
       - 'Bayesian uncertainty quantification for deep learning'
       - 'Physics-informed learning for fracture and structural health monitoring'
       - 'Adversarial robustness of Bayesian neural networks'
       - 'Maintenance scheduling under uncertainty'
+    topics_zh:
+      - '航空安全报告的可解释风险分析'
+      - '面向深度学习的贝叶斯不确定性量化'
+      - '用于断裂与结构健康监测的物理信息学习'
+      - '贝叶斯神经网络的对抗鲁棒性'
+      - '不确定性下的维修排程'
 
 # Reach-out panel (_includes/contact-panel.html, opens via #contact). Messages go to the Cloudflare worker in
 # worker/visitor-worker.js (POST /contact), which emails them and keeps a copy

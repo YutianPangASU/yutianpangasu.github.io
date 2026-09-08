@@ -33,6 +33,50 @@ Previous custom single-page design: branch `custom-site`.
 - Push to deploy: `git add -A && git commit -m "update" && git push`
   (live in ~1 minute).
 
+## Bilingual content (中文 / ENG)
+
+Every page ships in both languages and a toggle in the upper right of the
+masthead switches between them. English is the default; the choice is kept in
+`localStorage` under `site-lang` and applied by a snippet in
+`_includes/head/custom.html` before the first paint, so there is no flash of
+the wrong language. Nothing is server-side and no URLs change.
+
+How it works: both languages sit in the HTML, each copy wrapped in a bare
+`.i18n-en` / `.i18n-zh` element, and `_sass/layout/_i18n.scss` reveals one
+based on `data-lang` on `<html>`. Chinese text renders in SimSun, with the
+nearest Song faces as fallbacks on machines that lack it.
+
+Adding a translation:
+
+- **Short strings in a template**: `{% include t.html en="Research" zh="科研" %}`.
+  Leave `zh` off and it falls back to the English.
+- **Prose in a Markdown page**: two sibling blocks —
+  `<div class="i18n-en" markdown="1"> … </div>` and
+  `<div class="i18n-zh" lang="zh-Hans" markdown="1"> … </div>`. Section headings
+  become raw `<h1 id="...">` with a `t.html` include so their anchors survive.
+- **Front matter**: `title_zh` next to `title` translates a page title;
+  `title_zh` in `_data/navigation.yml` translates a nav label; `title_zh`,
+  `description_zh` and `topics_zh` under `publication_area` in `_config.yml`
+  translate the research areas.
+- **Strings that live in an attribute or in JavaScript** (placeholders,
+  `<option>` labels, an SVG `<title>`): put `data-en` and `data-zh` on the
+  element, plus `data-i18n-attr="placeholder"` when writing an attribute rather
+  than the text. `_includes/lang-toggle.html` applies these and fires a
+  `langchange` event that the contact panel and the visitor map listen for.
+
+Only put `.i18n-en` / `.i18n-zh` on plain `<span>`/`<div>`/`<p>` wrappers: the
+CSS uses `display: revert`, so an element that carries its own display (a
+`.btn`, a grid cell) must hold the wrapper inside it rather than on it.
+
+Deliberately left in English: paper titles, author lists, journal names, and
+the publication pages' abstracts, which are the papers' own language; the US
+state names in the Footprint map tooltips; and the owner-only edit panel at
+`/footprint/?edit`.
+
+Shared material — the homepage overview figure, the selected-publications list,
+the visitor map — sits outside the language wrappers so it is not duplicated in
+the DOM.
+
 ## Reach-out panel (message form)
 
 A folded "Reach out" tab sits on the right edge of every page

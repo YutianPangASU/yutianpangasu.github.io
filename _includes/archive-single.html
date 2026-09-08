@@ -46,7 +46,7 @@
 
     <h2 class="archive__item-title" itemprop="headline">
       {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">{% include t.html en="Permalink" zh="固定链接" %}</span></a>
       {% else %}
         <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
       {% endif %}
@@ -70,13 +70,13 @@
           {% elsif post.category == 'patents' %}
           <p>{{ post.venue }}, {{ post.date | default: "1900-01-01" | date: "%Y" }}</p>
           {% else %}
-          <p>Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
+          <p>{% include t.html en="Published in" zh="发表于" %} <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
           {% endif %}
           {% if post.arxiv %}
           <p class="archive__item-links"><a href="{{ post.arxiv }}" rel="noopener"><i class="ai ai-arxiv ai-fw" aria-hidden="true"></i> arXiv</a></p>
           {% endif %}
         {% elsif post.date %}
-         <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
+         <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {% include t.html en="Published:" zh="发表时间：" %}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}
 
     {% if post.excerpt and site.read_more != 'enabled' %}
@@ -91,31 +91,31 @@
         <pre><code>{{ post.bibtex | strip | escape }}</code></pre>
       </details>
     {% elsif post.citation and post.paperurl and post.slidesurl and post.bibtexurl %}
-      <p>Recommended citation: {{ post.citation }}<br /><a href="{{ post.paperurl }}">Download Paper</a> | <a href="{{ post.slidesurl }}">Download Slides</a> | <a href="{{ post.bibtexurl }}">Download Bibtex</a></p>
+      <p>{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ post.citation }}<br /><a href="{{ post.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a> | <a href="{{ post.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a> | <a href="{{ post.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
     {% elsif post.citation and post.paperurl and post.slidesurl %}
-      <p>Recommended citation: {{ post.citation }}<br /><a href="{{ post.paperurl }}">Download Paper</a> | <a href="{{ post.slidesurl }}">Download Slides</a></p>
+      <p>{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ post.citation }}<br /><a href="{{ post.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a> | <a href="{{ post.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a></p>
     {% elsif post.citation and post.paperurl and post.bibtexurl %}
-      <p>Recommended citation: {{ post.citation }}<br /><a href="{{ post.paperurl }}">Download Paper</a> | <a href="{{ post.bibtexurl }}">Download Bibtex</a></p>
+      <p>{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ post.citation }}<br /><a href="{{ post.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a> | <a href="{{ post.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
     {% elsif post.citation and post.paperurl %}
-      <p>Recommended citation: {{ post.citation }}<br /><a href="{{ post.paperurl }}">Download Paper</a></p>
+      <p>{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ post.citation }}<br /><a href="{{ post.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a></p>
     {% elsif post.citation and post.slidesurl and post.bibtexurl %}
-      <p>Recommended citation: {{ post.citation }}<br /><a href="{{ post.slidesurl }}">Download Slides</a> | <a href="{{ post.bibtexurl}}">Download Bibtex</a></p>
+      <p>{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ post.citation }}<br /><a href="{{ post.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a> | <a href="{{ post.bibtexurl}}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
     {% elsif post.citation and post.slidesurl %}
-      <p>Recommended citation: {{ post.citation }}<br /><a href="{{ post.slidesurl }}">Download Slides</a></p>
+      <p>{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ post.citation }}<br /><a href="{{ post.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a></p>
     {% elsif post.citation and post.bibtexurl %}
-      <p>Recommended citation: {{ post.citation }}<br /><a href="{{ post.bibtexurl }}">Download Bibtex</a></p>
+      <p>{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ post.citation }}<br /><a href="{{ post.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
     {% elsif post.citation %}
-      <p>Recommended citation: {{ post.citation }}</p>
+      <p>{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ post.citation }}</p>
     {% elsif post.paperurl and post.bibtexurl %}
-      <p><a href="{{ post.paperurl }}">Download Paper</a> | <a href="{{ post.bibtexurl }}">Download Bibtex</a></p>
+      <p><a href="{{ post.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a> | <a href="{{ post.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
     {% elsif post.paperurl %}
-      <p><a href="{{ post.paperurl }}">Download Paper</a></p>
+      <p><a href="{{ post.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a></p>
     {% elsif post.slidesurl and post.bibtexurl %}
-      <p><a href="{{ post.slidesurl }}">Download Slides</a> | <a href="{{ post.bibtexurl }}">Download Bibtex</a></p>
+      <p><a href="{{ post.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a> | <a href="{{ post.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
     {% elsif post.slidesurl %}
-      <p><a href="{{ post.slidesurl }}">Download Slides</a></p>
+      <p><a href="{{ post.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a></p>
     {% elsif post.bibtexurl %}
-      <p><a href="{{ post.bibtexurl }}">Download Bibtex</a></p>
+      <p><a href="{{ post.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
     {% endif %}
 
     {% if show_list_teaser %}

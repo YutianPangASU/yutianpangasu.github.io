@@ -26,20 +26,20 @@ layout: default
     <div class="page__inner-wrap">
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
-          {% if page.title %}<h1 class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
+          {% if page.title %}<h1 class="page__title" itemprop="headline">{% if page.title_zh %}{% include t.html en=page.title zh=page.title_zh %}{% else %}{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}{% endif %}</h1>{% endif %}
           {% if page.read_time %}
             <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
           {% endif %}
         {% if page.modified %}
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {% include t.html en="Published:" zh="发表时间：" %}</strong> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
         {% endif %}
         
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.venue and page.date %}
-          <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }}{% if page.arxiv %} &middot; <a href="{{ page.arxiv }}" rel="noopener"><i class="ai ai-arxiv ai-fw" aria-hidden="true"></i> arXiv</a>{% endif %} </p>
+          <p>{% include t.html en="Published in" zh="发表于" %} <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }}{% if page.arxiv %} &middot; <a href="{{ page.arxiv }}" rel="noopener"><i class="ai ai-arxiv ai-fw" aria-hidden="true"></i> arXiv</a>{% endif %} </p>
         {% elsif page.date %}
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {% include t.html en="Published:" zh="发表时间：" %}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}    
         </header>
       {% endunless %}
@@ -61,33 +61,33 @@ layout: default
 
         {% if page.bibtex %}
           <div class="bibtex" id="bibtex">
-            <p class="bibtex__label">Recommended citation <button type="button" class="bibtex__copy" onclick="navigator.clipboard.writeText(this.closest('.bibtex').querySelector('code').textContent).then(()=>{this.textContent='copied';setTimeout(()=>{this.textContent='copy BibTeX'},1500)})">copy BibTeX</button></p>
+            <p class="bibtex__label">{% include t.html en="Recommended citation" zh="推荐引用格式" %} <button type="button" class="bibtex__copy" data-en="copy BibTeX" data-zh="复制 BibTeX" onclick="navigator.clipboard.writeText(this.closest('.bibtex').querySelector('code').textContent).then(()=>{var d=document.documentElement.getAttribute('data-lang')==='zh';this.textContent=d?'已复制':'copied';setTimeout(()=>{this.textContent=d?'复制 BibTeX':'copy BibTeX'},1500)})">copy BibTeX</button></p>
             <pre><code>{{ page.bibtex | strip | escape }}</code></pre>
           </div>
         {% elsif page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
+          <p style="font-size: smaller">{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ page.citation }}<br /><a href="{{ page.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a> | <a href="{{ page.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a> | <a href="{{ page.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
         {% elsif page.citation and page.paperurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
+          <p style="font-size: smaller">{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ page.citation }}<br /><a href="{{ page.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a> | <a href="{{ page.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a></p>
         {% elsif page.citation and page.paperurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
+          <p style="font-size: smaller">{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ page.citation }}<br /><a href="{{ page.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a> | <a href="{{ page.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
         {% elsif page.citation and page.paperurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a></p>
+          <p style="font-size: smaller">{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ page.citation }}<br /><a href="{{ page.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a></p>
         {% elsif page.citation and page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
+          <p style="font-size: smaller">{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ page.citation }}<br /><a href="{{ page.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a> | <a href="{{ page.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
         {% elsif page.citation and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a></p>
+          <p style="font-size: smaller">{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ page.citation }}<br /><a href="{{ page.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a></p>
         {% elsif page.slidesurl and page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
+          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a> | <a href="{{ page.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
         {% elsif page.paperurl and page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
+          <p style="font-size: smaller"><a href="{{ page.paperurl }}">{% include t.html en="Download Paper" zh="下载论文" %}</a> | <a href="{{ page.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
         {% elsif page.citation and page.bibtexurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
+          <p style="font-size: smaller">{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ page.citation }}<br /><a href="{{ page.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
         {% elsif page.citation %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}</p>
+          <p style="font-size: smaller">{% include t.html en="Recommended citation:" zh="推荐引用格式：" %} {{ page.citation }}</p>
         {% elsif page.slidesurl %}
-          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">Download Slides</a></p>
+          <p style="font-size: smaller"><a href="{{ page.slidesurl }}">{% include t.html en="Download Slides" zh="下载幻灯片" %}</a></p>
         {% elsif page.bibtexurl %}
-          <p style="font-size: smaller"><a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
+          <p style="font-size: smaller"><a href="{{ page.bibtexurl }}">{% include t.html en="Download Bibtex" zh="下载 BibTeX" %}</a></p>
         {% endif %}
 
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}

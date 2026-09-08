@@ -4,7 +4,7 @@
   <a class="pub-line__title" href="{{ base_path }}{{ include.post.url }}">{{ include.post.title }}</a>.
   {{ include.post.authors }}
   {%- if include.post.category == 'workingpapers' %}
-  Working paper, in preparation.
+  {% include t.html en="Working paper, in preparation." zh="工作论文，撰写中。" %}
   {%- elsif include.post.category == 'underreview' %}
   {{ include.post.venue }}.
   {%- elsif include.post.category == 'patents' %}
