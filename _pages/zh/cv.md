@@ -53,4 +53,4 @@ wallpaper: /images/wallpapers/wall3-bg.webp
 ======
 * 技术程序委员会委员，CVPR「超越可见光谱的感知」研讨会，2024 年至今
 * 青年编委，*Computer Systems Science and Engineering*，2023 年至今
-* 为航空航天、机械、交通运输、人工智能、工业工程与运筹学、计算机与电子工程等领域的 50 余种期刊担任审稿人，包括 *Aerospace Science and Technology*、*Chinese Journal of Aeronautics*、*AIAA Journal of Aerospace Information Systems*、*AIAA Journal of Aircraft*、*Computers in Industry*、*Information Fusion*、*Reliability Engineering & System Safety*、*Transportation Research Part C/D/E/F*，以及 IEEE T-ITS/TAES
+* 为航空航天、机械、交通运输、人工智能、工业工程与运筹学、计算机与电子工程等领域的 50 余个期刊担任审稿人，包括 *Aerospace Science and Technology*、*Chinese Journal of Aeronautics*、*AIAA Journal of Aerospace Information Systems*、*AIAA Journal of Aircraft*、*Computers in Industry*、*Information Fusion*、*Reliability Engineering & System Safety*、*Transportation Research Part C/D/E/F*，以及 IEEE T-ITS/TAES
