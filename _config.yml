@@ -35,7 +35,8 @@ author:
   employer         : "The University of Texas at Austin"
   employer_zh      : "得克萨斯大学奥斯汀分校"
   uri              : # URL
-  email            : "yutian.pang@austin.utexas.edu"
+  email            : "yutian.pang@outlook.com"
+  email_alt        : "yutian.pang@austin.utexas.edu"   # listed alongside the first in the contact panel
   motto            : "夫抱火厝之积薪之下，而寝其上，火未及燃，因谓之安，偷安者也。"
   motto_author     : "贾谊"
 

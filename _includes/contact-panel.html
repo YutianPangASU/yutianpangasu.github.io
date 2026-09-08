@@ -105,7 +105,7 @@
       <div id="contact-status" hidden></div>
     </form>
 
-    <p class="contact-note">{% include t.html en="Prefer email? Write to" zh="更习惯用邮件？请写信至" %} <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.</p>
+    <p class="contact-note">{% include t.html en="Prefer email? Write to" zh="更习惯用邮件？请写信至" %} <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a> {% include t.html en="or" zh="或" %} <a href="mailto:{{ site.author.email_alt }}">{{ site.author.email_alt }}</a>{% if page.lang == "zh" %}。{% else %}.{% endif %}</p>
   </aside>
 </div>
 
@@ -135,7 +135,7 @@
       send: 'Send message',
       ok: 'Thank you. Your message is on its way, and I usually reply within a few days.',
       failed: 'Something went wrong.',
-      emailFallback: ' You can also email me at {{ site.author.email }}.'
+      emailFallback: ' You can also email me at {{ site.author.email }} or {{ site.author.email_alt }}.'
     },
     zh: {
       meeting: '您想讨论什么？平时哪些时间方便？',
@@ -147,7 +147,7 @@
       send: '发送留言',
       ok: '谢谢您的留言，消息已经发出。我通常会在几天内回复。',
       failed: '出了点问题。',
-      emailFallback: '您也可以直接发邮件到 {{ site.author.email }}。'
+      emailFallback: '您也可以直接发邮件到 {{ site.author.email }} 或 {{ site.author.email_alt }}。'
     }
   };
 
