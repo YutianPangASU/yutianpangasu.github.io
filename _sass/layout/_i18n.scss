@@ -18,9 +18,9 @@ html[data-lang="zh"] body {
 }
 
 /*
-   The switch sits at the right end of the masthead, as the single .persist.tail
-   list item: the greedy nav assumes one tail element and duplicates hidden
-   links if it finds more.
+   The switch is the last item of .greedy-nav__tail, the block the masthead
+   pins to the right edge of the bar (see _includes/masthead.html), so it stays
+   the right-most thing in the nav at every width.
 */
 
 .lang-toggle__opt {
@@ -33,20 +33,17 @@ html[data-lang="zh"] body {
   }
 }
 
-.greedy-nav .visible-links .nav-tools {
+.greedy-nav__tail {
   white-space: nowrap;
 
   .lang-toggle {
     display: inline-flex;
     align-items: baseline;
-    margin: 0;
+    /* flush with the right edge of the bar, one nav gap clear of the links */
+    margin: 0 0 0 1rem;
     padding: 0.25em 0;
     font-size: $type-size-6;
     letter-spacing: 0.02em;
-
-    &:before {
-      display: none;
-    }
 
     &:hover .lang-toggle__opt {
       color: var(--global-masthead-link-color-hover);

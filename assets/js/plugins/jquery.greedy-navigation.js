@@ -8,14 +8,20 @@
 var $nav = $('#site-nav');
 var $btn = $('#site-nav button');
 var $vlinks = $('#site-nav .visible-links');
-var $vlinks_persist_tail = $vlinks.children("*.persist.tail");
+var $tail = $('#site-nav .greedy-nav__tail');
 var $hlinks = $('#site-nav .hidden-links');
 
 var breaks = [];
 
+// The tail (dropdown button plus the language switch) is pinned to the right
+// edge of the bar, so the links only get what is left of the nav.
+function availableWidth() {
+  return $nav.width() - $tail.outerWidth(true) - 10;
+}
+
 function updateNav() {
 
-  var availableSpace = $btn.hasClass('hidden') ? $nav.width() : $nav.width() - $btn.width() - 30;
+  var availableSpace = availableWidth();
 
   // The visible list is overflowing the nav
   if ($vlinks.width() > availableSpace) {
@@ -27,10 +33,10 @@ function updateNav() {
       // Move item to the hidden list
       $vlinks.children("*:not(.persist)").last().prependTo($hlinks);
 
-      availableSpace = $btn.hasClass("hidden") ? $nav.width() : $nav.width() - $btn.width() - 30;
-
-      // Show the dropdown btn
+      // Show the dropdown btn, then re-measure: it widens the tail
       $btn.removeClass("hidden");
+
+      availableSpace = availableWidth();
     }
 
     // The visible list is not overflowing
@@ -39,11 +45,7 @@ function updateNav() {
     // There is space for another item in the nav
     while (breaks.length > 0 && availableSpace > breaks[breaks.length - 1]) {
       // Move the item to the visible list
-      if ($vlinks_persist_tail.children().length > 0) {
-        $hlinks.children().first().insertBefore($vlinks_persist_tail);
-      } else {
-        $hlinks.children().first().appendTo($vlinks);
-      }
+      $hlinks.children().first().appendTo($vlinks);
       breaks.pop();
     }
 

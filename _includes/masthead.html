@@ -5,7 +5,6 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <button><span class="navicon"></span></button>
         <ul class="visible-links">
           <li class="masthead__menu-item masthead__menu-item--lg persist {% if page.url == '/' or page.url == '/index.html' or page.url == '/zh/' %}selected{% endif %}">
             <a href="{{ base_path }}{{ lang_prefix }}/">{% include t.html en=site.title zh=site.title_zh %}</a>
@@ -22,20 +21,29 @@
               <a href="{{ domain }}{{ link_url }}">{% include t.html en=link.title zh=link.title_zh %}</a>
             </li>
           {% endfor %}
-          {% comment %}
-            Language switch: a plain link to the same page in the other language
-            (see lang-switch-url.html); English lives at the root, Chinese under
-            /zh/. It must stay the only .persist.tail item, because the greedy nav
-            in assets/js/main.min.js clones restored links if it finds more than one,
-            and it must be an <a>, since that script grabs every <button> in the nav.
-          {% endcomment %}
-          <li class="masthead__menu-item persist tail nav-tools">
-            <a id="lang-toggle" class="lang-toggle" href="{{ base_path }}{{ switch_url }}" hreflang="{% if page.lang == 'zh' %}en{% else %}zh-Hans{% endif %}" aria-label="{% if page.lang == 'zh' %}Switch to English / 切换到英文{% else %}Switch to Chinese / 切换到中文{% endif %}">
-              <span class="lang-toggle__opt lang-toggle__opt--zh{% if page.lang == 'zh' %} is-active{% endif %}" lang="zh-Hans">中文</span><span class="lang-toggle__sep" aria-hidden="true">/</span><span class="lang-toggle__opt lang-toggle__opt--en{% unless page.lang == 'zh' %} is-active{% endunless %}">ENG</span>
-            </a>
-          </li>
         </ul>
-        <ul class="hidden-links hidden"></ul>
+        {% comment %}
+          Everything pinned to the right edge of the masthead, at every width:
+          the overflow menu first, then the language switch as the right-most
+          item. The dropdown lives inside .greedy-nav__menu so its arrow keeps
+          pointing at the button rather than at the switch. The greedy nav in
+          assets/js/main.min.js measures this whole block and hands the links
+          only what is left of the bar; the switch must stay an <a>, since that
+          script grabs every <button> in the nav.
+
+          Language switch: a plain link to the same page in the other language
+          (see lang-switch-url.html); English lives at the root, Chinese under
+          /zh/.
+        {% endcomment %}
+        <div class="greedy-nav__tail">
+          <div class="greedy-nav__menu">
+            <button><span class="navicon"></span></button>
+            <ul class="hidden-links hidden"></ul>
+          </div>
+          <a id="lang-toggle" class="lang-toggle" href="{{ base_path }}{{ switch_url }}" hreflang="{% if page.lang == 'zh' %}en{% else %}zh-Hans{% endif %}" aria-label="{% if page.lang == 'zh' %}Switch to English / 切换到英文{% else %}Switch to Chinese / 切换到中文{% endif %}">
+            <span class="lang-toggle__opt lang-toggle__opt--zh{% if page.lang == 'zh' %} is-active{% endif %}" lang="zh-Hans">中文</span><span class="lang-toggle__sep" aria-hidden="true">/</span><span class="lang-toggle__opt lang-toggle__opt--en{% unless page.lang == 'zh' %} is-active{% endunless %}">ENG</span>
+          </a>
+        </div>
       </nav>
     </div>
   </div>
