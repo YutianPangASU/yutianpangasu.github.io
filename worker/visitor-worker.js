@@ -10,6 +10,11 @@
  *                   Relay, mobile carriers, and cloud hosts.
  *   GET  /visits  — public JSON of recent visits (time, country, region, city,
  *                   lat/lon). NO IP addresses — this feeds the public map.
+ *   GET  /china   — owner-only breakdown of visits carrying a Chinese signal
+ *                   (mainland IP, Chinese carrier or university network, or a
+ *                   zh-CN browser on an Asia/Shanghai clock). Same key/cookie
+ *                   as /admin. Read it as a floor: mainland networks that
+ *                   cannot reach this worker leave no trace at all.
  *   GET  /admin?key=YOUR_ADMIN_KEY
  *                 — owner-only HTML table of the full log, including IPs.
  *                   A correct key sets a year-long cookie, after which plain
@@ -93,6 +98,10 @@ const MESSAGES_SCHEMA = `CREATE TABLE IF NOT EXISTS messages (
 const MIGRATIONS = [
   "ALTER TABLE visits ADD COLUMN asn INTEGER",
   "ALTER TABLE visits ADD COLUMN org TEXT",
+  "ALTER TABLE visits ADD COLUMN lang TEXT",
+  "ALTER TABLE visits ADD COLUMN tz TEXT",
+  "ALTER TABLE visits ADD COLUMN colo TEXT",
+  "ALTER TABLE visits ADD COLUMN via TEXT",
 ];
 
 async function ensureSchema(db) {
@@ -165,6 +174,150 @@ function adminHeaders(env, { qKey }) {
       `adminkey=${qKey}; HttpOnly; Secure; Path=/; Max-Age=31536000; SameSite=Lax`;
   }
   return headers;
+}
+
+// ---------------------------------------------------------------------------
+// China visibility
+// ---------------------------------------------------------------------------
+//
+// Counting mainland readers is harder than counting anyone else, for two
+// reasons. Much of the mainland cannot reach this worker at all, so an
+// IP-based count undercounts by an unknown amount. And the Chinese academics
+// most likely to find this site are the ones behind a VPN, whose IP says Los
+// Angeles. So three independent signals are recorded and reported separately
+// rather than merged into one number that would be wrong in both directions:
+//
+//   IP        cf.country === "CN". Certain, but blind to blocked networks.
+//   Network   cf.asOrganization names a Chinese carrier or cloud. CERNET
+//             (AS4538) is the university backbone, so a hit carried by it is
+//             almost certainly an academic reader.
+//   Browser   Accept-Language zh-CN and an Asia/Shanghai clock. Both are set
+//             by the browser, not the network, so a VPN does not hide them.
+
+const CN_NET_RE = /\b(china|chinanet|chinamobile|chinatelecom|cernet|unicom|tietong|aliyun|alibaba|tencent|baidu|huawei)\b/i;
+const CN_TZ = ["Asia/Shanghai", "Asia/Urumqi", "Asia/Chongqing", "Asia/Harbin", "Asia/Kashgar", "PRC"];
+// Research and education networks, called out because they are the visits that
+// actually answer "are Chinese departments looking at me".
+const CN_EDU_RE = /\b(cernet|cstnet|edu\.cn|university|universities)\b/i;
+
+function isCnLang(lang) {
+  const first = String(lang || "").split(",")[0].trim().toLowerCase();
+  return /^zh(?:[-_](?:cn|hans(?:[-_]cn)?))?$/.test(first);
+}
+
+// Null for a row with no Chinese signal at all; otherwise the strongest tier
+// the row qualifies for, plus every reason behind it.
+function chinaTier(r) {
+  const ipCn = r.country === "CN";
+  const netCn = CN_NET_RE.test(r.org || "");
+  const langCn = isCnLang(r.lang);
+  const tzCn = CN_TZ.indexOf(r.tz) !== -1;
+  const why = [];
+  if (ipCn) why.push("Chinese IP");
+  if (netCn) why.push("Chinese network");
+  if (langCn) why.push("zh-CN browser");
+  if (tzCn) why.push("China clock");
+  if (!why.length) return null;
+  if (ipCn) return { rank: 0, why };
+  if (netCn || (langCn && tzCn)) return { rank: 1, why };
+  return { rank: 2, why };
+}
+
+const CN_TIERS = [
+  ["In mainland China",
+   "Cloudflare placed the IP in CN. Certain, and an undercount: mainland networks that cannot reach this worker never appear here at all."],
+  ["China-linked, VPN or overseas",
+   "A Chinese carrier or cloud network, or a zh-CN browser running on a China clock. Mainland readers on a VPN land here, and so do Chinese academics working abroad."],
+  ["Possibly China",
+   "One weak signal only. Includes Chinese speakers anywhere in the world, so treat it as an upper bound."],
+];
+
+function tally(rows, key) {
+  const m = new Map();
+  for (const r of rows) {
+    const k = key(r);
+    if (!k) continue;
+    m.set(k, (m.get(k) || 0) + 1);
+  }
+  return [...m.entries()].sort((a, b) => b[1] - a[1]);
+}
+
+function tallyTable(title, pairs, empty) {
+  if (!pairs.length) return `<h3>${esc(title)}</h3><p class="none">${esc(empty)}</p>`;
+  const rows = pairs.map(([k, n]) =>
+    `<tr><td>${esc(k)}${CN_EDU_RE.test(k) ? ' <span class="edu">education</span>' : ""}</td><td>${n}</td></tr>`
+  ).join("");
+  return `<h3>${esc(title)}</h3><table>${rows}</table>`;
+}
+
+function chinaPage(results) {
+  const hits = [];
+  for (const r of results) {
+    const t = chinaTier(r);
+    if (t) hits.push(Object.assign({}, r, t));
+  }
+  const byTier = [0, 1, 2].map(rank => hits.filter(h => h.rank === rank));
+  const solid = byTier[0].length + byTier[1].length;
+  // Visits that only got through on the second endpoint are a direct reading of
+  // how much the primary one is being blocked.
+  const rescued = hits.filter(h => h.via === "fallback").length;
+
+  const cards = CN_TIERS.map(([label, blurb], i) =>
+    `<div class="card r${i}"><div class="n">${byTier[i].length}</div><div class="lab">${esc(label)}</div>
+<p>${esc(blurb)}</p></div>`).join("");
+
+  const provinces = tallyTable("Province, for mainland IPs",
+    tally(byTier[0], r => r.region || r.city || null),
+    "No mainland IPs recorded yet.");
+  const networks = tallyTable("Network carrying the visit",
+    tally(byTier[0].concat(byTier[1]), r => r.org || null),
+    "Nothing recorded yet.");
+  const edge = tallyTable("Cloudflare edge that served it",
+    tally(byTier[0].concat(byTier[1]), r => r.colo || null),
+    "Nothing recorded yet.");
+
+  const rows = hits.slice(0, 300).map(h =>
+    `<tr class="r${h.rank}"><td>${esc(String(h.ts).replace("T", " ").slice(0, 16))}</td>
+<td>${esc(CN_TIERS[h.rank][0])}</td>
+<td>${esc([h.city, h.region, h.country].filter(Boolean).join(", ") || "unknown")}</td>
+<td>${esc(h.org || "")}${h.asn ? " (AS" + h.asn + ")" : ""}</td>
+<td>${esc(h.tz || "")}</td>
+<td>${esc(h.why.join(", "))}</td></tr>`).join("");
+
+  return `<!doctype html><meta charset="utf-8"><title>China visibility</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font:14px/1.6 sans-serif;margin:2rem auto;max-width:60rem;padding:0 1rem;color:#182430}
+h2{margin-bottom:.25rem}.nav{color:#6b7a8a;margin-bottom:1.5rem}
+.cards{display:flex;flex-wrap:wrap;gap:1rem;margin:1.5rem 0}
+.card{flex:1 1 14rem;border:1px solid #d6dde3;border-left-width:4px;border-radius:6px;padding:.75rem 1rem}
+.card .n{font-size:2rem;font-weight:700;line-height:1.1}
+.card .lab{font-weight:600;margin-bottom:.35rem}
+.card p{color:#6b7a8a;font-size:12px;margin:0}
+.r0{border-left-color:#A2346B}.r1{border-left-color:#e08a3c}.r2{border-left-color:#b6c2cc}
+table{border-collapse:collapse;width:100%;margin-bottom:1.5rem}
+td,th{border:1px solid #e3e8ec;padding:4px 8px;text-align:left;font-size:13px}
+th{background:#edf3f7}
+tr.r0 td:nth-child(2){color:#A2346B;font-weight:600}
+tr.r1 td:nth-child(2){color:#b4661f}
+tr.r2 td:nth-child(2){color:#6b7a8a}
+.edu{font-size:10px;background:#e8f5e9;color:#1b5e20;padding:1px 6px;border-radius:8px;text-transform:uppercase;letter-spacing:.03em}
+.none{color:#6b7a8a}
+.caveat{background:#fbf7ed;border:1px solid #ecdfc4;border-radius:6px;padding:.75rem 1rem;font-size:13px;color:#5b4a2a}
+</style>
+<h2>China visibility — ${solid} solid, ${hits.length} with any signal</h2>
+<div class="nav"><a href="/admin">Visitor log</a> · <a href="/inbox">Inbox</a> · <a href="https://yutianpang.com">yutianpang.com</a></div>
+<div class="cards">${cards}</div>
+<p class="caveat"><b>Read this as a floor, not a count.</b> A visit is only recorded if the browser reached this worker.
+Mainland networks that cannot reach it leave no trace at all, so the true number of Chinese readers is higher than the
+first card and the gap is not measurable from here. The middle card is the one to watch: it is where mainland academics
+on a VPN show up, and it does not depend on the mainland being able to reach Cloudflare directly.</p>
+<p class="caveat">${rescued
+    ? esc(rescued + " of these arrived only on the fallback endpoint, meaning the primary one was blocked or unreachable for that visitor.")
+    : "No visit has needed the fallback endpoint yet. Until a second endpoint on a custom domain is configured in _includes/visitor-map.html, that is expected rather than reassuring: a visitor who cannot reach the primary endpoint has nothing else to try."}</p>
+${provinces}${networks}${edge}
+<h3>Visits with a Chinese signal</h3>
+<table><tr><th>Time (UTC)</th><th>Tier</th><th>IP location</th><th>Network</th><th>Browser clock</th><th>Signals</th></tr>${rows || '<tr><td colspan="6" class="none">Nothing yet.</td></tr>'}</table>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -332,6 +485,13 @@ export default {
 
       const ip = request.headers.get("CF-Connecting-IP") || "";
       const cf = request.cf || {};
+      // Language rides along on the request; the clock is read by the page and
+      // handed back on the query string. Both describe the browser rather than
+      // the network, so a VPN does not hide either one. "via" says which of the
+      // page's two endpoints got through, which is how blocking gets measured.
+      const lang = (request.headers.get("Accept-Language") || "").slice(0, 100);
+      const tz = (url.searchParams.get("tz") || "").slice(0, 60);
+      const via = url.searchParams.get("via") === "fallback" ? "fallback" : "primary";
 
       // Skip repeat hits from the same IP within 30 minutes
       const last = await env.DB
@@ -342,7 +502,7 @@ export default {
       }
 
       await env.DB
-        .prepare("INSERT INTO visits (ts, ip, country, region, city, lat, lon, ua, asn, org) VALUES (?,?,?,?,?,?,?,?,?,?)")
+        .prepare("INSERT INTO visits (ts, ip, country, region, city, lat, lon, ua, asn, org, lang, tz, colo, via) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
         .bind(
           new Date().toISOString(),
           ip,
@@ -353,7 +513,11 @@ export default {
           cf.longitude ? Number(cf.longitude) : null,
           ua.slice(0, 200),
           cf.asn ? Number(cf.asn) : null,   // network owner, e.g. a university, a mobile
-          cf.asOrganization || null         // carrier, Apple Private Relay, or a cloud host
+          cf.asOrganization || null,        // carrier, Apple Private Relay, or a cloud host
+          lang || null,
+          tz || null,
+          cf.colo || null,                  // edge that served it; mainland traffic lands in LAX, SJC, HKG or NRT
+          via
         ).run();
       return json({ ok: true });
     }
@@ -391,6 +555,15 @@ export default {
       return Response.redirect(url.origin + "/inbox", 303);
     }
 
+    if (url.pathname === "/china") {
+      const keys = adminKeys(request, url);
+      if (!isAdmin(env, keys)) return loginPage("China visibility", "/china");
+      const { results } = await env.DB
+        .prepare("SELECT ts, country, region, city, org, asn, lang, tz, colo, via FROM visits ORDER BY ts DESC, id DESC LIMIT 5000")
+        .all();
+      return new Response(chinaPage(results), { headers: adminHeaders(env, keys) });
+    }
+
     if (url.pathname === "/admin") {
       const keys = adminKeys(request, url);
       if (!isAdmin(env, keys)) return loginPage("Visitor log", "/admin");
@@ -406,11 +579,11 @@ export default {
 <style>body{font:13px/1.5 monospace;margin:2rem;color:#182430}
 table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:4px 8px;text-align:left}
 th{background:#edf3f7}</style>
-<h2>Visitor log — ${results.length} entries · <a href="https://yutianpang.com">yutianpang.com</a> · <a href="/inbox">Inbox</a></h2>
+<h2>Visitor log — ${results.length} entries · <a href="https://yutianpang.com">yutianpang.com</a> · <a href="/china">China</a> · <a href="/inbox">Inbox</a></h2>
 <table><tr><th>Time (UTC)</th><th>IP</th><th>Country</th><th>Region</th><th>City</th><th>Network</th><th>User agent</th></tr>${rows}</table>`;
       return new Response(html, { headers: adminHeaders(env, keys) });
     }
 
-    return json({ service: "visitor logger", endpoints: ["/hit", "/visits", "/admin?key=…", "POST /contact", "/inbox"] });
+    return json({ service: "visitor logger", endpoints: ["/hit", "/visits", "/admin?key=…", "/china", "POST /contact", "/inbox"] });
   },
 };

@@ -99,6 +99,75 @@ User attributes → Demographic details.
 
 Optional upgrade to a full interactive on-page map: deploy
 `worker/visitor-worker.js` on Cloudflare (setup steps in that file), then set
-`VISITOR_API` in `_includes/visitor-map.html` to the worker URL. Anyone can
+`visitor.api` in `_config.yml` to the worker URL. Anyone can
 then click dots to see visit time/city/state/country; your private IP log is
 at `<worker-url>/admin?key=ADMIN_KEY`.
+
+The per-page beacon itself lives in `_includes/visit-beacon.html` and is pulled
+in sitewide from `_includes/scripts.html`, so every page counts, not only the
+homepage. The worker drops repeat hits from the same IP inside 30 minutes, so
+one reader browsing several pages is still one visit.
+
+## Counting readers in mainland China
+
+Visitors in mainland China load the site normally, because GitHub Pages is
+reachable there, and then vanish: the beacon they send goes to
+`visitor-log.yutian-pang.workers.dev`, and the `*.workers.dev` domain is
+blocked. The request dies with no error anywhere on the page, so a blocked
+visit and no visit look identical. Confirmed on both ends: friends in China
+report reaching the site without a VPN, and the log holds zero CN rows out of
+532 while showing Hong Kong, which sits outside the firewall.
+
+The fix is to give the worker a custom domain. The site's own hosting does not
+change at all, so the reachability your Chinese readers already have is
+untouched. **Done 2026-09-08**; the steps below are kept as a record.
+`visits.yutianpang.com` is a proxied AAAA record at `100::` plus the worker
+route `visits.yutianpang.com/*`, because the Add-domain dialog would not
+register the hostname. The apex stays DNS-only on GitHub Pages.
+
+1. Cloudflare → Add a site → `yutianpang.com`, free plan. Let it import the
+   existing records, then change the nameservers at GoDaddy to the two
+   Cloudflare gives you.
+2. In Cloudflare DNS, leave the four GitHub Pages A records
+   (185.199.108–111.153) set to **DNS only**, the grey cloud. This is what
+   keeps the site byte-for-byte as reachable as it is today. Do not proxy the
+   apex; Cloudflare's free edge is slower from China than GitHub Pages is.
+3. Worker → Settings → Domains & Routes → Add → Custom domain →
+   `visits.yutianpang.com`. Cloudflare creates the proxied record and the
+   certificate on its own.
+4. In `_config.yml`, swap the two `visitor` lines:
+
+       visitor:
+         api          : "https://visits.yutianpang.com"
+         api_fallback : "https://visitor-log.yutian-pang.workers.dev"
+
+   The fallback is only tried when the primary fails, and the worker tags the
+   visits that needed it, so `/china` shows how much blocking is still
+   happening.
+5. Set `contact.api` to `https://visits.yutianpang.com` as well. The reach-out
+   panel POSTs to the same worker, so today a Chinese reader cannot send you a
+   message either. Do this step only after the custom domain resolves: the
+   contact form has no fallback.
+
+### Reading `/china`
+
+`<worker-url>/china` (same admin key as `/admin`) splits visits into three
+tiers, deliberately kept separate rather than summed:
+
+- **In mainland China** — Cloudflare placed the IP in CN. Certain, and a
+  floor: networks that cannot reach the worker never appear.
+- **China-linked, VPN or overseas** — a Chinese carrier or cloud network, or a
+  `zh-CN` browser running on an `Asia/Shanghai` clock. Language and timezone
+  are set by the browser rather than the network, so a VPN does not hide them.
+  This is the tier that matters most: mainland academics reaching an overseas
+  site are usually on a VPN, and their IP says Los Angeles.
+- **Possibly China** — one weak signal only. An upper bound; includes Chinese
+  speakers anywhere.
+
+The network table flags education networks. A hit carried by CERNET (AS4538),
+the Chinese university backbone, is almost certainly an academic reader, which
+is the signal worth watching on the faculty market.
+
+No self-hosted tracker can give complete mainland numbers. Only analytics
+hosted inside China (Baidu Tongji) would, at the cost of handing the visitor
+log to Baidu.

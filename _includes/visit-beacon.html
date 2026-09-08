@@ -1,0 +1,47 @@
+{% comment %}
+Sitewide visit beacon. Included from _includes/scripts.html so every page is
+recorded, not just the homepage; the worker's 30-minute per-IP dedupe keeps one
+reader browsing several pages from counting as several visits.
+
+The endpoints come from the `visitor` block in _config.yml. The primary one must
+be a custom domain: *.workers.dev is blocked from mainland China, so a visitor
+there loads the page normally and is then never recorded, with no error visible
+anywhere. The fallback is tried only when the primary fails, and the worker
+flags whichever visits needed it, which is what /china reports.
+{% endcomment %}
+{% if site.visitor.api %}
+<script>
+  var VISIT_BEACON_API = '{{ site.visitor.api }}';
+  var VISIT_BEACON_FALLBACK = '{{ site.visitor.api_fallback }}';
+  var VISIT_BEACON_TIMEOUT_MS = 4000;  /* a blocked host hangs rather than failing fast */
+
+  if (!window.__visitLogged && /yutianpang\.com$/.test(location.hostname)) {
+    window.__visitLogged = true;
+    (function () {
+      /* The clock and the language are set by the browser, not the network, so
+         a VPN does not hide either one. They are what identifies a mainland
+         reader whose IP says Los Angeles. */
+      var tz = '';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+      var q = '/hit?tz=' + encodeURIComponent(tz);
+
+      /* Resolves false rather than throwing, so a blocked or hanging endpoint
+         is reported back instead of becoming an unhandled rejection. */
+      function beacon(base, suffix) {
+        var ctl = window.AbortController ? new AbortController() : null;
+        var timer = setTimeout(function () { if (ctl) ctl.abort(); }, VISIT_BEACON_TIMEOUT_MS);
+        var opts = { keepalive: true };
+        if (ctl) opts.signal = ctl.signal;
+        return fetch(base + q + suffix, opts).then(
+          function () { clearTimeout(timer); return true; },
+          function () { clearTimeout(timer); return false; }
+        );
+      }
+
+      beacon(VISIT_BEACON_API, '').then(function (ok) {
+        if (!ok && VISIT_BEACON_FALLBACK) beacon(VISIT_BEACON_FALLBACK, '&via=fallback');
+      });
+    })();
+  }
+</script>
+{% endif %}

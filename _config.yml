@@ -148,8 +148,18 @@ publication_area:
 # at <api>/inbox. Set turnstile_site_key once a Turnstile widget exists for
 # yutianpang.com (Cloudflare dashboard → Turnstile); empty = no captcha.
 contact:
-  api                : "https://visitor-log.yutian-pang.workers.dev"
+  api                : "https://visits.yutianpang.com"
   turnstile_site_key : ""
+
+# Visit beacon (_includes/visit-beacon.html), served by the same worker.
+# `api` is a custom domain on purpose: the *.workers.dev hostname is blocked
+# from mainland China, so those readers loaded the page and were then never
+# recorded. The fallback is only tried when the primary fails, and the worker
+# tags the visits that needed it, which is what /china reports as "arrived only
+# on the fallback endpoint".
+visitor:
+  api          : "https://visits.yutianpang.com"
+  api_fallback : "https://visitor-log.yutian-pang.workers.dev"
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews
