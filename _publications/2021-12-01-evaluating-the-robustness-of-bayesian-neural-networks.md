@@ -16,7 +16,11 @@ bibtex: |
     title = {Evaluating the Robustness of Bayesian Neural Networks Against Different Types of Attacks},
     author = {Pang, Y. and Cheng, S. and Hu, J. and Liu, Y.},
     booktitle = {CVPR 2021 Workshop on Adversarial Machine Learning in Real-World Computer Vision Systems},
-    year = {2021}
+    year = {2021},
+    eprint = {2106.09223},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.LG},
+    url = {https://arxiv.org/abs/2106.09223}
   }
 ---
 

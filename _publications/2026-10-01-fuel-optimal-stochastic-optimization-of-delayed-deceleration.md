@@ -17,7 +17,11 @@ bibtex: |
     title = {Optimal TRACON Descent Procedures under Wind Uncertainty and Fuel Savings Factors},
     author = {Pang, Y. and Clarke, J.},
     note = {Under review at AIAA Journal of Aircraft},
-    year = {2026}
+    year = {2026},
+    eprint = {2608.22480},
+    archivePrefix = {arXiv},
+    primaryClass = {eess.SY},
+    url = {https://arxiv.org/abs/2608.22480}
   }
 header:
   teaser: publications/2026-10-01-fuel-optimal-stochastic-optimization-of-delayed-deceleration.png

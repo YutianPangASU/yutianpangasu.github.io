@@ -18,7 +18,11 @@ bibtex: |
     journal = {Transportation Research Part C: Emerging Technologies},
     volume = {158},
     pages = {104444},
-    year = {2024}
+    year = {2024},
+    eprint = {2311.16030},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.AI},
+    url = {https://arxiv.org/abs/2311.16030}
   }
 header:
   teaser: publications/2024-10-01-machine-learning-enhanced-aircraft-landing-scheduling-under.png

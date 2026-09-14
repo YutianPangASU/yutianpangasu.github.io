@@ -17,7 +17,11 @@ bibtex: |
     title = {Modeling the Impact of Communication and Human Uncertainties on Runway Capacity in Terminal Airspace},
     author = {Pang, Y. and Kendall, A. and Clarke, J.},
     journal = {Journal of Air Transport Management},
-    year = {2026}
+    year = {2026},
+    eprint = {2510.09943},
+    archivePrefix = {arXiv},
+    primaryClass = {eess.SY},
+    url = {https://arxiv.org/abs/2510.09943}
   }
 header:
   teaser: publications/2026-11-01-modeling-the-impact-of-communication-and-human.png

@@ -17,7 +17,11 @@ bibtex: |
     title = {Trajectory-Based Optimization for Air Traffic Control in the Terminal Maneuvering Area},
     author = {Pang, Y. and Delahaye, D. and Clarke, J.},
     note = {Under review at Transportation Research Part C},
-    year = {2026}
+    year = {2026},
+    eprint = {2604.17776},
+    archivePrefix = {arXiv},
+    primaryClass = {eess.SY},
+    url = {https://arxiv.org/abs/2604.17776}
   }
 header:
   teaser: publications/2026-07-01-trajectory-based-optimization-for-air-traffic-control.gif

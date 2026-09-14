@@ -19,7 +19,11 @@ bibtex: |
     journal = {Transportation Research Part C: Emerging Technologies},
     volume = {184},
     pages = {105540},
-    year = {2026}
+    year = {2026},
+    eprint = {2503.04974},
+    archivePrefix = {arXiv},
+    primaryClass = {eess.AS},
+    url = {https://arxiv.org/abs/2503.04974}
   }
 header:
   teaser: publications/2026-09-01-from-voice-to-safety-language-ai-powered.gif

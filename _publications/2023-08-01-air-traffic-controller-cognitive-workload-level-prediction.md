@@ -19,7 +19,11 @@ bibtex: |
     journal = {Advanced Engineering Informatics},
     volume = {57},
     pages = {102113},
-    year = {2023}
+    year = {2023},
+    eprint = {2307.10559},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.LG},
+    url = {https://arxiv.org/abs/2307.10559}
   }
 header:
   teaser: publications/2023-08-01-air-traffic-controller-cognitive-workload-level-prediction.png

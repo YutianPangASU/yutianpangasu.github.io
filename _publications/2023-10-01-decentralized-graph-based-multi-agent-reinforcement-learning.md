@@ -18,7 +18,11 @@ bibtex: |
     author = {Hu, J. and Xu, Z. and Wang, W. and Qu, G. and Pang, Y. and Liu, Y.},
     journal = {Neurocomputing},
     pages = {126974},
-    year = {2023}
+    year = {2023},
+    eprint = {2110.00096},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.MA},
+    url = {https://arxiv.org/abs/2110.00096}
   }
 ---
 

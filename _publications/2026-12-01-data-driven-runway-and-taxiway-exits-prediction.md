@@ -17,7 +17,11 @@ bibtex: |
     title = {Data-Driven Runway and Taxiway Exits Prediction of Landing Aircraft: A Case Study at Hartsfield-Jackson Atlanta International Airport},
     author = {Porcayo, A. and Pang, Y. and Thomas, M. and Clarke, J.},
     journal = {Journal of Air Transport Management},
-    year = {2026}
+    year = {2026},
+    eprint = {2606.11017},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.LG},
+    url = {https://arxiv.org/abs/2606.11017}
   }
 header:
   teaser: publications/2026-12-01-data-driven-runway-and-taxiway-exits-prediction.png

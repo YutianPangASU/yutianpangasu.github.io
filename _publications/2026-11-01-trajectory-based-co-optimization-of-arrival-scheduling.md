@@ -17,7 +17,11 @@ bibtex: |
     title = {Trajectory-Based Co-Optimization of Arrival Scheduling and Descent Path Design in the Terminal Maneuvering Area},
     author = {Pang, Y. and Clarke, J.},
     note = {Under review at Aerospace Science and Technology},
-    year = {2026}
+    year = {2026},
+    eprint = {2609.03234},
+    archivePrefix = {arXiv},
+    primaryClass = {eess.SY},
+    url = {https://arxiv.org/abs/2609.03234}
   }
 header:
   teaser: publications/2026-11-01-trajectory-based-co-optimization-of-arrival-scheduling.png

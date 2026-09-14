@@ -17,7 +17,11 @@ bibtex: |
     title = {Geometric Trajectory Optimization for TRACON Arrivals: An NLP Approach with ATC Vectoring Maneuver Modeling},
     author = {Pang, Y. and Delahaye, D. and Clarke, J.},
     booktitle = {Annual Modeling and Simulation Conference 2026},
-    year = {2026}
+    year = {2026},
+    eprint = {2604.18454},
+    archivePrefix = {arXiv},
+    primaryClass = {math.OC},
+    url = {https://arxiv.org/abs/2604.18454}
   }
 header:
   teaser: publications/2026-11-01-geometric-trajectory-optimization-for-tracon-arrivals-an.gif

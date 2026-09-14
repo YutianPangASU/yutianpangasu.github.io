@@ -18,7 +18,11 @@ bibtex: |
     author = {Rathnakumar, R. and Pang, Y. and Liu, Y.},
     journal = {Reliability Engineering \& System Safety},
     pages = {109547},
-    year = {2023}
+    year = {2023},
+    eprint = {2302.06827},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.CV},
+    url = {https://arxiv.org/abs/2302.06827}
   }
 header:
   teaser: publications/2023-11-01-epistemic-and-aleatoric-uncertainty-quantification-for-crack.png

@@ -17,7 +17,11 @@ bibtex: |
     title = {The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties},
     author = {Pang, Y. and Kendall, A. and Clarke, J.},
     journal = {Reliability Engineering \& System Safety},
-    year = {2026}
+    year = {2026},
+    eprint = {2501.07743},
+    archivePrefix = {arXiv},
+    primaryClass = {eess.SY},
+    url = {https://arxiv.org/abs/2501.07743}
   }
 header:
   teaser: publications/2026-10-01-the-reliability-of-remotely-piloted-aircraft-system.png

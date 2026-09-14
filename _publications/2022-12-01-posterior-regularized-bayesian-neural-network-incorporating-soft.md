@@ -19,7 +19,11 @@ bibtex: |
     journal = {Knowledge-Based Systems},
     volume = {249},
     pages = {109047},
-    year = {2022}
+    year = {2022},
+    eprint = {2210.08608},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.AI},
+    url = {https://arxiv.org/abs/2210.08608}
   }
 header:
   teaser: publications/2022-12-01-posterior-regularized-bayesian-neural-network-incorporating-soft.png
