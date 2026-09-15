@@ -171,7 +171,8 @@
     </ul>
   </div>
 
-  {% if author.motto %}
+  {% comment %} Calligraphy motto: Chinese pages only. {% endcomment %}
+  {% if author.motto and page.lang == "zh" %}
   <p class="author__motto" lang="zh-Hans">{{ author.motto }}{% if author.motto_author %}<span class="author__motto-by">——{{ author.motto_author }}</span>{% endif %}</p>
   {% endif %}
 </div>
