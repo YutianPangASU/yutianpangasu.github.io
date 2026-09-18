@@ -10,7 +10,7 @@ main:
     url: /cv/
 
   - title: "Software"
-    title_zh: "开源软件"
+    title_zh: "软件"
     url: /software/
 
   - title: "Footprint"

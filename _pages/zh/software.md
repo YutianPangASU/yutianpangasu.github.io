@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "开源软件"
+title: "软件"
 lang: zh
 permalink: /zh/software/
 author_profile: true
