@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Software Release"
+title: "Software"
 permalink: /software/
 author_profile: true
 wallpaper: /images/wallpapers/b1b.webp

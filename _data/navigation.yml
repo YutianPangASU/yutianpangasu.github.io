@@ -9,7 +9,7 @@ main:
     title_zh: "简历"
     url: /cv/
 
-  - title: "Software Release"
+  - title: "Software"
     title_zh: "开源软件"
     url: /software/
 
