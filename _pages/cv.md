@@ -21,7 +21,7 @@ Education
 Positions
 ======
 * Jul 2024 – present: Postdoctoral Research Fellow, Department of Aerospace Engineering & Engineering Mechanics, The University of Texas at Austin
-* Mar 2025 – present: Co-founder & CTO, [Wyzzy](https://calls.wyzzy.ai/), an agentic-AI healthcare startup, Austin, TX
+* Mar 2025 – present: Co-founder & CTO, [Wyzzy](https://wyzzy.ai/), an agentic-AI healthcare startup, Austin, TX
 * Jun 2023 – Jul 2024: Machine Learning Engineer, Thales USA, San Jose, CA
 
 Honors and awards
