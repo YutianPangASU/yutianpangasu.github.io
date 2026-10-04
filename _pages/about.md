@@ -39,10 +39,11 @@ News
 * **May 2026** — [Modeling the Impact of Communication and Human Uncertainties on Runway Capacity in Terminal Airspace](/publication/2026-11-01-modeling-the-impact-of-communication-and-human) published in the *Journal of Air Transport Management*.
 * **Mar 2026** — [The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties](/publication/2026-10-01-the-reliability-of-remotely-piloted-aircraft-system) published in *Reliability Engineering & System Safety*.
 * **Jan 2026** — [From Voice to Safety: Language AI Powered Pilot-ATC Communication Understanding for Airport Surface Movement Collision Risk Assessment](/publication/2026-09-01-from-voice-to-safety-language-ai-powered) published in *Transportation Research Part C: Emerging Technologies*.
-* **Oct 2025** — Invited talk at the INFORMS Annual Meeting, Atlanta.
-* **Mar 2025** — 2nd place in the FAA Machine Learning / AI Data Challenge for Aviation Safety.
-* **Jul 2024** — Joined UT Austin as a postdoctoral research fellow.
-* **May 2023** — Ph.D. from Arizona State University; Outstanding Graduate Research Award, ASU MAE.
+* **Oct 2025** — Gave an invited talk in the Aviation Applications Section at the INFORMS Annual Meeting in Atlanta.
+* **Mar 2025** — Won 2nd place in the FAA Machine Learning / AI Data Challenge for Aviation Safety at the final event hosted by MITRE in McLean, VA.
+* **Jul 2024** — Returned to academia and joined UT Austin as a postdoctoral research fellow, working with Prof. John-Paul Clarke on the NASA ULI project on scalable advanced air mobility.
+* **Jun 2023** — Joined Thales Group in San Jose, California, as a Machine Learning Engineer, working on cyber, digital, software, and LLM security.
+* **May 2023** — Graduated with a Ph.D. from Arizona State University after five years on the NASA ULI project on aviation big data, and received the Outstanding Graduate Research Award from ASU Mechanical & Aerospace Engineering.
 
 Visitors
 ======

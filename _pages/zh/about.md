@@ -37,10 +37,11 @@ _我一直欢迎各种形式的合作，目前也在全球范围内积极寻找�
 * **2026 年 5 月** —— [Modeling the Impact of Communication and Human Uncertainties on Runway Capacity in Terminal Airspace](/publication/2026-11-01-modeling-the-impact-of-communication-and-human) 发表于 *Journal of Air Transport Management*。
 * **2026 年 3 月** —— [The Reliability of Remotely Piloted Aircraft System Performance under Aeronautical Communication Uncertainties](/publication/2026-10-01-the-reliability-of-remotely-piloted-aircraft-system) 发表于 *Reliability Engineering & System Safety*。
 * **2026 年 1 月** —— [From Voice to Safety: Language AI Powered Pilot-ATC Communication Understanding for Airport Surface Movement Collision Risk Assessment](/publication/2026-09-01-from-voice-to-safety-language-ai-powered) 发表于 *Transportation Research Part C: Emerging Technologies*。
-* **2025 年 10 月** —— 在亚特兰大举行的 INFORMS 年会上作特邀报告。
-* **2025 年 3 月** —— 获 美国航空安全管理局航空安全机器学习与人工智能数据挑战赛第二名。
-* **2024 年 7 月** —— 加入得克萨斯大学奥斯汀分校，任博士后研究员。
-* **2023 年 5 月** —— 于亚利桑那州立大学获得博士学位，并获 ASU 机械与航空航天工程系杰出研究生科研奖。
+* **2025 年 10 月** —— 在亚特兰大举行的 INFORMS 年会航空应用分会（Aviation Applications Section）上作特邀报告。
+* **2025 年 3 月** —— 参加在弗吉尼亚州麦克莱恩 MITRE 举行的决赛，获美国联邦航空管理局（FAA）航空安全机器学习与人工智能数据挑战赛第二名。
+* **2024 年 7 月** —— 重返学术界，加入得克萨斯大学奥斯汀分校任博士后研究员，与 John-Paul Clarke 教授合作开展 NASA ULI 可扩展先进空中交通（Advanced Air Mobility）项目研究。
+* **2023 年 6 月** —— 加入位于加利福尼亚州圣何塞的泰雷兹集团（Thales Group），任机器学习工程师，从事网络、数字、软件与大语言模型安全方向的工作。
+* **2023 年 5 月** —— 在 NASA ULI 航空大数据项目上工作五年后，于亚利桑那州立大学获得博士学位，并获 ASU 机械与航空航天工程系杰出研究生科研奖。
 
 访客
 ======
