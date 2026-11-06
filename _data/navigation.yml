@@ -1,6 +1,10 @@
 # Header navigation links, in order.
 # title_zh is the Chinese label shown when the masthead toggle is set to 中文.
 main:
+  - title: "News"
+    title_zh: "动态"
+    url: /news/
+
   - title: "Research"
     title_zh: "科研"
     url: /publications/
