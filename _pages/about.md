@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "About me"
-seo_title: "Yutian Pang Homepage"
+seo_title: "Homepage"
 author_profile: true
 wallpaper: /images/wallpapers/wall1-bg.webp
 redirect_from: 

@@ -2,7 +2,7 @@
 permalink: /zh/
 title: "关于我"
 lang: zh
-seo_title: "庞雨田 个人主页"
+seo_title: "个人主页"
 author_profile: true
 wallpaper: /images/wallpapers/wall1-bg.webp
 ---

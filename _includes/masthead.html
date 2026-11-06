@@ -17,7 +17,7 @@
               {% assign domain = base_path %}
               {% assign link_url = lang_prefix | append: link.url %}
             {% endif %}
-            <li class="masthead__menu-item {% if page.url contains link.url and link.url != '/' %}selected{% endif %}">
+            <li class="masthead__menu-item{% if link.italic %} masthead__menu-item--italic{% endif %} {% if page.url contains link.url and link.url != '/' %}selected{% endif %}">
               <a href="{{ domain }}{{ link_url }}">{% include t.html en=link.title zh=link.title_zh %}</a>
             </li>
           {% endfor %}

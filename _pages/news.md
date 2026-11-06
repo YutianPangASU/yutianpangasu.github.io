@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "News"
+title: "Latest News"
 permalink: /news/
 author_profile: true
 wallpaper: /images/wallpapers/wall1-bg.webp
