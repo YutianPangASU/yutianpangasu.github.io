@@ -17,7 +17,7 @@ Previous custom single-page design: branch `custom-site`.
   manuscripts (Journal Articles), underreview, workingpapers, conferences,
   patents.
 - **Talks**: `_talks/`
-- **CV**: `_pages/cv.md` + replace `files/Yutian_Pang_CV.pdf`
+- **CV**: `_pages/cv.md` + replace `files/Yutian_Pang_CV.pdf`; the Chinese twin `_pages/zh/cv.md` links `files/Yutian_Pang_CV_zh.pdf` (built with XeLaTeX from `academic-resume-zh.tex`, kept next to the English source)
 - **Photo**: `images/profile.jpg` (square-cropped headshot; replace to update)
 - **Footprint page** (`/footprint/`, travel log with maps and park photos):
   - Parks and photos: add the park to `_data/travel.yml`, drop resized photos

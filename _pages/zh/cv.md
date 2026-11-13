@@ -9,7 +9,7 @@ wallpaper: /images/wallpapers/wall3-bg.webp
 
 {% include base_path %}
 
-[下载完整简历 PDF](/files/Yutian_Pang_CV.pdf){: .btn .btn--primary}
+[下载完整简历 PDF](/files/Yutian_Pang_CV_zh.pdf){: .btn .btn--primary}
 
 教育背景
 ======
@@ -25,7 +25,7 @@ wallpaper: /images/wallpapers/wall3-bg.webp
 
 荣誉与奖励
 ======
-* 2025 —— 美国航空安全管理局航空安全机器学习与人工智能数据挑战赛 第二名，弗吉尼亚州麦克里恩
+* 2025 —— 美国联邦航空管理局航空安全机器学习与人工智能数据挑战赛 第二名，弗吉尼亚州麦克林
 * 2023 —— 亚利桑那州立大学机械与航空航天工程系 杰出研究生科研奖
 * 2015 —— 华中科技大学机械科学与工程学院 优秀学业表现奖
 
@@ -34,7 +34,7 @@ wallpaper: /images/wallpapers/wall3-bg.webp
 （作为主要发起人与撰写人）
 
 * NASA NAMS-2 任务：ACERO 山火空中交通管理 —— **已获资助**，10 万美元
-* 2024 年美国航空安全管理局航空安全机器学习与人工智能挑战赛 —— **已获资助**，2 万美元
+* 2024 年美国联邦航空管理局航空安全机器学习与人工智能挑战赛 —— **已获资助**，2 万美元
 * NASA ULI 第九轮，方向五：全系统实时安全保障 —— 主导申请，500 万美元，未获立项
 * 机场合作研究计划（ACRP），美国交通研究委员会 —— 主导申请，40 万美元，未获立项
 

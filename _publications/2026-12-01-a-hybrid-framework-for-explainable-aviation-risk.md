@@ -7,7 +7,7 @@ representative: true
 permalink: /publication/2026-12-01-a-hybrid-framework-for-explainable-aviation-risk
 excerpt: "Extracts causal chains from aviation safety reports and grounds them with physics-based failure quantification and interventional analysis, producing risk explanations an operator can check."
 date: 2026-12-01
-venue: "To be submitted to IEEE Transactions on Systems, Man, and Cybernetics: Systems"
+venue: "Under review at IEEE Transactions on Systems, Man, and Cybernetics: Systems"
 arxiv: "https://arxiv.org/abs/2610.35658"
 authors: "<b>Pang, Y.</b>, Tian, Y., Zhao, X., Hu, J., Clarke, J., & Jacobsen, H."
 author_rank: 1
@@ -16,7 +16,7 @@ bibtex: |
   @unpublished{pang2026hybrid,
     title = {A Hybrid Framework for Explainable Aviation Risk: Causal Chain Extraction from Safety Reports with Physics-Based Failure Quantification and Interventional Analysis},
     author = {Pang, Y. and Tian, Y. and Zhao, X. and Hu, J. and Clarke, J. and Jacobsen, H.},
-    note = {To be submitted to IEEE Transactions on Systems, Man, and Cybernetics: Systems},
+    note = {Under review at IEEE Transactions on Systems, Man, and Cybernetics: Systems},
     year = {2026},
     eprint = {2610.35658},
     archivePrefix = {arXiv},
