@@ -131,14 +131,14 @@ publication_area:
       - 'Multi-aircraft and procedure-aware trajectory prediction'
       - 'Machine-learning-enhanced landing scheduling and autonomous landing'
       - 'Runway capacity under communication and human uncertainties'
-      - 'Collision avoidance control laws and their capacity limits'
+      - 'Noncommunicative collision avoidance in dense air traffic'
     topics_zh:
       - '基于轨迹的进港排序与下降程序协同优化'
       - '风场不确定性下的燃油最优下降程序'
       - '多机与程序感知的轨迹预测'
       - '机器学习增强的着陆排序与自主着陆'
       - '通信与人因不确定性影响下的跑道容量'
-      - '避撞控制律及其容量极限'
+      - '高密度空中交通中的无通信避撞'
   airport-ground:
     title: 'Safety and Reliability Studies of Airport Surface Operations'
     title_zh: '机场场面运行的安全性与可靠性研究'
@@ -160,12 +160,14 @@ publication_area:
     topics:
       - 'Reliability of remotely piloted aircraft under communication uncertainties'
       - 'Communication and autonomy level tradeoffs in autonomous operations'
+      - 'Uncrewed aircraft for wildfire monitoring and suppression'
       - 'Last-mile and same-day delivery routing with capacity and time guarantees'
       - 'UAV package delivery aerodynamics'
       - 'Multi-agent reinforcement learning for decentralized decision-making'
     topics_zh:
       - '通信不确定性下遥控驾驶航空器的可靠性'
       - '自主运行中通信水平与自主等级的权衡'
+      - '面向山火监测与扑救的无人机运行'
       - '带容量与时限保证的最后一公里与当日配送路径规划'
       - '无人机包裹投送的空气动力学'
       - '面向分布式决策的多智能体强化学习'
@@ -175,13 +177,13 @@ publication_area:
     description: 'Beneath the applications sits methodological work on trustworthy machine learning and reliability engineering:'
     description_zh: '支撑上述应用的，是可信机器学习与可靠性工程方面的方法研究：'
     topics:
-      - 'Explainable risk analysis from aviation safety reports'
+      - 'Explainable risk analysis from aviation and crane safety reports'
       - 'Bayesian uncertainty quantification for deep learning'
       - 'Physics-informed learning for fracture and structural health monitoring'
       - 'Adversarial robustness of Bayesian neural networks'
       - 'Maintenance scheduling under uncertainty'
     topics_zh:
-      - '航空安全报告的可解释风险分析'
+      - '航空与起重机安全报告的可解释风险分析'
       - '面向深度学习的贝叶斯不确定性量化'
       - '用于断裂与结构健康监测的物理信息学习'
       - '贝叶斯神经网络的对抗鲁棒性'

@@ -7,6 +7,7 @@ author_profile: true
 wallpaper: /images/wallpapers/wall1-bg.webp
 ---
 
+* **2026 年 11 月** —— 担任 [Marshall Labs](https://www.marshall-labs.co) 技术顾问。该实验室正在构建完整规模的空中交通管制虚拟世界，在其中对 AI 管制员进行预训练，并面向安全进行微调，合作方包括驻美国联邦航空管理局迈克·蒙罗尼航空中心的退休管制教员。
 * **2026 年 11 月** —— 很高兴与大家分享：我们与多伦多大学计算机科学系合作的因果航空安全分析工作 [A Hybrid Framework for Explainable Aviation Risk: Causal Chain Extraction from Safety Reports with Physics-Based Failure Quantification and Interventional Analysis](/publication/2026-12-01-a-hybrid-framework-for-explainable-aviation-risk)（[arXiv](https://arxiv.org/abs/2610.35658)）已在线公开，代码、提取的因果链和学习到的网络已存档于 [Zenodo](https://doi.org/10.5281/zenodo.23934456)。该研究利用本地大语言模型从 56,202 份美国事故报告中提取有序因果链，汇聚成因果知识图谱，再结合物理模型量化给定运行状态下的失效概率。
 * **2026 年 10 月** —— 参加在得克萨斯大学奥斯汀分校举行的起重机安全研究中心（Crane Safety Research Center）年会，汇报了面向起重机安全因果分析的数据与物理混合模型，并以倾覆事故作为案例研究（[幻灯片](/files/crane_safety_annual_meeting_2026.pdf)）。
 * **2026 年 9 月** —— 很高兴与大家分享：我们迈向进近管制区自动化的第一项工作 [Trajectory-Based Optimization for Air Traffic Control in the Terminal Maneuvering Area](https://www.sciencedirect.com/science/article/pii/S0968090X26005395)（[arXiv](https://arxiv.org/abs/2604.17776)）已被 *Transportation Research Part C: Emerging Technologies* 接收发表。
