@@ -17,4 +17,6 @@
       {% break %}
     {% endif %}
   {% endfor %}
+  {% comment %} Blog posts are English only; their switch goes to the Chinese blog index. {% endcomment %}
+  {% if switch_url == "/zh/" and page.collection == "posts" %}{% assign switch_url = "/zh/blog/" %}{% endif %}
 {% endif %}

@@ -1,0 +1,14 @@
+{% comment %}
+  Post list for the Blog tab, shared by /blog/ and /zh/blog/. Posts are English
+  only, so titles and summaries stay in English on both pages.
+{% endcomment %}
+{% include base_path %}
+<ul class="blog-list">
+{% for post in site.posts %}
+  <li class="blog-list__item">
+    <h2 class="blog-list__title"><a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a></h2>
+    <p class="blog-list__date">{% if page.lang == "zh" %}{{ post.date | date: "%Y年%-m月%-d日" }}{% else %}{{ post.date | date: "%B %-d, %Y" }}{% endif %}</p>
+    <p class="blog-list__summary">{{ post.excerpt | strip_html | strip }}</p>
+  </li>
+{% endfor %}
+</ul>

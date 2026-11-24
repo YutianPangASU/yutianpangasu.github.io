@@ -1,0 +1,107 @@
+---
+layout: default
+title: "My Learning Route: From LLM Training to World Models"
+excerpt: "My current learning focus, as an interactive study map: 16 stages through the LLM training pipeline and its infrastructure, 6 stages on world models, and an atlas of post-training algorithms, each with readings, a hands-on exercise, and self-check questions."
+permalink: /blog/learning-route-llm-world-models/
+extra_css:
+  - /assets/css/llm-guide.css
+extra_js:
+  - /assets/js/llm-guide.js
+author_profile: false
+read_time: false
+comments: false
+share: false
+related: false
+---
+{% comment %}
+  The interactive study map. Markup skeleton only: the stages, diagrams and map
+  are rendered by assets/js/llm-guide.js, styled by assets/css/llm-guide.css
+  (all scoped under #guide). Progress checkmarks live in the reader's
+  localStorage. Without JavaScript the map view still shows the overview cards.
+{% endcomment %}
+{% include base_path %}
+<div id="guide">
+  <header class="top">
+    <div>
+      <div class="kicker">Blog · Current learning focus</div>
+      <h1>{{ page.title }}</h1>
+      <p class="byline">Yutian Pang · {{ page.date | date: "%B %-d, %Y" }} · <a href="{{ base_path }}/blog/">All posts</a></p>
+      <p class="sub">A step-by-step route I am following. First, the whole LLM training pipeline, seen from the point of view of someone who has to build it: the Model track has 10 stages (data, architecture, pretraining, mid-training, post-training, evaluation) and the Infra track has 6 (GPUs, distributed training, inference, RL systems, sandboxes, clusters). Then the World model track applies the same toolkit in 6 stages, ending with an action-conditioned world model post-trained with RL on verifiable rewards. The Algorithm atlas puts the post-training algorithms side by side.</p>
+    </div>
+    <div class="meter" id="meter" aria-live="polite"></div>
+  </header>
+
+  <div class="tabsbar">
+    <div class="tabgrid">
+      <button type="button" class="tab maptab" id="maptab" data-go="map" aria-selected="true">Map</button>
+      <span class="rowlab">Model</span><nav class="tabs" id="tabs-m" role="tablist" aria-label="Model track stages"></nav>
+      <span class="rowlab r2">Infra</span><nav class="tabs r2" id="tabs-i" role="tablist" aria-label="Infra track stages"></nav>
+      <span class="rowlab r2">World model</span><nav class="tabs r2" id="tabs-w" role="tablist" aria-label="World model track stages"></nav>
+      <span class="rowlab r2">Atlas</span><nav class="tabs r2" id="tabs-a" role="tablist" aria-label="Algorithm atlas"></nav>
+    </div>
+  </div>
+
+  <main>
+    <section id="view-map" aria-label="Overview map">
+      <div class="phases" id="phases" aria-label="Study order"></div>
+      <div class="mapcard">
+        <div class="maptop">
+          <div class="legend">
+            <span class="lg"><i></i>Model track</span>
+            <span class="lg"><i class="sq"></i>Infra track</span>
+            <span class="lg"><i class="cur"></i>Next stage</span>
+            <span class="lg"><i class="done"></i>Done</span>
+            <span class="lg"><span class="st">★</span>Core stage</span>
+          </div>
+          <span>Click any stage to open it. Dotted lines show dependencies.</span>
+        </div>
+        <div id="map-host"></div>
+      </div>
+      <div class="tracks2">
+        <div class="tcard w" style="grid-column:1 / -1">
+          <div class="t-eb">TRACK · WORLD MODELS</div>
+          <h3>World model track: from LLM training to world models</h3>
+          <p class="t-d">Walks through the main 2026 routes for world models, then builds one: a context-conditioned, action-controllable multi-agent world model, post-trained with RL on verifiable rewards and tested in closed loop.</p>
+          <div class="pre">Prerequisites: <span class="codes" id="pre-w"></span></div>
+          <div class="mini" id="mini-w"></div>
+        </div>
+      </div>
+      <p class="direction">The aim is to understand the whole pipeline well enough to set direction, and to be hands-on with post-training and the infrastructure it depends on. At the frontier, the post-training bottleneck has moved from the algorithms themselves to environment and reward design, the stability of RL systems, and the rigor of evaluation. World models are no different: the hard parts are data, rewards, and closed-loop evaluation. Stages marked ★ are the core ones, and every stage states how deep to go.</p>
+      <div class="cards">
+        <div class="card">
+          <h3><span class="game">START</span>Starting point</h3>
+          <ul>
+            <li>Comfortable with deep learning, probabilistic modeling, and sequence models</li>
+            <li>Experience with time series or spatiotemporal modeling helps</li>
+            <li>Have not trained a large model from scratch or run a training cluster</li>
+          </ul>
+          <p class="muted">To fill in: first-hand experience with pretraining and data; GPUs, distributed training, and inference systems; the engineering details of RL post-training; and the mainstream approaches to world models.</p>
+        </div>
+        <div class="card">
+          <h3><span class="game">GOAL</span>Where it ends</h3>
+          <ul>
+            <li>Explain the trade-offs at every step of the LLM training pipeline</li>
+            <li>Build your own training, rollout, and evaluation stack</li>
+            <li>Build an action-conditioned world model of a domain you know, on public data</li>
+            <li>Post-train it with RL on separate verifiable rewards and validate it in closed loop in a simulator</li>
+          </ul>
+          <p class="muted">The first two come from the main tracks (M, I); the last two from the World model track (W).</p>
+        </div>
+        <div class="card">
+          <h3><span class="game">RULES</span>Filtering the noise</h3>
+          <ol>
+            <li><b>Primary sources</b>: tech report appendices; the source code of nanochat, open-instruct, verl, TRL, and torchtitan</li>
+            <li><b>People who actually train models</b>: Smol Training Playbook, Ultra-Scale Playbook, Interconnects, Thinking Machines, Karpathy, the Marin dev logs</li>
+            <li><b>Courses</b>: CS336, rlhfbook, How to Scale Your Model</li>
+            <li><b>X, Medium, newsletters, surveys</b>: leads only, not evidence</li>
+          </ol>
+          <p class="muted">Treat with suspicion: RL results shown only on Qwen; gains from a single seed or a small benchmark; recipes without code or hyperparameters.</p>
+        </div>
+      </div>
+      <p class="fine">Use public data throughout, and check each source's license before you use it. Links, models, and numbers are as of November 2026. Diagrams tagged “Illustrative” show the shape of an effect, not measured data. Progress checkmarks are stored only in your browser.</p>
+    </section>
+
+    <section id="view-step" hidden></section>
+  </main>
+  <noscript><p class="fine">The stages and diagrams on this page need JavaScript.</p></noscript>
+</div>
