@@ -240,6 +240,12 @@ staticman:
       type               : "date"
       options:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
+# jekyll-feed: summaries only. Some posts are full standalone HTML documents
+# (the firefighting UAV reviews, ~1.3 MB each) that would otherwise be copied
+# whole into feed.xml.
+feed:
+  excerpt_only: true
+
 atom_feed:
   hide                   : false     # change to true to hide the RSS feed in the footer
   path                   : # blank (default) uses feed.xml
