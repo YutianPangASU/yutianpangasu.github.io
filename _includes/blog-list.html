@@ -1,6 +1,8 @@
 {% comment %}
   Post list for the Blog tab, shared by /blog/ and /zh/blog/. Posts are English
-  only, so titles and summaries stay in English on both pages.
+  only, so titles and summaries stay in English on both pages. A post can carry
+  a `companion:` (title, url, note) for a related document that is a page, not
+  a post, so one topic stays one entry (e.g. the firefighting UAV reviews).
 {% endcomment %}
 {% include base_path %}
 <ul class="blog-list">
@@ -9,6 +11,7 @@
     <h2 class="blog-list__title"><a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a></h2>
     <p class="blog-list__date">{% if page.lang == "zh" %}{{ post.date | date: "%Y年%-m月%-d日" }}{% else %}{{ post.date | date: "%B %-d, %Y" }}{% endif %}</p>
     <p class="blog-list__summary">{{ post.excerpt | strip_html | strip }}</p>
+    {% if post.companion %}<p class="blog-list__companion">{% include t.html en="Companion review: " zh="配套综述：" %}<a href="{{ base_path }}{{ post.companion.url }}">{{ post.companion.title }}</a>, {{ post.companion.note }}.</p>{% endif %}
   </li>
 {% endfor %}
 </ul>
